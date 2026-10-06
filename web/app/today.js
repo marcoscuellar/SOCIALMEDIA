@@ -65,10 +65,14 @@ export function refreshChrome() {
   $$('[data-step]').forEach((b) => { const n = +b.dataset.step; b.disabled = (n >= 2 && !p.approved) || (n === 3 && !p.imageReady); if (n === S.step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
   const ab = $('#approve'); if (ab) { ab.disabled = !p.linkedin.trim() || !p.instagram.trim(); ab.textContent = p.approved ? 'Captions approved ✓' : bothReviewed(p) ? 'AI reviewed · I approve both' : 'I approve both captions'; ab.disabled = ab.disabled || p.approved; }
   const rv = $('#reviewBadge'); if (rv) setBadge(rv, p);
+  // Keep the visible review result honest while typing: stale feedback must not look current.
+  const rr = $('#reviewresult'), r = reviewOf(p);
+  if (rr && r && (rr.dataset.stale || '') !== (r.stale || '')) { const open = rr.querySelector('details')?.open; renderResult(p, r); if (open) rr.querySelector('details').open = true; }
 }
 
 // ---------- AI review helpers ----------
-const reviewOf = (p, k = S.platform) => p.reviews?.[k];
+// Staleness is also computed locally so an edit marks the review stale immediately, before the server round trip.
+const reviewOf = (p, k = S.platform) => { const r = p.reviews?.[k]; if (!r) return r; return r.stale ? r : r.caption !== undefined && r.caption !== p[k] ? { ...r, stale: 'caption' } : r; };
 const reviewFresh = (p, k) => { const r = reviewOf(p, k); return !!r && !r.stale; };
 const bothReviewed = (p) => ['linkedin', 'instagram'].every((k) => reviewFresh(p, k) && reviewOf(p, k).ready);
 function setBadge(el, p) {
@@ -158,6 +162,7 @@ function renderReview(p) {
 
 function renderResult(p, r) {
   const k = S.platform; const hist = p.captionHistory?.[k];
+  $('#reviewresult').dataset.stale = r.stale || '';
   $('#reviewresult').innerHTML = `<div class="${r.stale ? 'muted' : ''}" style="margin-top:18px"><p><strong>${esc(r.summary)}</strong></p>
   ${r.stale ? `<div class="note warn">${r.stale === 'caption' ? 'This feedback is about earlier wording.' : 'Your voice guidance or voice choice changed after this review.'} Review again when you’re ready.</div>` : ''}
   ${r.works?.length ? `<h3>What works</h3><ul>${r.works.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
@@ -188,8 +193,10 @@ async function runReview(p) {
     if (d.usage) S.usage = d.usage;
     const cur = postById(p.id); if (cur) cur.reviews = { ...cur.reviews, [k]: d.review };
     toast(d.cached ? 'Saved review reused. No new AI request.' : 'Review ready. Your words are still yours.');
-  } catch (e) { toast(e.message); }
-  finally { S.reviewBusy = false; if (S.view === 'today' && S.step === 1 && current()?.id === p.id) { renderReview(current()); refreshChrome(); } }
+  } catch (e) {
+    toast(e.message);
+    try { S.usage = (await api('GET', '/api/ai-usage')).usage; } catch { /* usage line simply stays hidden */ }
+  } finally { S.reviewBusy = false; if (S.view === 'today' && S.step === 1 && current()?.id === p.id) { renderReview(current()); refreshChrome(); } }
 }
 
 async function addExcerpt(p, { label = '', body = '', sourceFileId = null, intro = '' }) {

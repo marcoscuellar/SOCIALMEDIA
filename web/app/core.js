@@ -77,8 +77,12 @@ function mergeServer(server) {
   if (i < 0) return server;
   const local = { ...server };
   const left = pending.get(server.id); if (left) applyLocal(local, left);
-  S.posts[i] = local; return local;
+  // Update in place: open panels hold a reference to this object, so its identity must not change.
+  const existing = S.posts[i];
+  for (const k of Object.keys(existing)) delete existing[k];
+  Object.assign(existing, local); return existing;
 }
+function replacePostInPlace(i, next) { const existing = S.posts[i]; for (const k of Object.keys(existing)) delete existing[k]; Object.assign(existing, next); }
 export async function flush(postId) {
   clearTimeout(timers.get(postId));
   if (inflight.has(postId)) await inflight.get(postId);
@@ -108,7 +112,7 @@ export const flushAll = async () => { let ok = true; for (const id of [...pendin
 export function resolveConflict(postId, keepMine) {
   const c = S.conflicts.get(postId); if (!c) return;
   S.conflicts.delete(postId);
-  const i = S.posts.findIndex((p) => p.id === postId); S.posts[i] = c.theirs;
+  const i = S.posts.findIndex((p) => p.id === postId); replacePostInPlace(i, c.theirs);
   if (keepMine) { editPost(postId, c.mine); flush(postId); } else setStatus('Saved');
 }
 export async function postAction(postId, action, extra = {}) {
