@@ -198,6 +198,19 @@ test('security: auth, origin checks, JSON limits, unmigrated database', async ()
   assert.match(JSON.parse(r.body).error, /migrate/);
 });
 
+test('first-time setup button creates the tables once, behind sign-in and same-origin, and is repeatable', async () => {
+  const { createPgliteDb } = await import('../lib/db.js'); const db = await createPgliteDb();
+  const app = createApp({ db, blobs: createMemoryBlobs(), env: { LAUNCH_ROOM_PASSWORD: 'pw pw pw' } });
+  const auth = { authorization: 'Basic ' + Buffer.from('x:pw pw pw').toString('base64') };
+  const call = (method, path, headers = {}) => app.handle({ method, path, query: {}, headers: { host: 'h', ...headers }, body: Buffer.alloc(0) });
+  assert.equal((await call('POST', '/api/setup/database', { origin: 'http://h' })).status, 401);
+  assert.equal((await call('POST', '/api/setup/database', { ...auth, origin: 'http://evil' })).status, 403);
+  assert.equal((await call('GET', '/api/brands', auth)).status, 503);
+  assert.equal((await call('POST', '/api/setup/database', { ...auth, origin: 'http://h' })).status, 200);
+  assert.equal((await call('POST', '/api/setup/database', { ...auth, origin: 'http://h' })).status, 200);
+  assert.equal((await call('GET', '/api/brands', auth)).status, 200);
+});
+
 test('excerpts: validation, selection, and removal cleans selections', async () => {
   const t = await setup(); const { a } = await twoBrands(t); let p = await mkPost(t, a);
   assert.equal((await t.call('POST', `/api/brands/${a.id}/excerpts`, { label: 'x', body: '' })).status, 400);

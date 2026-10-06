@@ -92,7 +92,14 @@ async function boot() {
     refreshSwitcher();
     if (!pick) { S.brandId = null; S.brand = null; setStatus('Saved'); return render(); }
     await switchBrand(pick.id, 'today');
-  } catch (e) { $('#content').innerHTML = `<div class="card"><h2>Your room couldn’t open.</h2><p>${esc(e.message)}</p><button class="btn" onclick="location.reload()">Try again</button></div>`; setStatus('Not loaded'); }
+  } catch (e) {
+    if (e.status === 503 && /not set up yet/.test(e.message)) {
+      $('#content').innerHTML = `<div class="card empty"><div class="eyebrow">First-time setup</div><h1>Set up your database.</h1><p class="muted">This creates the empty tables Launch Room needs. It doesn’t touch any other data and is safe to press twice.</p><div class="actions" style="justify-content:center"><button class="btn primary" id="setupDb" type="button">Set up database</button></div></div>`;
+      $('#setupDb').onclick = async () => { $('#setupDb').disabled = true; try { await api('POST', '/api/setup/database', {}); toast('Database ready.'); await boot(); } catch (err) { toast(err.message); $('#setupDb').disabled = false; } };
+      return setStatus('Setup needed');
+    }
+    $('#content').innerHTML = `<div class="card"><h2>Your room couldn’t open.</h2><p>${esc(e.message)}</p><button class="btn" onclick="location.reload()">Try again</button></div>`; setStatus('Not loaded');
+  }
 }
 
 $$('#nav [data-view]').forEach((b) => (b.onclick = async () => { if (!(await flushAll())) return toast('Resolve the unsaved change first.'); S.view = b.dataset.view; render(); $('#main').focus(); }));
