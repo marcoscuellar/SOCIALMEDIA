@@ -211,6 +211,24 @@ test('first-time setup button creates the tables once, behind sign-in and same-o
   assert.equal((await call('GET', '/api/brands', auth)).status, 200);
 });
 
+test('carousel slides: validated, brand-scoped, change clears image approval, file removal detaches', async () => {
+  const t = await setup(); const { a, b } = await twoBrands(t); let p = await mkPost(t, a);
+  const img = (await t.call('POST', `/api/brands/${a.id}/files`, PNG, { 'x-file-name': 's.png', 'x-file-role': 'reference' })).json.file;
+  const foreign = (await t.call('POST', `/api/brands/${b.id}/files`, PNG, { 'x-file-name': 'b.png', 'x-file-role': 'reference' })).json.file;
+  const patch = (graphic) => t.call('PATCH', `/api/brands/${a.id}/posts/${p.id}`, { revision: p.revision, changes: { graphic } });
+  assert.deepEqual(p.graphic.slides, []);
+  assert.equal((await patch({ slides: Array.from({ length: 10 }, () => ({ line: 'x' })) })).status, 400, 'at most 10 slides in total');
+  assert.equal((await patch({ slides: [{ line: 'x', imageFileId: foreign.id }] })).status, 400, 'other brand image refused');
+  assert.equal((await patch({ slides: [{ line: 'y'.repeat(201) }] })).status, 400);
+  let r = await patch({ line: 'Slide one' }); p = r.json.post;
+  for (const n of ['approve', 'approve-image']) p = (await t.call('POST', `/api/brands/${a.id}/posts/${p.id}/actions/${n}`, { revision: p.revision })).json.post;
+  assert.ok(p.imageReady);
+  r = await patch({ slides: [{ line: 'Two', imageFileId: img.id }, { line: 'Three' }] }); p = r.json.post;
+  assert.equal(p.graphic.slides.length, 2); assert.ok(p.approved && !p.imageReady, 'slides changed: image approval cleared, caption approval kept');
+  await t.call('DELETE', `/api/brands/${a.id}/files/${img.id}`);
+  p = (await t.call('GET', `/api/brands/${a.id}/posts/${p.id}`)).json.post; assert.equal(p.graphic.slides[0].imageFileId, null); assert.equal(p.graphic.slides[0].line, 'Two');
+});
+
 test('excerpts: validation, selection, and removal cleans selections', async () => {
   const t = await setup(); const { a } = await twoBrands(t); let p = await mkPost(t, a);
   assert.equal((await t.call('POST', `/api/brands/${a.id}/excerpts`, { label: 'x', body: '' })).status, 400);

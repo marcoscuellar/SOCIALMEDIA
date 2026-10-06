@@ -249,7 +249,7 @@ await step('AI limits: when today’s reviews are used the UI says so and the pr
   const before = providerCalls.length; await server.db.query(`UPDATE ai_budget SET day=$1, day_count=10 WHERE id=1`, [(await api(page, 'GET', '/api/ai-usage')).json.usage.day]);
   await switchTo('Beta Labs'); await page.click('[data-view=today]'); await page.click('[data-step="1"]'); await page.fill('#caption', 'A brand new Beta caption that is not cached'); await settle();
   await page.click('#askreview'); await page.waitForFunction(() => /10 AI reviews are used/.test(document.getElementById('toast').textContent));
-  assert.equal(providerCalls.length, before); assert.match(await page.textContent('#reviewbody'), /Today’s AI reviews are used/); assert.equal(await page.isEnabled('#approve'), true, 'approval still works');
+  assert.equal(providerCalls.length, before); await page.waitForFunction(() => /Today’s AI reviews are used/.test(document.getElementById('reviewbody')?.textContent || '')); assert.match(await page.textContent('#reviewbody'), /Today’s AI reviews are used/); assert.equal(await page.isEnabled('#approve'), true, 'approval still works');
   await page.click('[data-view=brand]'); await page.click('#usageBox summary'); await page.waitForSelector('#usageBody table'); const usage = await page.textContent('#usageBody');
   assert.match(usage, /Alpha Foods/); assert.match(usage, /Beta Labs/); assert.match(usage, /of 10 new reviews used today/);
 });
@@ -262,6 +262,23 @@ await step('calendar and queue: reschedule, unschedule, create for any date; pos
   await page.click('#newpost'); await page.fill('#np_title', 'Dated far away'); await page.fill('#np_date', '2027-03-09'); await page.click('#np_ok'); await page.waitForSelector('#caption'); assert.equal(await page.inputValue('#pdate'), '2027-03-09');
   await switchTo('Beta Labs'); await page.click('[data-view=plan]'); assert.match(await page.textContent('[aria-label="Posting history"]'), /Beta teaser/); assert.doesNotMatch(await page.textContent('#content'), /Alpha launch|Dated far away/);
   assert.doesNotMatch(await page.textContent('#content'), /overdue|streak|behind/i);
+});
+
+await step('carousel: add slides, preview them, export a ZIP of PNGs and a PDF with every slide', async () => {
+  await switchTo('Alpha Foods'); await page.click('[data-view=plan]'); await page.click('.qitem [data-open]:has-text("Alpha launch")'); await page.waitForSelector('#ptitle'); await page.click('[data-step="2"]');
+  await page.click('#addslide'); await page.fill('#sl_line_0', 'Slide two words'); await page.click('#addslide'); await page.fill('#sl_line_1', 'Slide three words'); await settle();
+  await page.waitForFunction(() => document.querySelectorAll('#prevThumbs canvas').length === 2); await page.click('#ready'); await page.waitForSelector('#format');
+  assert.equal(await page.isVisible('#dlzip'), true);
+  const zip = await download(() => page.click('#dlzip')); assert.match(zip.name, /carousel\.zip$/);
+  const m = await page.evaluate(() => window.__lastExport); assert.equal(m.slides, 3); assert.equal(m.brandId, (await alpha()).id);
+  const zf = path.join(tmp, 'c.zip'); fs.writeFileSync(zf, zip.bytes); const { execFileSync } = await import('node:child_process');
+  assert.match(execFileSync('unzip', ['-tq', zf]).toString(), /No errors/); const listing = execFileSync('unzip', ['-Z1', zf]).toString().trim().split('\n'); assert.equal(listing.length, 3); assert.ok(listing.every((n) => /slide-0[123]\.png$/.test(n)));
+  const first = execFileSync('unzip', ['-p', zf, listing[0]], { maxBuffer: 1e8 }); const px = await decodePixels(first, [[5, 5]]); assert.equal(hex(px.px[0]), '#101010', 'slides use the brand background');
+  const pdf = await download(() => page.click('#dlpdf')); assert.match(pdf.name, /carousel\.pdf$/); const txt = pdf.bytes.toString('latin1');
+  assert.ok(txt.startsWith('%PDF-1.4')); assert.equal((txt.match(/\/Type \/Page /g) || []).length, 3);
+  // slides survive a reload
+  await page.reload(); await page.waitForSelector('#ptitle'); await page.click('[data-step="2"]'); await page.waitForSelector('#sl_line_1'); assert.equal(await page.inputValue('#sl_line_1'), 'Slide three words');
+  await page.click('[data-rmslide="1"]'); await settle(); assert.equal(await page.locator('[data-slideline]').count(), 1);
 });
 
 await step('keyboard: skip link, tab order, visible focus, escape closes dialogs, nav reachable', async () => {
@@ -285,12 +302,12 @@ await step('theme and motion preferences: dark mode persists; reduced motion rem
 });
 
 await step('mobile layout: no sideways scrolling, bottom navigation, generous touch targets', async () => {
-  const m = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true }); await m.route(/fonts\./, (r) => r.abort()); const mp = await m.newPage(); await mp.goto(base + '/'); await mp.waitForSelector('#caption');
+  const m = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true }); await m.route(/fonts\./, (r) => r.abort()); const mp = await m.newPage(); await mp.goto(base + '/'); await mp.waitForSelector('#ptitle');
   for (const view of ['today', 'plan', 'files', 'brand', 'voice']) {
     await mp.click(`[data-view=${view}]`); await mp.waitForTimeout(250);
     const over = await mp.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); assert.ok(over <= 1, `${view}: horizontal overflow ${over}px`);
   }
-  await mp.click('[data-view=today]'); await mp.waitForSelector('#caption');
+  await mp.click('[data-view=today]'); await mp.waitForSelector('#ptitle');
   const small = await mp.evaluate(() => [...document.querySelectorAll('.btn:not(.link), .nav button, .steps button, .seg button, select, input[type=text], input[type=date]')].filter((e) => e.offsetParent).map((e) => ({ t: (e.textContent || e.id).trim().slice(0, 20), h: e.getBoundingClientRect().height })).filter((x) => x.h < 40));
   assert.deepEqual(small, [], 'controls under 40px tall'); const nav = await mp.evaluate(() => { const r = document.getElementById('nav').getBoundingClientRect(); return [r.bottom, window.innerHeight, getComputedStyle(document.getElementById('nav')).position]; });
   assert.equal(nav[2], 'fixed'); assert.ok(Math.abs(nav[0] - nav[1]) < 2, 'nav docked at the bottom');

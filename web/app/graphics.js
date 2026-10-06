@@ -67,10 +67,14 @@ function wrap(x, text, size, fontCss, maxW) {
   return lines;
 }
 
-export async function renderGraphic({ post, brand, files, format = 'portrait', canvas }) {
+// Slide 0 is the post's main graphic; later slides take their headline and image from graphic.slides.
+export const slideCount = (post) => 1 + (post.graphic.slides?.length || 0);
+export async function renderGraphic({ post, brand, files, format = 'portrait', canvas, slideIndex = 0 }) {
   const [w, h] = FORMATS[format];
   const c = canvas || document.createElement('canvas'); c.width = w; c.height = h;
-  const x = c.getContext('2d'); const g = post.graphic; const pal = palette(brand, g.style);
+  const x = c.getContext('2d'); const base = post.graphic, total = slideCount(post);
+  const g = slideIndex === 0 ? base : { ...base, line: base.slides[slideIndex - 1].line, imageFileId: base.slides[slideIndex - 1].imageFileId || null, footer: '' };
+  const pal = palette(brand, g.style);
   const [hf, bf] = await Promise.all([ensureFont(brand, 'heading'), ensureFont(brand, 'body')]);
   const meta = { brandId: brand.id, background: pal.bg, foreground: pal.fg, accent: pal.accent, headingFont: hf.requested, headingFontLoaded: hf.loaded, headingCss: hf.css, bodyFont: bf.requested, bodyFontLoaded: bf.loaded, logo: false, image: false, format };
   x.fillStyle = pal.bg; x.fillRect(0, 0, w, h);
@@ -110,9 +114,20 @@ export async function renderGraphic({ post, brand, files, format = 'portrait', c
   lines.forEach((l, i) => x.fillText(l, pad, top + size * 0.95 + i * size * 1.12)); meta.headlineSize = size;
   const footer = (g.footer || profile.tagline || '').trim();
   if (footer) { x.globalAlpha = 0.7; x.font = `22px ${bf.css}`; x.fillText(footer.toUpperCase(), pad, h - (format === 'story' ? 155 : 65)); x.globalAlpha = 1; }
+  if (total > 1) { x.globalAlpha = 0.7; x.font = `22px ${bf.css}`; x.textAlign = 'right'; x.fillStyle = pal.fg; x.fillText(`${slideIndex + 1} / ${total}`, w - pad, h - (format === 'story' ? 155 : 65)); x.textAlign = 'left'; x.globalAlpha = 1; }
+  meta.slide = slideIndex + 1; meta.slides = total;
   c.__meta = meta; return { canvas: c, meta };
 }
 
+// Renders every slide of a post, one after another, as PNG (and JPEG for PDF) blobs.
+export async function exportSlides(args, type = 'image/png') {
+  const out = [];
+  for (let i = 0; i < slideCount(args.post); i++) {
+    const { canvas, meta } = await renderGraphic({ ...args, slideIndex: i, canvas: undefined });
+    out.push({ blob: await new Promise((r) => canvas.toBlob(r, type, 0.92)), meta, width: canvas.width, height: canvas.height });
+  }
+  return out;
+}
 export async function exportPng(args) {
   const { canvas, meta } = await renderGraphic(args);
   const blob = await new Promise((r) => canvas.toBlob(r, 'image/png'));

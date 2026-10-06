@@ -7,6 +7,11 @@ import { normalizeProfile, voiceFingerprint, styleFingerprint, DEFAULT_PROFILE }
 import { readConfig, LIMITS } from '../lib/config.js';
 import { buildInstructions } from '../lib/prompt.js';
 import { PNG, ttf } from './helpers.mjs';
+import { buildZip, buildPdf, crc32 } from '../web/app/carousel.js';
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 test('file type is sniffed from content, not the filename', () => {
   assert.equal(sniffType(PNG, 'evil.txt'), 'image/png');
@@ -79,4 +84,20 @@ test('prompt includes the right voice by mode', () => {
   assert.ok(b.includes('BRANDVOICE') && !b.includes('FOUNDERVOICE'));
   assert.ok(f.includes('FOUNDERVOICE') && !f.includes('BRANDVOICE'));
   assert.ok(both.includes('BRANDVOICE') && both.includes('FOUNDERVOICE') && both.includes('VERIFYME'));
+});
+
+test('carousel ZIP is a valid archive with every slide intact', () => {
+  const files = [1, 2, 3].map((n) => ({ name: `slide-0${n}.png`, bytes: Uint8Array.from(Buffer.concat([PNG, Buffer.from('x'.repeat(n * 100))])) }));
+  const f = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'zip-')), 'c.zip'); fs.writeFileSync(f, buildZip(files));
+  assert.match(execFileSync('unzip', ['-tq', f]).toString(), /No errors detected/);
+  for (const x of files) assert.deepEqual(Buffer.from(execFileSync('unzip', ['-p', f, x.name], { maxBuffer: 1e6 })), Buffer.from(x.bytes));
+  assert.equal(crc32(Buffer.from('123456789')), 0xcbf43926);
+});
+test('carousel PDF has one page per slide and a correct cross-reference table', () => {
+  const jpeg = Uint8Array.from([0xff, 0xd8, 0xff, 0xe0, 1, 2, 3, 0xff, 0xd9]);
+  const pdf = Buffer.from(buildPdf([1, 2, 3].map(() => ({ jpeg, width: 1080, height: 1350 }))));
+  const text = pdf.toString('latin1');
+  assert.ok(text.startsWith('%PDF-1.4')); assert.equal((text.match(/\/Type \/Page /g) || []).length, 3); assert.match(text, /\/Count 3/);
+  const start = Number(text.match(/startxref\n(\d+)/)[1]); assert.ok(text.slice(start).startsWith('xref'));
+  const rows = text.slice(start).split('\n').slice(3, 3 + 9); rows.forEach((r, i) => { const off = Number(r.slice(0, 10)); assert.ok(text.slice(off).startsWith(`${i + 1} 0 obj`), `object ${i + 1} offset`); });
 });

@@ -1,6 +1,7 @@
 import { $, $$, S, esc, api, bpath, fileUrl, isImg, current, postById, editPost, flush, postAction, resolveConflict, toast, fmtDate, postStatus, savePlace, setStatus, banner, isDone } from './core.js';
 import { ask, form, sizeText } from './ui.js';
-import { renderGraphic, exportPng, FORMATS, palette } from './graphics.js';
+import { renderGraphic, exportPng, exportSlides, slideCount, FORMATS, palette } from './graphics.js';
+import { buildZip, buildPdf } from './carousel.js';
 
 let ctl = { rerender: () => {}, reloadFiles: async () => {}, go: () => {}, choose: () => {} };
 export const bindToday = (c) => { ctl = c; };
@@ -232,6 +233,12 @@ function renderImage(p, box) {
   <div class="checkrow"><input type="radio" name="imgsel" id="img_none" value="" ${!g.imageFileId ? 'checked' : ''}><label for="img_none">Words only</label></div>
   ${imgs.map((f) => `<div class="checkrow"><input type="radio" name="imgsel" id="img_${f.id}" value="${f.id}" ${g.imageFileId === f.id ? 'checked' : ''}><label for="img_${f.id}"><img src="${fileUrl(f)}" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:8px">${esc(f.name)}<small>${f.postId ? 'This post' : 'Brand file'}</small></label></div>`).join('')}
   ${imgs.length ? '' : '<p class="small muted">Upload a photo or screenshot under “Files for this post” to use it here.</p>'}
+  <h3 style="margin-top:22px">Carousel slides <span class="small muted">(optional)</span></h3>
+  <p class="small muted">Add more slides to turn this into a carousel. Slide 1 is the headline above. Up to 10 slides in total.</p>
+  ${(g.slides || []).map((sl, i) => `<div class="card" style="box-shadow:none;margin-top:12px"><div class="row between"><strong>Slide ${i + 2}</strong><button class="btn link danger" type="button" data-rmslide="${i}">Remove</button></div>
+    <label for="sl_line_${i}">Headline</label><textarea id="sl_line_${i}" rows="2" maxlength="200" data-slideline="${i}">${esc(sl.line)}</textarea>
+    <label for="sl_img_${i}">Photo or screenshot</label><select id="sl_img_${i}" data-slideimg="${i}"><option value="">Words only</option>${imgs.map((f) => `<option value="${f.id}" ${sl.imageFileId === f.id ? 'selected' : ''}>${esc(f.name)}</option>`).join('')}</select></div>`).join('')}
+  <div class="actions" style="margin-top:12px"><button class="btn" id="addslide" type="button" ${(g.slides || []).length >= 9 ? 'disabled' : ''}>Add a slide</button></div>
   <label for="footer">Small line at the bottom</label><input type="text" id="footer" maxlength="80" value="${esc(g.footer)}" placeholder="${esc(S.brand.profile.tagline || 'Optional')}">
   <div class="checkrow"><input type="checkbox" id="showLogo" ${g.showLogo ? 'checked' : ''}><label for="showLogo">Show logo and name</label></div>
   <div class="actions"><button class="btn primary" id="ready" type="button" ${p.imageReady ? 'disabled' : ''}>${p.imageReady ? 'Image approved ✓' : 'Approve image'}</button><button class="btn" id="backcaption" type="button">Back to caption</button></div>`;
@@ -239,6 +246,11 @@ function renderImage(p, box) {
   $('#headline').oninput = (e) => upd({ line: e.target.value });
   $('#footer').oninput = (e) => upd({ footer: e.target.value });
   $('#showLogo').onchange = (e) => upd({ showLogo: e.target.checked });
+  const setSlides = (slides) => { upd({ slides }); renderStepBody(); };
+  $('#addslide').onclick = () => setSlides([...(p.graphic.slides || []), { line: '', imageFileId: null }]);
+  $$('[data-rmslide]').forEach((b) => (b.onclick = () => setSlides(p.graphic.slides.filter((_, i) => i !== +b.dataset.rmslide))));
+  $$('[data-slideline]').forEach((t) => (t.oninput = () => upd({ slides: p.graphic.slides.map((sl, i) => (i === +t.dataset.slideline ? { ...sl, line: t.value } : sl)) })));
+  $$('[data-slideimg]').forEach((sel) => (sel.onchange = () => upd({ slides: p.graphic.slides.map((sl, i) => (i === +sel.dataset.slideimg ? { ...sl, imageFileId: sel.value || null } : sl)) })));
   $$('[data-style]').forEach((b) => (b.onclick = () => { upd({ style: b.dataset.style }); $$('[data-style]').forEach((x) => x.setAttribute('aria-pressed', x === b)); }));
   $$('[name=imgsel]').forEach((r) => (r.onchange = () => upd({ imageFileId: r.value || null })));
   $('#ready').onclick = async () => { if (!p.graphic.line.trim()) return toast('Add a line for the image first.'); if (await postAction(p.id, 'approve-image')) { S.step = 3; savePlace(S.brandId, { lastStep: 3 }); ctl.rerender(); } };
@@ -253,7 +265,7 @@ function renderPost(p, box) {
   ${p.approved && p.needs.voiceReview ? '<div class="note warn">Voice guidance changed since approval. Your approved words are unchanged.</div>' : ''}
   <div class="row between">${platformTabs()}</div><div class="actions"><button class="btn primary" id="copy" type="button">Copy ${platformName(k)} caption</button></div>
   <label for="format">Image format</label><select id="format">${Object.entries(FORMATS).map(([v, f]) => `<option value="${v}">${f[2]}</option>`).join('')}</select>
-  <div class="actions"><button class="btn" id="download" type="button">Download image (PNG)</button></div><p class="small muted" id="exportNote">The PNG uses ${esc(S.brand.name)}’s logo, colors and fonts.</p>
+  <div class="actions"><button class="btn" id="download" type="button">${slideCount(p) > 1 ? 'Download slide 1 (PNG)' : 'Download image (PNG)'}</button>${slideCount(p) > 1 ? '<button class="btn" id="dlzip" type="button">All slides (ZIP of PNGs, for Instagram)</button><button class="btn" id="dlpdf" type="button">All slides (PDF, for LinkedIn)</button>' : ''}</div><p class="small muted" id="exportNote">The PNG uses ${esc(S.brand.name)}’s logo, colors and fonts.</p>
   <h3 style="margin-top:22px">Posting checklist</h3>
   ${['linkedin', 'instagram'].map((pk) => { const at = p[pk === 'linkedin' ? 'postedLinkedinAt' : 'postedInstagramAt']; return `<div class="checkrow"><input type="checkbox" id="posted_${pk}" ${at ? 'checked' : ''}><label for="posted_${pk}">Posted on ${platformName(pk)}<small>${at ? 'Marked ' + new Date(at).toLocaleDateString() : 'Check after you publish there. Tracked separately.'}</small></label></div>`; }).join('')}
   ${isDone(p) ? '<div class="note"><strong>That’s out in the world.</strong> Your progress is saved. You can leave it here.</div>' : ''}
@@ -261,6 +273,7 @@ function renderPost(p, box) {
   bindPlatform();
   $('#copy').onclick = () => copyCaption(p);
   $('#download').onclick = () => downloadImage(p);
+  if ($('#dlzip')) { $('#dlzip').onclick = () => downloadCarousel(p, 'zip'); $('#dlpdf').onclick = () => downloadCarousel(p, 'pdf'); }
   $('#editimage').onclick = () => { S.step = 2; renderStepBody(); refreshChrome(); };
   for (const pk of ['linkedin', 'instagram']) $('#posted_' + pk).onchange = async (e) => { const r = await postAction(p.id, 'posted', { platform: pk, posted: e.target.checked }); ctl.rerender(); if (!r) toast('Could not update.'); };
 }
@@ -277,6 +290,21 @@ export async function downloadImage(p) {
   finally { btn.disabled = false; btn.textContent = 'Download image (PNG)'; }
 }
 
+const bytesOf = async (blob) => new Uint8Array(await blob.arrayBuffer());
+function saveBlob(blob, name) { const u = URL.createObjectURL(blob), a = document.createElement('a'); a.href = u; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(u), 3000); }
+export async function downloadCarousel(p, kind) {
+  const btn = $(kind === 'zip' ? '#dlzip' : '#dlpdf'), label = btn.textContent; const format = $('#format').value; btn.disabled = true; btn.textContent = 'Preparing slides…';
+  try {
+    const slug = S.brand.name.normalize('NFD').replace(/[^\w]+/g, '-').replace(/^-|-$/g, '').toLowerCase() || 'brand', base = `${slug}-${p.date || 'draft'}-${format}`;
+    const slides = await exportSlides({ post: p, brand: S.brand, files: S.files, format }, kind === 'zip' ? 'image/png' : 'image/jpeg');
+    window.__lastExport = { ...slides[0].meta, slides: slides.length, kind };
+    if (kind === 'zip') saveBlob(new Blob([buildZip(await Promise.all(slides.map(async (s, i) => ({ name: `${base}-slide-${String(i + 1).padStart(2, '0')}.png`, bytes: await bytesOf(s.blob) }))))], { type: 'application/zip' }), `${base}-carousel.zip`);
+    else saveBlob(new Blob([buildPdf(await Promise.all(slides.map(async (s) => ({ jpeg: await bytesOf(s.blob), width: s.width, height: s.height }))))], { type: 'application/pdf' }), `${base}-carousel.pdf`);
+    toast(`${slides.length} slides downloaded.`);
+  } catch { toast('Could not export the slides. Please try again.'); }
+  finally { btn.disabled = false; btn.textContent = label; }
+}
+
 // ---------- preview ----------
 export function drawPreview() {
   clearTimeout(previewTimer);
@@ -287,6 +315,9 @@ export function drawPreview() {
     let c = box.querySelector('canvas'); if (!c) { box.innerHTML = '<canvas aria-label="Image preview" role="img"></canvas>'; c = box.querySelector('canvas'); }
     const id = p.id; const { meta } = await renderGraphic({ post: p, brand: S.brand, files: S.files, canvas: c });
     if (current()?.id === id) c.dataset.style = meta.background;
+    let th = $('#prevThumbs'); if (!th) { box.insertAdjacentHTML('beforeend', '<div id="prevThumbs" class="row" style="margin-top:10px;gap:8px"></div>'); th = $('#prevThumbs'); }
+    const n = slideCount(p); th.innerHTML = '';
+    for (let i = 1; i < n && current()?.id === id; i++) { const tc = document.createElement('canvas'); tc.setAttribute('role', 'img'); tc.setAttribute('aria-label', `Slide ${i + 1} preview`); tc.style.cssText = 'width:30%;height:auto;border-radius:6px'; th.append(tc); await renderGraphic({ post: p, brand: S.brand, files: S.files, canvas: tc, slideIndex: i }); }
   }, 120);
 }
 
