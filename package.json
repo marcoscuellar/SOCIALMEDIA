@@ -1,0 +1,28 @@
+{
+  "name": "launch-room",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build-vercel.mjs",
+    "dev": "node scripts/dev-server.mjs",
+    "db:migrate": "node scripts/migrate.mjs",
+    "legacy:migrate": "node scripts/migrate-legacy.mjs",
+    "backup": "node scripts/backup.mjs",
+    "restore": "node scripts/restore.mjs",
+    "test": "node --test tests/unit.test.mjs tests/api.test.mjs tests/ai.test.mjs tests/migration.test.mjs",
+    "test:e2e": "node tests/e2e.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "1.2.0",
+    "@vercel/blob": "2.8.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "pg": "^8.23.1",
+    "playwright-core": "1.63.0"
+  }
+}

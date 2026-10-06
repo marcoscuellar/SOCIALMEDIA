@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "framework": null,
+  "buildCommand": "node scripts/build-vercel.mjs",
+  "outputDirectory": "public",
+  "functions": { "api/index.js": { "includeFiles": "{web,db,seed}/**", "maxDuration": 60 } },
+  "rewrites": [{ "source": "/:path*", "destination": "/api/index?path=:path*" }]
+}

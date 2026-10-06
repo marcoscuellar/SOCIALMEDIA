@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Launch Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<script src="/app/theme.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%274%27 fill=%27%231f5f69%27/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to workspace</a>
+<header class="top">
+  <div class="brandmark"><span class="logo-dot" aria-hidden="true"></span><strong>Launch Room</strong></div>
+  <label class="switcher"><span class="sr-only">Brand</span><select id="brandSwitch" aria-label="Brand"></select></label>
+  <div class="top-right">
+    <button class="btn small" id="themeBtn" type="button">Dark</button>
+    <span id="saveStatus" class="status" role="status" aria-live="polite">Opening…</span>
+  </div>
+</header>
+<div class="shell">
+  <nav class="nav" aria-label="Workspace" id="nav">
+    <button data-view="today" type="button">Next post</button>
+    <button data-view="plan" type="button">Plan</button>
+    <button data-view="files" type="button">Files</button>
+    <button data-view="brand" type="button">Brand</button>
+    <button data-view="voice" type="button">My voice</button>
+  </nav>
+  <main id="main" tabindex="-1">
+    <div id="banner" class="banner hidden" role="alert"></div>
+    <div id="content"><p class="muted">Opening your Launch Room…</p></div>
+  </main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="dlg"></dialog>
+<script type="module" src="/app/main.js"></script>
+</body>
+</html>
