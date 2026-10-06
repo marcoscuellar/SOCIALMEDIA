@@ -1,5 +1,5 @@
 import { $, $$, S, esc, api, bpath, fileUrl, toast } from './core.js';
-import { ask } from './ui.js';
+import { ask, sizeText } from './ui.js';
 import { renderGraphic } from './graphics.js';
 
 let ctl; export const bindBrand = (c) => { ctl = c; };
@@ -10,8 +10,42 @@ const fromLines = (s) => s.split('\n').map((x) => x.trim()).filter(Boolean);
 const linkLines = (a) => (a || []).map((l) => `${l.label} | ${l.url}`).join('\n');
 const fromLinks = (s) => fromLines(s).map((l) => { const [label, ...u] = l.split('|'); return u.length ? { label: label.trim(), url: u.join('|').trim() } : { label: '', url: label.trim() }; });
 
+const gateKey = (id) => 'lr-gate-' + id;
+const gateSkipped = (id) => { try { return localStorage.getItem(gateKey(id)) === '1'; } catch { return false; } };
+const skipGate = (id) => { try { localStorage.setItem(gateKey(id), '1'); } catch { /* optional */ } };
+
+function docList() {
+  const refs = S.files.filter((f) => !f.postId && f.role === 'reference');
+  const ex = S.excerpts.filter((e) => !e.postId);
+  return refs.map((f) => `<div class="fileitem"><div class="fileicon" aria-hidden="true">FILE</div><div class="meta"><strong>${esc(f.name)}</strong><div class="small muted">${sizeText(f.size)} · stored privately</div><div class="row"><a class="btn link" href="${fileUrl(f, true)}" download>Download</a></div></div></div>`).join('')
+    + ex.map((e) => `<div class="fileitem"><div class="fileicon" aria-hidden="true">TEXT</div><div class="meta"><strong>${esc(e.label)}</strong><div class="small muted">${e.body.length} characters pasted</div></div></div>`).join('');
+}
+
+function renderGate() {
+  $('#content').innerHTML = `<div class="eyebrow">Branding · ${esc(S.brand.name)}</div>
+  <section class="card" id="gate"><h1>Do you have a branding document?</h1>
+  <p style="font-size:1.1rem">If you have a branding document, upload it here.</p>
+  <label class="uploadzone" style="padding:34px"><strong>Choose your file or drop it here</strong><input type="file" id="gateFile" aria-label="Upload your branding document"></label>
+  <p class="small muted">Any file type, up to 4 MB. It is stored privately and stays downloadable. AI can't read PDF, Word or HTML files, so after you upload, copy the key parts into the boxes on the next screen, or paste them below.</p>
+  <label for="gateText">Or paste the text of it (or a few words from AI)</label><textarea id="gateText" rows="5" maxlength="12000" placeholder="Paste it here"></textarea>
+  <div class="actions"><button class="btn primary" id="gateSave" type="button">Save pasted text</button></div>
+  <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+  <p style="margin-bottom:12px"><strong>Don't have one?</strong></p>
+  <button class="btn" id="gateNo" type="button">No, I don't have one. Let me fill it in.</button></section>`;
+  const done = async () => { await ctl.reloadFiles(); renderBrand(); toast('Saved. Now fill in the rest below.'); };
+  $('#gateFile').onchange = async (e) => { const f = e.target.files[0]; if (!f) return; if (await upload(f, 'reference')) done(); };
+  const z = $('.uploadzone'); z.ondragover = (e) => e.preventDefault(); z.ondrop = async (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f && (await upload(f, 'reference'))) done(); };
+  $('#gateSave').onclick = async () => {
+    const text = $('#gateText').value; if (!text.trim()) return toast('Paste some text first.');
+    try { await api('POST', bpath('/excerpts'), { label: 'Branding document (pasted)', body: text }); done(); } catch (e) { toast(e.message); }
+  };
+  $('#gateNo').onclick = () => { skipGate(S.brand.id); renderBrand(); };
+}
+
 export function renderBrand() {
   const b = S.brand;
+  const hasContent = b.profile.voice.guidelines || b.profile.audience || b.profile.positioning || S.files.some((f) => !f.postId && f.role === 'reference') || S.excerpts.some((e) => !e.postId);
+  if (!hasContent && !gateSkipped(b.id)) return renderGate();
   if (!draft || draft.__id !== b.id || draft.__rev !== b.revision) { draft = JSON.parse(JSON.stringify(b.profile)); draft.__id = b.id; draft.__rev = b.revision; draftName = b.name; dirty = false; }
   const d = draft; const logo = S.files.find((f) => f.id === d.logo.fileId), logoDark = S.files.find((f) => f.id === d.logo.darkFileId);
   const fontRow = (which, label) => { const f = d.fonts[which]; return `<div class="card" style="box-shadow:none"><h3>${label}</h3>
@@ -22,6 +56,10 @@ export function renderBrand() {
   $('#content').innerHTML = `
   <div class="row between"><div><div class="eyebrow">Brand profile</div><h1>${esc(b.name)}</h1></div>${b.status === 'archived' ? '<span class="pill warn">Archived</span>' : ''}</div>
   <p class="muted">Everything the writing and the graphics need to feel like this brand. Changing voice or facts marks reviews and approvals for another look; changing the look marks approved images. Nothing approved is edited for you.</p>
+  <section class="card" id="docsCard"><h2>Branding document</h2>
+  <p class="muted small">If you have a branding document, upload it here. Any file type, up to 4 MB. Stored privately and downloadable; AI can't read PDF, Word or HTML files, so copy the key parts into the boxes below.</p>
+  ${docList() || '<p class="small muted">None added yet.</p>'}
+  <label class="uploadzone"><strong>Add a branding document</strong><input type="file" id="docFile" aria-label="Add a branding document"></label></section>
   <section class="card"><h2>The basics</h2><label for="b_name">Brand name</label><input id="b_name" type="text" maxlength="100" value="${esc(draftName)}">
   <label for="b_desc">Description</label><textarea id="b_desc" rows="3" maxlength="2000">${esc(d.description)}</textarea>
   <label for="b_aud">Audience</label><textarea id="b_aud" rows="3" maxlength="2000">${esc(d.audience)}</textarea>
@@ -59,6 +97,7 @@ function collect() {
 }
 
 function bind() {
+  $('#docFile').onchange = async (e) => { const f = e.target.files[0]; if (!f) return; collect(); if (await upload(f, 'reference')) { toast('Saved. Your other edits on this page are kept.'); const keep = draftName; renderBrand(); draftName = keep; } };
   const mark = () => { dirty = true; $('#saveNote').textContent = 'Unsaved changes'; };
   $$('#content input,#content textarea,#content select').forEach((e) => { if (e.type !== 'file') e.addEventListener('input', mark); });
   for (const k of ['dark', 'light', 'primary', 'accent']) {

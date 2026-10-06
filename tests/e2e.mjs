@@ -69,7 +69,8 @@ await step('first run: empty workspace invites adding a brand (no starter when n
 
 await step('create brand A through the interface, then edit voice, facts, colors, uploaded font and logo', async () => {
   await page.click('#addFirst'); await page.fill('#nb_name', 'Alpha Foods'); await page.fill('#nb_desc', 'Loud street food.'); await page.click('#nb_ok');
-  await page.waitForSelector('#b_name'); assert.equal(await page.inputValue('#b_name'), 'Alpha Foods');
+  await page.waitForSelector('#gate'); assert.match(await page.textContent('#gate'), /If you have a branding document, upload it here/); assert.equal(await page.locator('#b_name').count(), 0, 'fields stay closed until the question is answered');
+  await page.click('#gateNo'); await page.waitForSelector('#b_name'); assert.equal(await page.inputValue('#b_name'), 'Alpha Foods');
   await page.fill('#b_aud', 'Hungry commuters'); await page.fill('#b_pos', 'Fast and fiery');
   await page.fill('#b_vg', 'ALPHA-VOICE: loud, playful, exclamation marks.'); await page.fill('#b_va', 'bland, corporate');
   await page.fill('#b_fc', 'Open since 2019\nFree delivery over $20'); await page.fill('#b_fv', 'Best in the city');
@@ -86,7 +87,8 @@ await step('create brand A through the interface, then edit voice, facts, colors
 
 await step('create brand B (very different) from the switcher; both appear in the switcher', async () => {
   await page.selectOption('#brandSwitch', '__new'); await page.fill('#nb_name', 'Beta Labs'); await page.fill('#nb_desc', 'Quiet research.'); await page.click('#nb_ok');
-  await page.waitForFunction(() => document.querySelector('#content h1')?.textContent === 'Beta Labs'); assert.equal(await page.inputValue('#b_name'), 'Beta Labs');
+  await page.waitForSelector('#gate'); await page.setInputFiles('#gateFile', files.notes); await page.waitForSelector('#b_name'); assert.match(await page.textContent('#docsCard'), /research\.txt/); assert.equal(await page.inputValue('#b_name'), 'Beta Labs');
+  const dlg = await download(() => page.click('#docsCard a:has-text("Download")')); assert.equal(dlg.name, 'research.txt');
   assert.equal(await page.inputValue('#b_vg'), '', 'a new brand starts blank, not with Alpha content');
   await page.fill('#b_vg', 'BETA-VOICE: calm, precise, no exclamation marks.'); await page.fill('#b_fc', 'Peer reviewed in 2024');
   await page.fill('#ct_dark', '#001a33'); await page.fill('#ct_light', '#eef6ff'); await page.fill('#ct_primary', '#0066aa'); await page.fill('#ct_accent', '#33ddaa');
