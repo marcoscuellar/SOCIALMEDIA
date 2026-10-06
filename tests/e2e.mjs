@@ -201,7 +201,8 @@ await step('upload, preview, download, use for graphic, and removal of a post fi
   const f = (await api(page, 'GET', `/api/brands/${a.id}/files?postId=${post.id}`)).json.files.find((x) => x.name === 'photo.png');
   const dl = await download(() => page.locator('.fileitem', { hasText: 'photo.png' }).locator('a:has-text("Download")').click()); assert.equal(dl.name, 'photo.png'); assert.deepEqual(dl.bytes, fs.readFileSync(files.photo));
   const bytesBefore = fs.readdirSync(path.join(tmp, 'blobs')).length;
-  await page.locator('.fileitem', { hasText: 'photo.png' }).locator('[data-usefile]').click(); await settle(); await page.click('[data-step="2"]'); await page.waitForSelector(`#img_${f.id}:checked`);
+  await page.click('[data-step="1"]'); await page.click('#approve'); await page.waitForSelector('#headline'); // the earlier caption edit cleared approval
+  await page.locator('.fileitem', { hasText: 'photo.png' }).locator('[data-usefile]').click(); await settle(); await page.waitForSelector(`#img_${f.id}:checked`);
   await page.click('#ready'); await page.waitForSelector('#format'); const g = await download(() => page.click('#download')); const m = await page.evaluate(() => window.__lastExport); assert.equal(m.image, true);
   const px = await decodePixels(g.bytes, [[540, 330 + 20 + 100]]); assert.ok(px.px[0][1] > 150 && px.px[0][0] < 80, 'green photo drawn in the graphic: ' + px.px[0]);
   page.once('dialog', () => {}); await page.locator('.fileitem', { hasText: 'photo.png' }).locator('[data-removefile]').click(); await page.click('#dlg [data-i="0"]');
@@ -226,10 +227,10 @@ await step('brand voice change marks approved work "needs another look" without 
 });
 
 await step('concurrent edits from two tabs: nothing is silently overwritten', async () => {
-  await switchTo('Beta Labs'); await page.click('[data-view=today]'); const tab2 = await context.newPage(); await tab2.goto(base + '/'); await tab2.waitForSelector('#caption');
+  await switchTo('Beta Labs'); await page.click('[data-view=today]'); const tab2 = await context.newPage(); await tab2.goto(base + '/'); await tab2.waitForSelector('#ptitle');
   const brandName = await tab2.evaluate(() => document.querySelector('#brandSwitch').selectedOptions[0].textContent); if (brandName !== 'Beta Labs') await tab2.selectOption('#brandSwitch', { label: 'Beta Labs' });
   await tab2.waitForFunction(() => document.getElementById('saveStatus').textContent === 'Saved' && document.getElementById('ptitle')?.value === 'Beta teaser');
-  await page.click('[data-step="1"]'); await tab2.click('[data-step="1"]').catch(() => {});
+  await page.click('[data-step="1"]'); await tab2.click('[data-step="1"]');
   await page.click('[data-platform=linkedin]'); await tab2.click('[data-platform=linkedin]');
   await page.fill('#caption', 'Beta caption from TAB ONE'); await settle(page);
   await tab2.fill('#caption', 'Beta caption from TAB TWO'); await tab2.waitForSelector('#keepMine', { timeout: 8000 });
