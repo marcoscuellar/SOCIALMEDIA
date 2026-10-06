@@ -9,6 +9,10 @@ let noteTimer, previewTimer;
 const filesFor = (p) => S.files.filter((f) => !f.postId || f.postId === p.id);
 const imagesFor = (p) => filesFor(p).filter((f) => isImg(f) && ['attachment', 'reference'].includes(f.role));
 const voiceLabel = { brand: 'Brand voice', founder: 'My voice', both: 'Both' };
+const PLATFORM_TIP = {
+  linkedin: 'LinkedIn tip: the audience likes document-style, easy-to-skim posts (a step-by-step carousel does well). Open with a hook line, keep warm and plain, and use real detail over polish.',
+  instagram: 'Instagram tip: carousels (about 5 to 10 slides) tend to beat single images. Make slide 1 stop the scroll, and give people a reason to save or send it. Real and a little imperfect beats glossy.',
+};
 const platformName = (k) => (k === 'linkedin' ? 'LinkedIn' : 'Instagram');
 const nextDraft = (p) => S.posts.find((x) => x.id !== p.id && !x.paused && !isDone(x));
 
@@ -99,6 +103,7 @@ function renderCaption(p, box) {
   box.innerHTML = `${voiceChooser(p)}
   ${p.approved && p.needs.voiceReview ? `<div class="note warn" id="voiceNote"><strong>Voice guidance changed since you approved this.</strong> Nothing was edited. Take another look, then confirm or change it. <div class="actions"><button type="button" class="btn small" id="reconfirm">Still good — keep my approval</button></div></div>` : ''}
   <div class="row between" style="margin-top:16px">${platformTabs()}<span class="small muted" id="count"></span></div>
+  <p class="small muted" id="platformTip" style="margin:12px 0 0">${esc(PLATFORM_TIP[k])} <span class="muted">(Industry-research tendencies, not guarantees.)</span></p>
   <label for="caption" class="sr-only">${platformName(k)} caption</label><textarea id="caption" style="margin-top:12px" placeholder="Write your ${platformName(k)} caption. It’s yours; nothing here is sent anywhere until you ask for a review.">${esc(p[k])}</textarea>
   <div class="small muted" style="margin-top:8px">Editable draft. Editing a caption clears its approval so you always approve the final words.</div>
   <details class="box" id="reviewbox" open><summary>Second pair of eyes <span id="reviewBadge" class="pill"></span></summary><div id="reviewbody"></div></details>
