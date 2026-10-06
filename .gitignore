@@ -51,3 +51,4 @@ next-env.d.ts
 backups/
 .local-data/
 test-results/
+*.zip
