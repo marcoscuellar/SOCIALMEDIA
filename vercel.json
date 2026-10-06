@@ -3,6 +3,20 @@
   "framework": null,
   "buildCommand": "node scripts/build-vercel.mjs",
   "outputDirectory": "public",
-  "functions": { "api/index.js": { "includeFiles": "{web,db,seed}/**", "maxDuration": 60 } },
-  "rewrites": [{ "source": "/:path*", "destination": "/api/index?path=:path*" }]
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{web,db,seed}/**",
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/index?path="
+    },
+    {
+      "source": "/:path*",
+      "destination": "/api/index?path=:path*"
+    }
+  ]
 }
