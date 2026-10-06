@@ -221,3 +221,12 @@ test('review results save to the post, scoped to its brand, and never overwrite 
   const cur = saved; const edited = (await t.call('PATCH', `/api/brands/${a.id}/posts/${p.id}`, { revision: cur.revision, changes: { linkedin: 'My exact words!' } })).json.post;
   assert.equal(edited.reviews.linkedin.stale, 'caption'); assert.ok(!edited.approved);
 });
+
+test('a brand aesthetic direction is sent only for that brand and changes the cache key', async () => {
+  const { t, a, b, post, review } = await fixture(); const p = await post(a); await review(a, p); assert.ok(!sentText(t.calls[0]).includes('AESTHETIC DIRECTION'));
+  const br = (await t.call('GET', `/api/brands/${a.id}`)).json.brand;
+  assert.equal((await t.call('PATCH', `/api/brands/${a.id}`, { revision: br.revision, profile: { ...br.profile, aesthetic: 'warm-editorial' } })).status, 200);
+  assert.equal((await t.call('PATCH', `/api/brands/${a.id}`, { revision: br.revision + 1, profile: { ...br.profile, aesthetic: 'nope' } })).status, 400);
+  await review(a, p); assert.equal(t.calls.length, 2, 'new direction means a new review'); assert.match(sentText(t.calls[1]), /AESTHETIC DIRECTION: Warm editorial/);
+  const pb = await post(b); await review(b, pb); assert.ok(!sentText(t.calls[2]).includes('AESTHETIC DIRECTION'), 'other brands are unaffected');
+});

@@ -65,6 +65,13 @@ test('platform guidance reaches the prompt as advisory notes', () => {
   assert.match(li, /PLATFORM NOTES \(linkedin/); assert.match(li, /document-like/); assert.doesNotMatch(li, /carousels \(about 5/);
   assert.match(ig, /PLATFORM NOTES \(instagram/); assert.match(ig, /5 to 10 slides/); assert.match(ig, /advisory only/); assert.doesNotMatch(ig, /\d+\.\d+%/, 'no statistics are injected');
 });
+test('aesthetic direction is validated per brand and reaches the prompt only when chosen', () => {
+  assert.throws(() => normalizeProfile({ aesthetic: 'glitter' }), /aesthetic/);
+  assert.equal(normalizeProfile({}).aesthetic, ''); assert.equal(normalizeProfile({ aesthetic: 'soft-brutalism' }).aesthetic, 'soft-brutalism');
+  const none = { name: 'A', profile: normalizeProfile({}) }, some = { name: 'B', profile: normalizeProfile({ aesthetic: 'techno-futurism' }) };
+  assert.doesNotMatch(buildInstructions({ brand: none, founder: null, voiceMode: 'brand', platform: 'linkedin' }), /AESTHETIC DIRECTION/);
+  assert.match(buildInstructions({ brand: some, founder: null, voiceMode: 'brand', platform: 'linkedin' }), /AESTHETIC DIRECTION: Techno-futurism/);
+});
 test('prompt includes the right voice by mode', () => {
   const brand = { name: 'Acme', profile: { ...DEFAULT_PROFILE(), voice: { guidelines: 'BRANDVOICE', preferred: '', avoid: '', examples: '' }, facts: { confirmed: ['FACT1'], verify: ['VERIFYME'], links: [] } } };
   const founder = { name: 'Fo', guidelines: 'FOUNDERVOICE', preferred: '', avoid: '', examples: '' };

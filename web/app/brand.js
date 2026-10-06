@@ -72,6 +72,7 @@ export function renderBrand() {
   <label for="b_fv">Claims that need verification (one per line)</label><textarea id="b_fv" rows="4">${esc(lines(d.facts.verify))}</textarea>
   <label for="b_fl">Links (one per line: Label | https://…)</label><textarea id="b_fl" rows="3">${esc(linkLines(d.facts.links))}</textarea></section>
   <section class="card"><h2>Look: logo, colors and fonts</h2><p class="muted small">Used for exported graphics. The workspace itself always uses Inter.</p>
+  <label for="b_aes">Aesthetic direction (optional)</label><select id="b_aes"><option value="">None / my own</option>${(S.caps.aesthetics || []).map((a) => `<option value="${esc(a.key)}" ${d.aesthetic === a.key ? 'selected' : ''}>${esc(a.label)}</option>`).join('')}</select><p class="small muted" id="aesTip">${esc((S.caps.aesthetics || []).find((a) => a.key === d.aesthetic)?.tip || 'Pick a look to guide AI reviews and image tips. It never changes your colors, fonts or logo.')}</p>
   <div class="cols">${colorRow('dark', 'Dark')}${colorRow('light', 'Light')}${colorRow('primary', 'Primary')}${colorRow('accent', 'Accent')}</div>
   <div class="cols" style="margin-top:16px">${fontRow('heading', 'Headline font')}${fontRow('body', 'Body font')}</div>
   <h3 style="margin-top:20px">Logo</h3><div class="cols"><div><label for="lg">Logo (PNG, JPEG, WebP or GIF)</label><input type="file" id="lg" accept="image/png,image/jpeg,image/webp,image/gif">${logo ? `<p class="small muted">Current: <img src="${fileUrl(logo)}" alt="Current logo" style="height:40px;vertical-align:middle;background:#8884;border-radius:4px;padding:2px"> ${esc(logo.name)}</p>` : '<p class="small muted">No logo yet.</p>'}</div>
@@ -92,7 +93,7 @@ function collect() {
   draft.facts = { confirmed: fromLines(v('b_fc')), verify: fromLines(v('b_fv')), links: fromLinks(v('b_fl')) };
   for (const k of ['dark', 'light', 'primary', 'accent']) draft.colors[k] = v('ct_' + k).trim();
   for (const w of ['heading', 'body']) { const src = v('fs_' + w); const cur = draft.fonts[w]; draft.fonts[w] = src === 'upload' ? { source: 'upload', family: cur.family || 'Brand font', fileId: cur.fileId } : { source: src, family: v('fn_' + w).trim() }; }
-  draft.logo.treatment = v('lt');
+  draft.logo.treatment = v('lt'); draft.aesthetic = v('b_aes');
   const { __id, __rev, ...profile } = draft; return profile;
 }
 
@@ -100,6 +101,7 @@ function bind() {
   $('#docFile').onchange = async (e) => { const f = e.target.files[0]; if (!f) return; collect(); if (await upload(f, 'reference')) { toast('Saved. Your other edits on this page are kept.'); const keep = draftName; renderBrand(); draftName = keep; } };
   const mark = () => { dirty = true; $('#saveNote').textContent = 'Unsaved changes'; };
   $$('#content input,#content textarea,#content select').forEach((e) => { if (e.type !== 'file') e.addEventListener('input', mark); });
+  $('#b_aes').onchange = (e) => { $('#aesTip').textContent = (S.caps.aesthetics || []).find((a) => a.key === e.target.value)?.tip || 'Pick a look to guide AI reviews and image tips. It never changes your colors, fonts or logo.'; };
   for (const k of ['dark', 'light', 'primary', 'accent']) {
     $('#c_' + k).oninput = (e) => { $('#ct_' + k).value = e.target.value; };
     $('#ct_' + k).oninput = (e) => { if (/^#[0-9a-fA-F]{6}$/.test(e.target.value)) $('#c_' + k).value = e.target.value; };
