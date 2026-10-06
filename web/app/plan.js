@@ -42,7 +42,7 @@ export function renderPlan() {
   const scheduled = open.filter((p) => p.date);
   const posted = S.posts.filter((p) => p.postedLinkedinAt || p.postedInstagramAt);
   $('#content').innerHTML = `
-  <div class="row between" style="margin-bottom:18px"><div><div class="eyebrow">${esc(S.brand.name)} · calendar and drafts</div><h1>Plan, at your pace.</h1><p class="muted">Dates are suggestions. Move things as life happens; nothing is overdue here.</p></div>
+  <div class="row between" style="margin-bottom:18px"><div><div class="eyebrow">${esc(S.brand.name)} · calendar and drafts</div><h1>Plan, at your pace.</h1><p class="muted">Dates are suggestions. Move things as life happens; there is no catching up to do.</p></div>
   <div class="row"><button class="btn primary" id="newpost" type="button">New post</button><button class="btn" id="backup" type="button">Export backup</button></div></div>
   <section class="card" aria-label="Calendar"><div class="row between"><h2 style="margin:0">${monthName}</h2><div class="row"><button class="btn small" id="prevm" type="button" aria-label="Previous month">‹ Prev</button><button class="btn small" id="thism" type="button">Today</button><button class="btn small" id="nextm" type="button" aria-label="Next month">Next ›</button></div></div>
   <div class="cal" style="margin-top:14px">${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => `<div class="dow">${d}</div>`).join('')}${cells.join('')}</div>
