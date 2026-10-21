@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELIPAN Social</title><meta name="description" content="ELIPAN Social: the social media command center for ELIPAN GROUP. Today's AI and tech news, matched to every brand.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200.5 179.3'%3E%3Cpath fill='%23141414' fill-rule='evenodd' d='M0.8 66.0 L0.0 68.5 L0.0 127.8 L1.7 130.2 L3.0 130.8 L61.3 131.2 L62.3 132.7 L62.3 177.7 L63.7 179.0 L118.8 179.3 L121.3 178.0 L122.3 176.2 L122.3 124.2 L121.3 121.8 L120.0 120.5 L118.0 119.5 L112.5 119.3 L64.5 119.5 L61.7 119.2 L59.0 117.7 L56.3 113.5 L56.3 68.3 L55.3 66.2 L53.0 64.3 L3.3 64.2Z M63.3 1.3 L62.3 3.5 L62.3 52.2 L63.3 54.7 L64.8 56.2 L67.0 57.0 L109.7 57.0 L113.0 57.8 L114.5 58.8 L144.5 91.7 L145.0 92.8 L145.2 114.0 L146.2 115.8 L147.8 117.2 L149.3 117.7 L197.0 117.7 L199.7 115.8 L200.3 114.5 L200.5 57.7 L198.7 54.7 L196.2 53.5 L125.0 53.3 L123.5 52.2 L122.3 49.7 L122.5 1.2 L121.8 0.2 L65.5 0.0Z'/%3E%3C/svg%3E">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Courier+Prime:wght@400;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.m{--bg:#000000;--card:#0B0B0B;--raised:#121212;--hover:#181818;--line:#222222;--line2:#3A3A3A;--ink:#FFFFFF;--ink2:#CFCFCF;--muted:#A0A0A0;--swap:#FFFFFF;--swap-ink:#000000;--bar:rgba(0,0,0,0.88);--shadow:0 1px 2px rgba(0,0,0,0.8), 0 14px 36px rgba(0,0,0,0.7);--warn:#E3A33B;--bad:#E5484D;color-scheme:dark}
+.m.light{--bg:#FFFFFF;--card:#FFFFFF;--raised:#F1F3F5;--hover:#EEF0F3;--line:#E3E6EA;--line2:#D3D8DE;--ink:#232527;--ink2:#3A3D41;--muted:#6B7079;--swap:#232527;--swap-ink:#FFFFFF;--bar:rgba(255,255,255,0.9);--shadow:0 2px 4px rgba(35,37,39,0.06), 0 12px 28px rgba(35,37,39,0.10);--warn:#9A6B00;--bad:#C62828;color-scheme:light}
+.m a{color:inherit}
+.m .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.16em;color:var(--muted)}
+.m .h{margin:0;font-family:Archivo,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.02em;line-height:1}
+.m .nav{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;color:var(--ink2);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.14em;background:transparent;border:0;cursor:pointer}
+.m .obtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--line2);border-radius:10px;background:transparent;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.12em;cursor:pointer;text-decoration:none;white-space:nowrap}
+.m .obtn:disabled{opacity:.4;cursor:not-allowed}
+.m .wbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:10px;background:var(--swap);color:var(--swap-ink);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.12em;cursor:pointer;text-decoration:none;white-space:nowrap}
+.m .aibtn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1px dashed var(--line2);background:transparent;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;cursor:pointer}
+.m .opt{min-height:40px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink2);font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.m .opt[aria-pressed="true"]{background:var(--swap);color:var(--swap-ink);border-color:var(--swap)}
+.m .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow);box-sizing:border-box}
+.m .field{display:block;box-sizing:border-box;width:100%;padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--ink);font-family:Inter,sans-serif;font-size:15px;line-height:1.6;resize:vertical}
+.m .chk{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}
+.m .chk:first-of-type{border-top:0}
+.m .chk b{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700}
+.m .chk.ok b{background:var(--swap);color:var(--swap-ink)}
+.m .chk.warn b{border:1.5px solid var(--warn);color:var(--warn);box-sizing:border-box}
+.m .chk.bad b{background:var(--bad);color:#FFFFFF}
+.m .topic{display:flex;flex-direction:column;gap:12px;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.m .sec{display:flex;flex-direction:column;gap:8px;padding:18px 0;border-top:1px solid var(--line)}
+.m .sec:first-of-type{border-top:0}
+.m .pill{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;border:1px solid var(--line2);font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;color:var(--ink2)}
+
+/* ===== NEWS BOARD · site-wide ===== */
+.m .card{background:transparent !important;border:0 !important;border-top:2px solid var(--ink) !important;border-radius:0 !important;box-shadow:none !important;padding:18px 0 0 !important}
+.m .topic{background:transparent !important;border:0 !important;border-top:1px solid var(--line2) !important;border-radius:0 !important;padding:18px 0 4px !important}
+.m main h1.h{border-bottom:1px solid var(--ink);padding-bottom:12px}
+.m main section > div > h1.h, .m main .card h1.h{border-bottom:0;padding-bottom:0}
+.m .live{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.16em;color:var(--bad)}
+.m .live i{width:8px;height:8px;border-radius:50%;background:var(--bad);animation:livepulse 1.4s ease-in-out infinite}
+@keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.m .tick{overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.m .tick > div{display:inline-flex;gap:40px;padding-left:20px;animation:tickmove 300s linear infinite}
+.m .tick:hover > div{animation-play-state:paused}
+@keyframes tickmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.m .tick > div{animation:none}.m .live i{animation:none}}
+
+/* scrambled masthead */
+.m .scr{position:relative;display:inline-block;color:transparent;animation:scrIn 0s linear forwards;animation-delay:var(--d)}
+.m .scr::before{content:"";position:absolute;left:0;right:0;top:0;text-align:center;color:var(--ink);animation-duration:var(--d);animation-timing-function:steps(1);animation-fill-mode:forwards}
+.m .scr.s1::before{animation-name:scr1}.m .scr.s2::before{animation-name:scr2}.m .scr.s3::before{animation-name:scr3}
+@keyframes scrIn{to{color:var(--ink)}}
+@keyframes scr1{0%{content:"$"}10%{content:"!"}20%{content:"*"}30%{content:"3"}40%{content:"4"}50%{content:"@"}60%{content:"Ø"}70%{content:"Z"}80%{content:"%"}90%{content:"#"}100%{content:""}}@keyframes scr2{0%{content:"!"}10%{content:"Ø"}20%{content:"$"}30%{content:"="}40%{content:"4"}50%{content:"@"}60%{content:"*"}70%{content:"/"}80%{content:"3"}90%{content:"%"}100%{content:""}}@keyframes scr3{0%{content:"Z"}10%{content:"K"}20%{content:"4"}30%{content:"7"}40%{content:"@"}50%{content:"Ø"}60%{content:"3"}70%{content:"!"}80%{content:"%"}90%{content:"?"}100%{content:""}}
+@media (prefers-reduced-motion: reduce){.m .scr{color:var(--ink);animation:none}.m .scr::before{display:none}}
+</style>
+<style>.m.played .scr{animation:none!important;color:var(--ink)!important}.m.played .scr::before{display:none!important}body{margin:0}</style></head><body>
+<template id="tpl">
+<div class="{{rootClass}}" style="min-height: 100vh; background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; padding-bottom: 72px;">
+
+<header style="position: sticky; top: 0; z-index: 30; background: var(--bar); border-bottom: 1px solid var(--line); padding: 14px 28px;">
+<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="display: flex; align-items: center; gap: 14px; color: var(--ink);"><svg xmlns="http://www.w3.org/2000/svg" style="display: block; height: 30px; width: auto;" aria-hidden="true" viewBox="0 0 200.5 179.3"><path fill="currentColor" fill-rule="evenodd" d="M0.8 66.0 L0.0 68.5 L0.0 127.8 L1.7 130.2 L3.0 130.8 L61.3 131.2 L62.3 132.7 L62.3 177.7 L63.7 179.0 L118.8 179.3 L121.3 178.0 L122.3 176.2 L122.3 124.2 L121.3 121.8 L120.0 120.5 L118.0 119.5 L112.5 119.3 L64.5 119.5 L61.7 119.2 L59.0 117.7 L56.3 113.5 L56.3 68.3 L55.3 66.2 L53.0 64.3 L3.3 64.2Z M63.3 1.3 L62.3 3.5 L62.3 52.2 L63.3 54.7 L64.8 56.2 L67.0 57.0 L109.7 57.0 L113.0 57.8 L114.5 58.8 L144.5 91.7 L145.0 92.8 L145.2 114.0 L146.2 115.8 L147.8 117.2 L149.3 117.7 L197.0 117.7 L199.7 115.8 L200.3 114.5 L200.5 57.7 L198.7 54.7 L196.2 53.5 L125.0 53.3 L123.5 52.2 L122.3 49.7 L122.5 1.2 L121.8 0.2 L65.5 0.0Z"></path></svg><span role="img" aria-label="ELIPAN Social" style="display: inline-flex; align-items: center; gap: 12px; line-height: 1;"><span style="font-family: Archivo, sans-serif; font-weight: 900; font-size: 22px; letter-spacing: 0.22em; margin-right: -0.22em;">ELIPAN</span><span aria-hidden="true" style="width: 2px; height: 22px; background: currentColor;"></span><span style="font-family: 'Courier Prime', 'Courier New', monospace; font-weight: 400; font-size: 15px; letter-spacing: 0.12em;">SOCIAL</span></span></span>
+</div>
+<sc-if value="{{showPicker}}" hint-placeholder-val="{{true}}">
+<div style="position: relative;">
+<button type="button" onClick="{{toggleMenu}}" aria-haspopup="menu" aria-expanded="{{menuStr}}" style="display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 16px; background: var(--card); border: 1px solid var(--line2); border-radius: 12px; color: var(--ink); cursor: pointer;">
+<span class="lbl">{{headerLabel}}</span>
+<span aria-hidden="true" style="{{headerDot}}"></span>
+<span style="font-size: 16px; font-weight: 700;">{{headerBrand}}</span>
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg>
+</button>
+<sc-if value="{{menu}}" hint-placeholder-val="{{false}}">
+<div role="menu" aria-label="Brands" style="position: absolute; top: calc(100% + 8px); left: 0; z-index: 40; width: 280px; background: var(--card); border: 1px solid var(--line2); border-radius: 14px; padding: 6px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 2px;">
+<sc-for list="{{brandMenu}}" as="b" hint-placeholder-count="6">
+<button type="button" role="menuitem" onClick="{{b.pick}}" style="{{b.style}}">
+<span aria-hidden="true" style="{{b.dot}}"></span>
+<span style="flex: 1; text-align: left;">{{b.name}}</span>
+<span class="lbl">{{b.tag}}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-if>
+</div>
+<div style="display: flex; gap: 8px;">
+<sc-if value="{{isHome}}" hint-placeholder-val="{{true}}"><button type="button" class="obtn" onClick="{{toggleNav}}" aria-expanded="{{navOpenStr}}">{{navLabel}}</button></sc-if>
+<button type="button" class="obtn" onClick="{{toggleTheme}}" aria-pressed="{{lightStr}}">{{themeLabel}}</button>
+</div>
+</div>
+<sc-if value="{{showNav}}" hint-placeholder-val="{{false}}">
+<nav aria-label="Main" style="max-width: 1280px; margin: 14px auto 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="6">
+<span style="{{st.gapStyle}}" aria-hidden="true"></span>
+<button type="button" onClick="{{st.go}}" disabled="{{st.locked}}" aria-current="{{st.current}}" style="{{st.style}}">
+<span style="{{st.numStyle}}">{{st.num}}</span>{{st.name}}
+</button>
+<span aria-hidden="true" style="{{st.arrow}}">→</span>
+</sc-for>
+</nav>
+</sc-if>
+<div style="max-width: 1280px; margin: 12px auto 0; display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--line2); padding-top: 10px;">
+<span class="live"><i aria-hidden="true"></i>LIVE</span>
+<span class="lbl" style="flex: none;">UPDATED {{updatedAt}}</span>
+<div class="tick" style="flex: 1; min-width: 0;" aria-label="Latest stories">
+<div>
+<sc-for list="{{ticker}}" as="tk" hint-placeholder-count="6">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px;"><span aria-hidden="true" style="{{tk.dot}}"></span><span class="lbl" style="color: var(--ink);">{{tk.brandUpper}}</span><span style="color: var(--ink2);">{{tk.title}}</span><span class="lbl" style="{{tk.ageStyle}}">{{tk.age}}</span></span>
+</sc-for>
+<sc-if value="{{noLead}}" hint-placeholder-val="{{false}}"><span class="lbl">NO NEW STORIES IN THE LAST 24 HOURS · NEXT BRIEF 4:57 AM</span></sc-if>
+</div>
+</div>
+</div>
+</header>
+
+<main style="max-width: 1280px; margin: 0 auto; padding: 32px 28px 0; box-sizing: border-box;">
+
+<sc-if value="{{isHome}}" hint-placeholder-val="{{true}}">
+<section style="display: flex; flex-direction: column;">
+
+<div style="border-top: 6px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 10px 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px;">
+<span class="lbl" style="color: var(--ink);">VOL. 1 · NO. {{issueNo}}</span>
+<span class="lbl" style="color: var(--ink);">{{todayFull}}</span>
+<span class="lbl" style="color: var(--ink);">ALL BRANDS EDITION</span>
+</div>
+
+<div style="padding: 30px 0 22px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+<h1 class="h" aria-label="ELIPAN Syntax and Snax" style="display: flex; flex-direction: column; align-items: center; gap: 0.06em; line-height: 0.9; letter-spacing: -0.035em;"><span aria-hidden="true" style="font-size: clamp(52px, 9.5vw, 128px);"><span class="scr s3" style="--d: 0.46s;">E</span><span class="scr s2" style="--d: 0.63s;">L</span><span class="scr s3" style="--d: 0.60s;">I</span><span class="scr s3" style="--d: 0.61s;">P</span><span class="scr s3" style="--d: 0.75s;">A</span><span class="scr s1" style="--d: 0.90s;">N</span></span><span aria-hidden="true" style="font-size: clamp(52px, 9.5vw, 128px);"><span class="scr s1" style="--d: 0.71s;">S</span><span class="scr s3" style="--d: 0.69s;">Y</span><span class="scr s3" style="--d: 0.90s;">N</span><span class="scr s2" style="--d: 1.06s;">T</span><span class="scr s3" style="--d: 1.04s;">A</span><span class="scr s3" style="--d: 1.11s;">X</span> <span class="scr s3" style="--d: 1.02s;">&amp;</span> <span class="scr s1" style="--d: 1.11s;">S</span><span class="scr s1" style="--d: 1.21s;">N</span><span class="scr s2" style="--d: 1.38s;">A</span><span class="scr s3" style="--d: 1.38s;">X</span></span></h1>
+<span class="lbl">TODAY’S BOARD · CREDIBLE STORIES FROM THE LAST 24 HOURS ONLY, MATCHED TO A BRAND · BRIEF FILED 4:57 AM</span>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px;">
+<button type="button" class="obtn" onClick="{{startBlank}}">START BLANK</button>
+
+</div>
+</div>
+
+<div style="border-top: 1px solid var(--ink); padding: 12px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+<span class="lbl" style="color: var(--ink); margin-right: 6px;">BRANDS</span>
+<button type="button" class="obtn" onClick="{{allBrands}}" aria-pressed="{{allBrandsStr}}" style="{{allBrandsStyle}}">ALL BRANDS</button>
+<sc-for list="{{brandRows}}" as="r" hint-placeholder-count="6">
+<button type="button" class="obtn" onClick="{{r.go}}" disabled="{{r.soon}}" aria-pressed="{{r.onStr}}" style="{{r.chipStyle}}"><span aria-hidden="true" style="{{r.dot}}"></span><span style="font-weight: 700;">{{r.name}}</span><span style="color: var(--muted);">{{r.posted}}/{{r.goal}}</span></button>
+</sc-for>
+</div>
+<div style="border-top: 1px solid var(--ink); border-bottom: 4px double var(--ink); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+<sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+<div style="padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; border-left: 1px solid var(--line2);">
+<span class="lbl">{{k.label}}</span>
+<div style="display: flex; align-items: baseline; gap: 8px;"><span class="h" style="font-size: 40px;">{{k.value}}</span><span class="lbl">{{k.unit}}</span></div>
+<span style="font-size: 12px; line-height: 1.4; color: var(--muted);">{{k.note}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 32px; padding-top: 28px;">
+
+<div style="grid-column: span 2; min-width: 0; display: flex; flex-direction: column; gap: 22px;">
+<sc-if value="{{noLead}}" hint-placeholder-val="{{false}}">
+<div style="padding: 40px 0; border-bottom: 1px solid var(--ink);"><h2 class="h" style="font-size: 40px;">No news in the last 24 hours.</h2><p style="margin: 12px 0 0; font-size: 16px; color: var(--ink2);">The 4:57 AM brief files new stories every morning. Start blank in the meantime.</p></div>
+</sc-if>
+<sc-if value="{{hasLead}}" hint-placeholder-val="{{true}}">
+<article style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 24px; border-bottom: 1px solid var(--ink);">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+<span class="lbl" style="color: var(--ink);">{{lead.kicker}}</span>
+<span class="lbl">FOR</span><span class="pill"><span aria-hidden="true" style="{{lead.dot}}"></span>&nbsp;{{lead.brandUpper}}</span>
+<span class="lbl" style="{{lead.ageStyle}}">{{lead.age}}</span>
+</div>
+<h2 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 900; font-size: clamp(34px, 4.4vw, 54px); line-height: 1.0; letter-spacing: -0.025em;">{{lead.title}}</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; color: var(--ink2); max-width: 62ch;">{{lead.why}}</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px;">
+<button type="button" style="{{lead.btn}}" onClick="{{lead.use}}">WRITE IT →</button>
+<a href="{{lead.url}}" target="_blank" rel="noopener" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted);">SOURCE · {{lead.source}} ↗</a>
+</div>
+</article>
+</sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0 28px;">
+<sc-for list="{{seconds}}" as="t" hint-placeholder-count="2">
+<article style="display: flex; flex-direction: column; gap: 10px; padding: 4px 0 22px;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;"><span aria-hidden="true" style="{{t.dot}}"></span><span class="lbl" style="color: var(--ink);">{{t.brandUpper}}</span><span class="lbl" style="{{t.ageStyle}}">· {{t.age}}</span></div>
+<h3 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 24px; line-height: 1.15; letter-spacing: -0.01em;">{{t.title}}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink2);">{{t.why}}</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: auto;"><button type="button" class="obtn" style="min-height: 36px; padding: 0 12px;" onClick="{{t.use}}">WRITE IT →</button><a href="{{t.url}}" target="_blank" rel="noopener" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);">{{t.source}} ↗</a></div>
+</article>
+</sc-for>
+</div>
+</div>
+
+<aside style="min-width: 0; display: flex; flex-direction: column; border-left: 1px solid var(--line2); padding-left: 28px;">
+<span class="lbl" style="color: var(--ink); padding-bottom: 10px; border-bottom: 1px solid var(--ink);">MORE STORIES</span>
+<sc-for list="{{mores}}" as="t" hint-placeholder-count="2">
+<article style="display: flex; flex-direction: column; gap: 8px; padding: 16px 0; border-bottom: 1px solid var(--line2);">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;"><span aria-hidden="true" style="{{t.dot}}"></span><span class="lbl" style="color: var(--ink);">{{t.brandUpper}}</span><span class="lbl" style="{{t.ageStyle}}">· {{t.age}}</span></div>
+<h4 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 18px; line-height: 1.25;">{{t.title}}</h4>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;"><button type="button" class="obtn" style="min-height: 36px; padding: 0 12px;" onClick="{{t.use}}">WRITE IT →</button><a href="{{t.url}}" target="_blank" rel="noopener" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);">{{t.source}} ↗</a></div>
+</article>
+</sc-for>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 18px 0;">
+<span class="lbl" style="color: var(--ink);">FROM THE DESK</span>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink2);">Comments count about 15 times more than likes on LinkedIn. Answer every comment in the first hour.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink2);">Keep links out of the post. Drop the source in the first comment.</p>
+</div>
+</aside>
+</div>
+
+<div style="border-top: 4px double var(--ink); margin-top: 12px; padding-top: 22px; display: flex; flex-direction: column;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--ink);">
+<div>
+<span class="live"><i aria-hidden="true"></i>THE WIRE · ALL AI &amp; TECH NEWS · LAST 24 HOURS</span>
+<h2 class="h" style="margin-top: 10px; font-size: 40px;">Everything today</h2>
+<p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">{{feedCount}} stories · {{flaggedCount}} flagged for a brand. Flagged stories come first.</p>
+</div>
+<div role="group" aria-label="Filter the wire" style="display: flex; gap: 6px;">
+<button type="button" class="opt" onClick="{{feedShowAll}}" aria-pressed="{{feedAllStr}}">ALL {{feedCount}}</button>
+<button type="button" class="opt" onClick="{{feedShowFlag}}" aria-pressed="{{feedFlagStr}}">FLAGGED FOR BRANDS {{flaggedCount}}</button>
+</div>
+</div>
+<sc-if value="{{noFeed}}" hint-placeholder-val="{{false}}"><p style="margin: 0; padding: 18px 0; color: var(--muted);">No AI or tech news in the last 24 hours yet.</p></sc-if>
+<sc-for list="{{feedRows}}" as="w" hint-placeholder-count="8">
+<div style="display: grid; grid-template-columns: 92px minmax(0, 1fr) minmax(180px, 240px); gap: 6px 24px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line2);">
+<div style="display: flex; flex-direction: column; gap: 6px;"><span class="lbl" style="color: var(--ink);">{{w.age}}</span><span class="lbl">{{w.cat}}</span></div>
+<div style="min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<a href="{{w.url}}" target="_blank" rel="noopener" style="font-family: Archivo, sans-serif; font-weight: 800; font-size: 18px; line-height: 1.3; text-decoration: none;">{{w.title}}</a>
+<span style="font-size: 14px; line-height: 1.5; color: var(--ink2);">{{w.sum}}</span>
+<span class="lbl">{{w.source}} ↗</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+<sc-if value="{{w.flagged}}" hint-placeholder-val="{{false}}">
+<span class="pill"><span aria-hidden="true" style="{{w.dot}}"></span>&nbsp;FOR {{w.brandUpper}}</span>
+<span style="font-size: 13px; line-height: 1.45; color: var(--muted);">{{w.why}}</span>
+<button type="button" class="obtn" style="min-height: 36px; padding: 0 12px;" onClick="{{w.use}}">WRITE IT →</button>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="border-top: 4px double var(--ink); margin-top: 12px; padding-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 0 32px;">
+<div style="display: flex; flex-direction: column;">
+<span class="lbl" style="color: var(--ink); padding-bottom: 10px; border-bottom: 1px solid var(--ink);">POSTED THIS WEEK</span>
+<sc-if value="{{noPosted}}" hint-placeholder-val="{{true}}">
+<p style="margin: 0; padding: 14px 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Nothing posted yet this week. Posts you send from Step 4 show up here.</p>
+</sc-if>
+<sc-for list="{{postedList}}" as="pp" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line2);">
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="{{pp.dot}}"></span><span class="lbl">{{pp.when}}</span></span>
+<span style="font-size: 15px; font-weight: 600; line-height: 1.4;">{{pp.title}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column;">
+<span class="lbl" style="color: var(--ink); padding-bottom: 10px; border-bottom: 1px solid var(--ink);">ON DECK · ALL BRANDS</span>
+<sc-for list="{{upcoming}}" as="u" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line2);">
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="{{u.dot}}"></span><span class="lbl">{{u.when}}</span></span>
+<span style="font-size: 15px; font-weight: 600; line-height: 1.4;">{{u.title}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="margin-top: 28px; padding: 14px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+<span style="font-size: 14px; color: var(--ink2);"><span class="lbl" style="color: var(--ink);">SOCIAL STATS ·</span> Not connected yet. Connect LinkedIn and Instagram to see followers, impressions and engagement for every brand.</span>
+<button type="button" class="obtn">CONNECT ACCOUNTS</button>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isSnax}}" hint-placeholder-val="{{true}}">
+<section style="display: flex; flex-direction: column; gap: 22px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
+<div>
+<span class="lbl">STEP 1 · {{todayShort}} · FROM THIS MORNING'S BRIEF</span>
+<h1 class="h" style="margin-top: 8px; font-size: 56px;">Syntax &amp; Snax</h1>
+<p style="margin: 10px 0 0; font-size: 16px; color: var(--ink2);">Only stories from the last 24 hours, already matched to a brand. Pick one to write.</p>
+</div>
+<div role="group" aria-label="Show topics" style="display: flex; gap: 6px;">
+<button type="button" class="opt" onClick="{{showAll}}" aria-pressed="{{allStr}}">ALL TOPICS</button>
+<button type="button" class="opt" onClick="{{showMine}}" aria-pressed="{{mineStr}}">FOR {{brandUpper}}</button>
+</div>
+</div>
+<div class="card" style="display: flex; flex-direction: column; gap: 14px; padding: 22px 24px;">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px;">
+<span class="lbl">{{brandUpper}} · CONTENT MIX THIS WEEK · TARGET 40 / 40 / 20</span>
+<span style="font-size: 14px; font-weight: 600;">{{mixNext}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+<sc-for list="{{mix}}" as="mx" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; justify-content: space-between; gap: 6px;"><span class="lbl" style="color: var(--ink2);">{{mx.name}}</span><span class="lbl">{{mx.count}} · GOAL {{mx.goal}}</span></div>
+<span style="display: block; height: 8px; border-radius: 999px; background: var(--raised); overflow: hidden;"><span style="{{mx.bar}}"></span></span>
+<span style="font-size: 12px; line-height: 1.4; color: var(--muted);">{{mx.desc}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px;">
+<sc-for list="{{topics}}" as="t" hint-placeholder-count="5">
+<article class="topic">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+<span class="pill"><span aria-hidden="true" style="{{t.dot}}"></span>&nbsp;{{t.brandUpper}}</span>
+<span class="lbl">{{t.date}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px;">
+<span class="pill">{{t.pillarName}}</span>
+<sc-if value="{{t.fillsGap}}" hint-placeholder-val="{{false}}"><span class="pill" style="border-color: var(--ink); color: var(--ink);">FILLS A GAP</span></sc-if>
+</div>
+<h2 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 21px; line-height: 1.25;">{{t.title}}</h2>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink2);">{{t.why}}</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: auto;">
+<button type="button" style="{{t.btn}}" onClick="{{t.use}}">WRITE IT →</button>
+<a href="{{t.url}}" target="_blank" rel="noopener" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);">{{t.source}} ↗</a>
+</div>
+</article>
+</sc-for>
+</div>
+<sc-if value="{{noTopics}}" hint-placeholder-val="{{false}}">
+<div class="card"><p style="margin: 0; color: var(--muted);">No topic for {{brandName}} today. Switch to All topics, or start from a blank page.</p></div>
+</sc-if>
+<div><button type="button" class="obtn" onClick="{{startBlank}}">START FROM A BLANK PAGE</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{isWrite}}" hint-placeholder-val="{{false}}">
+<section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+<div class="card" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 18px;">
+<div>
+<span class="lbl" style="{{accentTextStyle}}">STEP 1 · WRITING STUDIO · {{brandUpper}}</span>
+<h1 class="h" style="margin-top: 8px; font-size: 40px;">Write the post</h1>
+</div>
+<sc-if value="{{hasTopic}}" hint-placeholder-val="{{true}}">
+<div style="padding: 16px 18px; border-radius: 10px; background: var(--raised); display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;">
+<span class="lbl">FROM THE BOARD · {{topicDate}}</span>
+<button type="button" class="obtn" style="min-height: 36px; padding: 0 12px;" onClick="{{changeStory}}">← CHANGE STORY</button>
+</div>
+<span style="font-size: 16px; font-weight: 700; line-height: 1.4;">{{topicTitle}}</span>
+<span style="font-size: 14px; line-height: 1.5; color: var(--ink2);">{{topicWhy}}</span>
+<a href="{{topicUrl}}" target="_blank" rel="noopener" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);">{{topicSource}} ↗</a>
+</div>
+<sc-if value="{{autoDrafted}}" hint-placeholder-val="{{true}}">
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink2);">✦ AI drafted this from the story. Edit it so it sounds like you.</p>
+</sc-if>
+</sc-if>
+<sc-if value="{{noTopic}}" hint-placeholder-val="{{false}}">
+<div style="padding: 16px 18px; border-radius: 10px; background: var(--raised); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;">
+<span style="font-size: 14px; color: var(--ink2);">No story picked. Writing from a blank page.</span>
+<button type="button" class="obtn" style="min-height: 36px; padding: 0 12px;" onClick="{{changeStory}}">← PICK A STORY ON THE BOARD</button>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<span class="lbl">CHANNEL</span>
+<div role="group" aria-label="Channel" style="display: flex; gap: 6px;">
+<sc-for list="{{channels}}" as="ch" hint-placeholder-count="2">
+<button type="button" class="opt" onClick="{{ch.pick}}" aria-pressed="{{ch.on}}">{{ch.name}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<span class="lbl">PILLAR</span>
+<div role="group" aria-label="Content pillar" style="display: flex; flex-wrap: wrap; gap: 6px;">
+<sc-for list="{{pillars}}" as="pl" hint-placeholder-count="3">
+<button type="button" class="opt" onClick="{{pl.pick}}" aria-pressed="{{pl.on}}">{{pl.name}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted);">{{channelTip}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<button type="button" class="aibtn" onClick="{{aiDraft}}">{{draftLabel}}</button>
+<button type="button" class="aibtn" onClick="{{aiTighten}}">✦ TIGHTEN</button>
+<button type="button" class="aibtn" onClick="{{aiClear}}">CLEAR</button>
+</div>
+<label class="lbl" for="draft">POST TEXT</label>
+<textarea id="draft" class="field" rows="14" value="{{draft}}" onInput="{{onDraft}}" placeholder="{{draftPlaceholder}}"></textarea>
+<div style="display: flex; justify-content: space-between; gap: 12px;">
+<span class="lbl">{{charCount}} / {{charMax}} CHARACTERS</span>
+<span class="lbl">{{channelUpper}}</span>
+</div>
+</div>
+
+<aside class="card" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+<span class="lbl">⛨ BRAND CHECK</span>
+<span class="pill" style="{{bmPillStyle}}">{{bmStatus}}</span>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted);">Live checks against {{brandName}}'s Brand Manager rules.</p>
+<div style="display: flex; flex-direction: column;">
+<sc-for list="{{checks}}" as="c" hint-placeholder-count="5">
+<div class="{{c.cls}}"><b aria-hidden="true">{{c.icon}}</b><span>{{c.text}}</span></div>
+</sc-for>
+</div>
+<sc-if value="{{bmNotApproved}}" hint-placeholder-val="{{true}}">
+<p style="margin: 0; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--warn); color: var(--warn); font-size: 13px; line-height: 1.5;">! {{brandName}}'s rules aren't approved yet, so these checks use draft rules. Approve them in Brand Manager to lock them in.</p>
+</sc-if>
+<button type="button" style="{{approveBtn}}" disabled="{{cantApprove}}" onClick="{{approveCopy}}">✓ APPROVE COPY → DESIGN</button>
+<span class="lbl" style="text-align: center;">{{approveHint}}</span>
+</aside>
+</section>
+</sc-if>
+
+<sc-if value="{{isDesign}}" hint-placeholder-val="{{false}}">
+<section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+<div class="card" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<div>
+<span class="lbl" style="{{accentTextStyle}}">STEP 2 · DESIGN STUDIO · {{brandUpper}}</span>
+<h1 class="h" style="margin-top: 8px; font-size: 40px;">Design the image</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<button type="button" class="aibtn" onClick="{{aiSuggest}}">✦ SUGGEST WITH AI</button>
+</div>
+<sc-if value="{{isIG}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<span class="lbl">INSTAGRAM FORMAT</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px;">
+<sc-for list="{{formats}}" as="f" hint-placeholder-count="3">
+<button type="button" class="opt" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.name}}</button>
+</sc-for>
+</div>
+<span style="font-size: 13px; line-height: 1.5; color: var(--muted);">{{formatTip}}</span>
+</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<span class="lbl">LAYOUT</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px;">
+<sc-for list="{{layouts}}" as="l" hint-placeholder-count="3">
+<button type="button" class="opt" onClick="{{l.pick}}" aria-pressed="{{l.on}}">{{l.name}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<span class="lbl">BACKGROUND</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px;">
+<sc-for list="{{grounds}}" as="g" hint-placeholder-count="3">
+<button type="button" class="opt" onClick="{{g.pick}}" aria-pressed="{{g.on}}">{{g.name}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<label class="lbl" for="headline">HEADLINE ON THE IMAGE</label>
+<textarea id="headline" class="field" rows="3" value="{{headline}}" onInput="{{onHeadline}}"></textarea>
+</div>
+<p style="margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--raised); font-size: 13px; line-height: 1.5; color: var(--ink2);">⛨ Colors, fonts and logo are locked by {{brandName}}'s Brand Manager.</p>
+<button type="button" style="{{primaryBtn}}" onClick="{{approveDesign}}">✓ APPROVE DESIGN → POST</button>
+</div>
+<div style="flex: 999 1 500px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+<span class="lbl">{{previewLabel}}</span>
+<div style="{{frame}}">
+<div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; box-sizing: border-box; padding: 40px;">
+<span style="{{kicker}}">{{brandUpper}}</span>
+<sc-if value="{{isStat}}" hint-placeholder-val="{{false}}">
+<span style="{{statStyle}}">{{headline}}</span>
+</sc-if>
+<sc-if value="{{notStat}}" hint-placeholder-val="{{true}}">
+<p style="{{bigStyle}}">{{quoteOpen}}{{headline}}</p>
+</sc-if>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+<span aria-hidden="true" style="{{rule}}"></span>
+<span style="{{footStyle}}">{{frameFoot}}</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isPost}}" hint-placeholder-val="{{false}}">
+<section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+<div class="card" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<div>
+<span class="lbl" style="{{accentTextStyle}}">STEP 3 · POST OR SCHEDULE · {{brandUpper}}</span>
+<h1 class="h" style="margin-top: 8px; font-size: 40px;">Ship it</h1>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 16px; border-radius: 12px; background: var(--raised);">
+<div style="{{thumb}}"><span style="{{thumbText}}">{{headline}}</span></div>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink2); white-space: pre-line;">{{draftPreview}}</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+<div style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 12px; padding: 20px; border: 1px solid var(--line); border-radius: 14px;">
+<span class="lbl">POST NOW</span>
+<p style="margin: 0; font-size: 14px; color: var(--ink2);">{{postNowText}}</p>
+<a href="{{openUrl}}" target="_blank" rel="noopener" style="{{primaryBtn}}" onClick="{{markPosted}}">{{openLabel}}</a>
+<sc-if value="{{justPosted}}" hint-placeholder-val="{{false}}"><span class="lbl">✓ COPIED · LOGGED AS POSTED TODAY</span></sc-if>
+</div>
+<div style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 12px; padding: 20px; border: 1px solid var(--line); border-radius: 14px;">
+<span class="lbl">SCHEDULE</span>
+<div style="display: flex; gap: 8px;">
+<label style="flex: 1; display: flex; flex-direction: column; gap: 6px;"><span class="lbl">DAY</span><input type="date" class="field" value="{{date}}" onInput="{{onDate}}" style="padding: 10px;"></label>
+<label style="flex: 1; display: flex; flex-direction: column; gap: 6px;"><span class="lbl">TIME</span><input type="time" class="field" value="{{time}}" onInput="{{onTime}}" style="padding: 10px;"></label>
+</div>
+<button type="button" class="wbtn" onClick="{{schedule}}">SCHEDULE</button>
+</div>
+</div>
+<sc-if value="{{justScheduled}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line2); font-size: 15px; font-weight: 600;">✓ Scheduled for {{brandName}} on {{date}} at {{time}}.</p>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 12px; background: var(--raised);">
+<span class="lbl">{{windowLabel}}</span>
+<span style="font-size: 14px; line-height: 1.55; color: var(--ink2);">{{windowText}}</span>
+</div>
+<sc-if value="{{showReshare}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-radius: 12px; border: 1px solid var(--line2);">
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 4px;">
+<span class="lbl">BOOST IT FROM PERSONAL</span>
+<span style="font-size: 14px; line-height: 1.5; color: var(--ink2);">Personal profiles reach more people than company pages. Reshare this from your profile with one line of your own take.</span>
+</div>
+<button type="button" class="aibtn" onClick="{{reshare}}">✦ DRAFT A PERSONAL RESHARE</button>
+</div>
+</sc-if>
+<button type="button" class="obtn" onClick="{{restart}}" style="align-self: flex-start;">PICK ANOTHER TOPIC</button>
+</div>
+<aside class="card" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<span class="lbl" style="margin-bottom: 8px;">UP NEXT</span>
+<sc-for list="{{upcoming}}" as="u" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-top: 1px solid var(--line);">
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="{{u.dot}}"></span><span class="lbl">{{u.when}}</span></span>
+<span style="font-size: 14px; font-weight: 600; line-height: 1.4;">{{u.title}}</span>
+</div>
+</sc-for>
+</aside>
+</section>
+</sc-if>
+
+<sc-if value="{{isEngage}}" hint-placeholder-val="{{false}}">
+<section style="display: flex; flex-direction: column; gap: 24px;">
+<div>
+<span class="lbl">DAILY · BUILDS VISIBILITY</span>
+<h1 class="h" style="margin-top: 8px; font-size: 56px;">Engage</h1>
+<p style="margin: 10px 0 0; font-size: 16px; line-height: 1.5; color: var(--ink2); max-width: 64ch;">On LinkedIn a comment counts about 15 times more than a like. Three thoughtful comments a day, two sentences each. No "Great post."</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+<div class="card"><span class="lbl">TODAY'S COMMENTS</span><div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px;"><span class="h" style="font-size: 64px;">{{commentsToday}}</span><span class="lbl">/ 3 GOAL</span></div><span style="display: block; height: 8px; border-radius: 999px; background: var(--raised); overflow: hidden; margin-top: 14px;"><span style="{{goalBar}}"></span></span></div>
+<div class="card"><span class="lbl">STREAK</span><div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px;"><span class="h" style="font-size: 64px;">{{streak}}</span><span class="lbl">DAYS</span></div><p style="margin: 14px 0 0; font-size: 13px; color: var(--muted);">Hit 3 comments today to start it.</p></div>
+<div class="card"><span class="lbl">VISIBILITY POINTS · THIS WEEK</span><div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px;"><span class="h" style="font-size: 64px;">{{points}}</span><span class="lbl">PTS</span></div><p style="margin: 14px 0 0; font-size: 13px; color: var(--muted);">Post = 10 · Comment = 3. Counted from what you do here.</p></div>
+</div>
+<div class="card" style="display: flex; flex-direction: column; gap: 10px;">
+<span class="lbl">THE FIRST 60–90 MINUTES</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink2);">LinkedIn tests every post with a small group first. Comments in that window decide how far it goes. Stay close after you post and answer every comment with a real reply, not a thumbs up.</p>
+</div>
+<div class="card" style="display: flex; flex-direction: column; gap: 4px;">
+<span class="lbl" style="margin-bottom: 8px;">WHERE TO COMMENT TODAY · TIED TO TODAY'S TOPICS</span>
+<sc-for list="{{prompts}}" as="p" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid var(--line);">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px;">
+<span style="display: inline-flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="{{p.dot}}"></span><span class="lbl">AS {{p.brand}}</span></span>
+<span style="font-size: 16px; font-weight: 700;">{{p.target}}</span>
+<span style="font-size: 14px; line-height: 1.5; color: var(--ink2); padding: 10px 14px; border-radius: 10px; background: var(--raised);">✦ Starter: {{p.starter}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<a class="obtn" href="{{p.url}}" target="_blank" rel="noopener">FIND POSTS ↗</a>
+<button type="button" class="{{p.cls}}" onClick="{{p.done}}" aria-pressed="{{p.doneStr}}">{{p.label}}</button>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isBM}}" hint-placeholder-val="{{false}}">
+<section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+<div class="card" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 10px;">
+<div>
+<span class="lbl" style="{{accentTextStyle}}">⛨ BRAND MANAGER · {{brandUpper}}</span>
+<h1 class="h" style="margin-top: 8px; font-size: 40px;">The rules</h1>
+</div>
+<span class="pill" style="{{bmPillStyle}}">{{bmStatus}}</span>
+</div>
+<div role="group" aria-label="Pick a brand" style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+<sc-for list="{{bmTabs}}" as="bt" hint-placeholder-count="7"><button type="button" class="opt" onClick="{{bt.pick}}" aria-pressed="{{bt.on}}">{{bt.name}}</button></sc-for>
+</div>
+<div class="sec" style="margin-bottom: 18px;">
+<span class="lbl">LOGO &amp; MARKS</span>
+<sc-if value="{{hasLogos}}" hint-placeholder-val="{{true}}"><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 10px;">
+<sc-for list="{{logos}}" as="lg" hint-placeholder-count="3"><figure style="{{lg.fig}}"><div style="{{lg.stage}}"><img src="{{lg.src}}" alt="{{lg.cap}}" style="{{lg.img}}"></div><figcaption class="lbl" style="color: var(--ink2);">{{lg.cap}}</figcaption></figure></sc-for>
+</div></sc-if>
+<sc-if value="{{noLogos}}" hint-placeholder-val="{{false}}"><p style="margin: 10px 0 0; font-size: 15px; line-height: 1.6; color: var(--warn);">No logo files yet. Send this brand's book and they'll show here.</p></sc-if>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+<span class="lbl" style="color: var(--ink);">{{bmFilled}} OF {{bmTotal}} SECTIONS FILLED</span>
+<span style="flex: 1; display: block; height: 6px; border-radius: 999px; background: var(--raised); overflow: hidden;"><span style="{{bmFillBar}}"></span></span>
+</div>
+<sc-for list="{{bmFields}}" as="f" hint-placeholder-count="9">
+<div class="sec">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+<span class="lbl">{{f.title}}</span>
+<sc-if value="{{f.notEditing}}" hint-placeholder-val="{{true}}"><button type="button" class="obtn" style="min-height: 32px; padding: 0 12px;" onClick="{{f.edit}}">EDIT</button></sc-if>
+</div>
+<sc-if value="{{f.showText}}" hint-placeholder-val="{{true}}"><span style="font-size: 15px; line-height: 1.6; white-space: pre-line; color: var(--ink);">{{f.body}}</span></sc-if>
+<sc-if value="{{f.empty}}" hint-placeholder-val="{{false}}"><span style="font-size: 15px; line-height: 1.6; color: var(--warn);">Not set yet. Tap EDIT to add it.</span></sc-if>
+<sc-if value="{{f.editing}}" hint-placeholder-val="{{false}}">
+<textarea id="bmfield" class="field" rows="4" value="{{bmDraft}}" onInput="{{onBmDraft}}"></textarea>
+<div style="display: flex; gap: 8px;"><button type="button" class="wbtn" onClick="{{saveBm}}">SAVE</button><button type="button" class="obtn" onClick="{{cancelBm}}">CANCEL</button></div>
+</sc-if>
+<span class="lbl" style="{{f.srcStyle}}">{{f.source}}</span>
+</div>
+</sc-for>
+<div class="sec">
+<span class="lbl">COLORS (LOCKED IN STUDIO)</span>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+<sc-for list="{{swatches}}" as="w" hint-placeholder-count="3">
+<span style="display: inline-flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="{{w.sw}}"></span><span class="lbl" style="color: var(--ink2);">{{w.hex}}</span></span>
+</sc-for>
+</div>
+</div>
+</div>
+<aside class="card" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+<span class="lbl">HOW THIS PROTECTS {{brandUpper}}</span>
+<div style="display: flex; flex-direction: column;">
+<div class="chk ok"><b aria-hidden="true">1</b><span>AI drafts and the brand check only use these rules.</span></div>
+<div class="chk ok"><b aria-hidden="true">2</b><span>Design Studio can't use colors or fonts outside this page.</span></div>
+<div class="chk ok"><b aria-hidden="true">3</b><span>Nothing moves to Design until you approve the copy.</span></div>
+<div class="chk ok"><b aria-hidden="true">4</b><span>Changes to these rules wait as "pending" until you approve them. Every version is kept.</span></div>
+<div class="chk ok"><b aria-hidden="true">5</b><span>80/20 rule: at least 80% of {{brandName}}'s posts stay on its own topic. Mentions of sister brands are capped at 20%. This month: {{xpLine}}.</span></div>
+</div>
+<button type="button" style="{{approveRulesBtn}}" onClick="{{approveRules}}">{{approveRulesLabel}}</button>
+<span class="lbl">{{bmHistory}}</span>
+</aside>
+</section>
+</sc-if>
+
+</main>
+</div>
+</template><div id="root"></div>
+<script>
+var __render;
+class DCLogic { setState(o){ this.state = Object.assign({}, this.state, o); if (__render) __render(); } }
+
+class Component extends DCLogic {
+  renderVals() {
+    var s = this.state || {};
+    var self = this;
+    var light = s.light !== false;
+    function set(o) { self.setState(o); }
+    var LIGHT = { '#F9C933': ['#7A5A00', '#F9C933', '#000000'], '#2DD4BF': ['#0F766E', '#2DD4BF', '#000000'], '#FAE268': ['#232527', '#FAE268', '#000000'], '#A9C4A5': ['#4A6B47', '#8FAE8B', '#0A0A0A'], '#FFFFFF': ['#232527', '#232527', '#FFFFFF'], '#9AA0A8': ['#4A4F57', '#4A4F57', '#FFFFFF'], '#3C8692': ['#2C6670', '#3C8692', '#FFFFFF'], '#FFE14D': ['#6E5A00', '#FFE14D', '#181A1E'] };
+    function tone(c) { return light ? LIGHT[c] : [c, c, '#000000']; }
+    var GLOBAL_AVOID = ['revolutionary', 'game-changing', 'game changing', 'disruptive', 'synergy', 'thrilled to announce'];
+    var BR = {
+      you: { name: 'CUEPA for You', c: '#F9C933', handle: 'you.makingcuepa.com', swatches: ['#141414', '#F9C933', '#FFFFFF'],
+        rules: { noExclaim: true, must: ['you', 'your'], mustLabel: 'Talks to the reader (you / your)' },
+        sections: [
+          { title: 'WHAT IT IS', body: 'One-on-one AI coaching for everyday life. A one-hour video session: we set AI up around your life and build your own CUEPA AI command center, plus a weekly AI briefing from Marcos.', source: 'FROM YOU.MAKINGCUEPA.COM' },
+          { title: 'WHO IT’S FOR', body: 'Individuals who feel behind on AI. No tech skills needed. Business or team help is CUEPA for Work.', source: 'FROM YOU.MAKINGCUEPA.COM' },
+          { title: 'TAGLINES', body: '"Make room for more of you."\n"You stay in the middle. AI makes the room."', source: 'FROM YOU.MAKINGCUEPA.COM' },
+          { title: 'VOICE', body: 'Warm, plain and calm. Start with their life, not the tech. Short sentences, no jargon, no hype. Talk to the reader as you.', source: 'DRAFT FROM THE SITE · PENDING' },
+          { title: 'TYPE', body: 'Anton headlines · Inter body · sun yellow #F9C933 on near-black #141414', source: 'FROM YOU.MAKINGCUEPA.COM' }
+        ] },
+      cuepa: { name: 'CUEPA for Work', c: '#2DD4BF', handle: 'makingcuepa.com', swatches: ['#030303', '#2DD4BF', '#F1EFE9'],
+        rules: { noExclaim: true, noEmoji: true, must: ['human', 'approve', 'you decide', 'person'], mustLabel: 'Keeps a human in charge (says who approves)' },
+        sections: [
+          { title: 'MISSION', body: 'Workflow architecture and applied AI for small businesses.', source: 'FROM ELIPAN COMMAND · PENDING' },
+          { title: 'VOICE', body: 'Short, plain sentences. Lead with the human outcome, then the system.\nShow proof instead of promising. Every number names its source.\nKeep the human in charge in every sentence about automation.\nSpeak to the reader as you; CUEPA is we. No exclamation marks, no emoji.', source: 'FROM CUEPA DESIGN SYSTEM' },
+          { title: 'TRUST LINE', body: 'Protect · Challenge · Verify. "Human in the Middle."', source: 'FROM CUEPA DESIGN SYSTEM' },
+          { title: 'WORDS TO AVOID', body: 'Revolutionary · Game-changing · Disruptive · Synergy · "Thrilled to announce"', source: 'FROM ELIPAN BRAND BOOK' },
+          { title: 'TYPE', body: 'Archivo Black headlines · Anton numbers · Archivo body · JetBrains Mono labels', source: 'FROM CUEPA DESIGN SYSTEM' }
+        ] },
+      elipan: { name: 'ELIPAN GROUP', c: '#A9C4A5', handle: 'elipangroup.com', swatches: ['#0A0A0A', '#FFFFFF', '#8FAE8B'],
+        rules: { noExclaim: true, noEmoji: false },
+        sections: [
+          { title: 'TAGLINE', body: 'Intelligent design to enhance human life.', source: 'FROM ELIPAN BRAND BOOK' },
+          { title: 'VOICE', body: 'Direct, confident, short. Write like a founder talking across the table.\nReal numbers, short sentences, no hype words.', source: 'FROM ELIPAN BRAND BOOK' },
+          { title: 'WORDS TO AVOID', body: 'Revolutionary · Game-changing · Disruptive · "Thrilled to announce"', source: 'FROM ELIPAN BRAND BOOK' },
+          { title: 'TYPE', body: 'Archivo headlines · Inter body · IBM Plex Mono labels', source: 'FROM ELIPAN BRAND BOOK' }
+        ] },
+      os: { name: 'ŌLLIN OS', c: '#FAE268', handle: 'ollinos.com', swatches: ['#18191D', '#FAE268', '#FFFFFF'], rules: {},
+        sections: [
+          { title: 'MISSION', body: 'Sales and recruiting intelligence.', source: 'FROM ELIPAN COMMAND · PENDING' },
+          { title: 'TAGLINES', body: '"Real signals. Real people. Your call."\n"Not another AI sales tool."', source: 'FROM OLLINOS.COM' },
+          { title: 'VOICE', body: 'Not set yet. Add rules here so AI and the brand check can follow them.', source: 'EMPTY' }
+        ] },
+      go: { name: 'ŌLLIN GO', c: '#FFE14D', handle: 'go.ollinos.com', swatches: ['#181A1E', '#FFE14D', '#F4F1EA'], rules: { noExclaim: true, noEmoji: true },
+        sections: [
+          { title: 'MISSION', body: 'The engine every ELIPAN brand runs its outreach through.', source: 'FROM ELIPAN COMMAND · PENDING' },
+          { title: 'VOICE', body: 'Not set yet.', source: 'EMPTY' }
+        ] },
+      nenemi: { name: 'NENEMI', c: '#3C8692', handle: 'mynenemi.com', swatches: ['#111312', '#3C8692', '#E9BE55', '#FAF8F3'],
+        rules: { noExclaim: true },
+        sections: [
+          { title: 'WHAT IT IS', body: 'A calm home for ADHD brains. Nenemi is Nahuatl for "to come back."', source: 'FROM NENEMI BRAND BOOK' },
+          { title: 'VOICE', body: 'Warm, plain, human. Never shames, never nags, never optimizes.', source: 'FROM NENEMI BRAND BOOK' }
+        ] },
+      personal: { name: 'Personal', c: '#FFFFFF', handle: 'Marcos Cuellar', swatches: ['#000000', '#FFFFFF'],
+        rules: { must: ['I ', 'I’', "I'", 'my '], mustLabel: 'Written in your own voice (I / my)' },
+        sections: [
+          { title: 'VOICE', body: 'Operator-founder sharing what he builds. Your Personal Brand Voice Guide exists and can be imported here.', source: 'IMPORT PENDING' },
+          { title: 'COLORS', body: 'Monochrome.', source: 'YOUR CHOICE · OCT 15' }
+        ] },
+      hires: { name: 'Elipan Hires', c: '#9AA0A8', handle: 'Elipan Hires', swatches: ['#0A0A0A', '#9AA0A8'], rules: {}, soon: true,
+        sections: [
+          { title: 'MISSION', body: 'One hiring tool. Free tools bring real candidates in, and recruiters hire from that database.', source: 'FROM THE OLLIN HIRE RECORD · PENDING' },
+          { title: 'VOICE', body: 'Not set yet.', source: 'EMPTY' }
+        ] }
+    };
+    var BMDATA = {"cuepa": {"what": {"t": "Helps small-business owners make room for what matters. AI takes the work AI should do; people keep the work that needs a person, and the final decision always stays with the human.", "src": "CUEPA FOR WORK BRAND BOOK"}, "who": {"t": "Small-business owners, their teams and families: a dental practice, a family HVAC company, a boutique CPA, a kids' circus school. Not enterprise executives.", "src": "CUEPA FOR WORK BRAND BOOK"}, "voice": {"t": "A chief of staff who already acted. Warm and human, never sappy. Evidence before claims. Plain owner's language, not SaaS jargon. Confident and calm, never urgent. Honest about what stays human.\nHeadlines bold, short, ALL CAPS. Body conversational. Every stat names its source.", "src": "CUEPA FOR WORK BRAND BOOK"}, "lines": {"t": "\"Make room for what matters.\"\n\"What are you making room for?\"\n\"Human foreground. Intelligence background.\"\n\"We handle the noise. You get the room.\"\nProtect · Challenge · Verify (CHIMAL).", "src": "CUEPA FOR WORK BRAND BOOK"}, "avoid": {"t": "Revolutionary · Game-changing · \"AI-powered\" as a selling point · Autonomous · Replace · Headcount-cutting · Guarantees about AI accuracy or security · Invented clients, quotes or numbers · Tool words: chatbots, agents, RAG, Zapier · ŌLLIN (internal only)", "src": "CUEPA FOR WORK BRAND BOOK"}, "beat": {"t": "AI agents and automation for small business · human approval and AI incidents · workflow and operations · verified, auditable systems", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "LinkedIn: posts go out from your personal profile; the CUEPA page is for launches and proof. Instagram: none for now.", "src": "FROM OUR OCT 20 PLAN"}, "goal": {"t": "3 posts a week", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "Anton display (ALL CAPS) · Archivo Black section headers · Inter body. Ink #030303, Ivory #F4F5F5, one accent: Signal Turquoise #2DD4BF. LinkedIn post: 1080×1080 real photo, white lockup top-left, Anton headline with one word in turquoise.", "src": "CUEPA FOR WORK BRAND BOOK"}, "social": {"t": "LinkedIn, 1080×1080 (the approved format).\n• Full-bleed real photo, dark fade from the bottom. White lockup top-left, no turquoise block.\n• Anton headline, 2 to 3 lines, one word in turquoise. One supporting line in Inter SemiBold.\n• Lead with \"Making room for ___\" or close with \"What are you making room for?\"\n• Every stat names its source. Room Stories stay anonymized.\n• Photos: owners in ordinary life. Never office stock, phones in frame, robots or glowing brains.", "src": "CUEPA FOR WORK BRAND BOOK"}}, "you": {"what": {"t": "One-on-one AI coaching for everyday life. A one-hour video session: we set AI up around your life and build your own CUEPA AI command center, plus a weekly AI briefing from Marcos.", "src": "FROM YOUR SITE"}, "who": {"t": "Individuals who feel behind on AI. No tech skills needed. Help for a business or team is CUEPA for Work.", "src": "FROM YOUR SITE"}, "voice": {"t": "A friend who's already figured it out. Warm and plain, like talking at a kitchen table. Patient: beginners are the point. Reassuring: \"No tech skills needed.\" Honest about what stays yours.\nNever like a course, never hyped, never \"you're falling behind\", never like AI runs your life.", "src": "CUEPA FOR YOU BRAND BOOK"}, "lines": {"t": "\"Make room for more of you.\"\n\"You stay in the middle. AI makes the room.\"\n\"It's a lot. We'll start with you.\"\n\"What are you making room for?\"", "src": "CUEPA FOR YOU BRAND BOOK"}, "avoid": {"t": "Workflow automation · AI-powered · Onboarding / training · Platform / tool stack · Stay ahead of the curve · Tool words (agents, RAG, Zapier) · Business words (ROI, headcount, pipeline) · Guarantees about AI accuracy · Invented clients or numbers", "src": "CUEPA FOR YOU BRAND BOOK"}, "beat": {"t": "AI for everyday life · beginner-friendly tools worth trying · what is safe to skip · AI on phones and at home", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "Instagram: its own account, the one brand that gets one. LinkedIn: launches shared from your personal profile.", "src": "FROM OUR OCT 20 PLAN"}, "goal": {"t": "2 posts a week", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "Anton headlines ending on a Sun period · Inter body · white Paper with Ink #141414 bands · Sun #F9C933, never with Turquoise in one view · rounded pill buttons.", "src": "CUEPA FOR YOU BRAND BOOK"}, "social": {"t": "• Life words, not business words: your week, your inbox, the family calendar.\n• Anton headline that ends on a Sun period. Sun only, never Turquoise in the same post.\n• Warm photos of real moments at home.\n• Never sell business services here; point business questions to CUEPA for Work.\n• No FOMO: never \"you're falling behind.\"", "src": "CUEPA FOR YOU BRAND BOOK"}}, "elipan": {"what": {"t": "The parent company behind CUEPA, ŌLLIN and Elipan Hires.", "src": "CONFIRMED"}, "who": {"t": "Partners, investors, future hires and anyone following what ELIPAN builds.", "src": "DRAFT · PLEASE CONFIRM"}, "voice": {"t": "Direct, confident, short. Write like a founder talking across the table.\nReal numbers, short sentences, no hype words.", "src": "FROM ELIPAN BRAND BOOK"}, "lines": {"t": "\"Intelligent design to enhance human life.\"\n\"The how and why behind every brand we build.\"", "src": "ELIPAN BRAND BOOK"}, "avoid": {"t": "Revolutionary · Game-changing · Disruptive · Synergy · \"Thrilled to announce\"", "src": "FROM ELIPAN BRAND BOOK"}, "beat": {"t": "Small-business AI adoption · productivity and the AI economy · founder and operator stories · ELIPAN launches", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "LinkedIn company page for milestones and proof only. Everything else posts from your personal profile.", "src": "FROM OUR OCT 20 PLAN"}, "goal": {"t": "2 posts a week", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "Archivo headlines · Inter body · IBM Plex Mono labels. Black #0A0A0A, white, one spark of sage #8FAE8B (about 10%). Wordmark: ELI bold, PAN regular, GROUP spaced.", "src": "ELIPAN BRAND BOOK"}, "social": {"t": "• Real people in real moments; natural light that leans dark.\n• Type on photos: black fade from the bottom, white type. Never a sage color wash.\n• Logo on a busy photo only on a solid black panel.\n• Never robots, staged stock, hackers in hoodies, or AI-generated people shown as real.\n• Milestones and proof only on the company page.", "src": "ELIPAN BRAND BOOK"}}, "os": {"what": {"t": "Sales and recruiting intelligence: real signals about who is buying or hiring, so people reach out at the right time.", "src": "DRAFT · PLEASE CONFIRM"}, "who": {"t": "", "src": ""}, "voice": {"t": "Uses ELIPAN's voice until ŌLLIN OS has its own book: direct, confident, short. Real numbers, no hype.", "src": "ELIPAN PARENT DEFAULT · NO OWN BOOK YET"}, "lines": {"t": "\"Real signals. Real people. Your call.\"\n\"Not another AI sales tool.\"", "src": "FROM OLLINOS.COM"}, "avoid": {"t": "Revolutionary · Game-changing · Disruptive · Synergy · \"Thrilled to announce\"", "src": "FROM ELIPAN BRAND BOOK"}, "beat": {"t": "Buying and hiring signals · staffing market data · sales tech launches · recruiting tools", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "Shared from your personal profile. No own account yet.", "src": "FROM OUR OCT 20 PLAN"}, "goal": {"t": "2 posts a week", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "ŌLLIN family look: dark ground, yellow #FAE268 accent. Inter until its own book says otherwise.", "src": "ELIPAN PARENT DEFAULT · NO OWN BOOK YET"}, "social": {"t": "Follows ELIPAN's photo and copy rules until ŌLLIN OS has its own book.", "src": "ELIPAN PARENT DEFAULT · NO OWN BOOK YET"}}, "go": {"what": {"t": "Part of the ŌLLIN family. Tagline: \"Where you are, and the way forward.\" Ōllin is Nahuatl for movement.", "src": "ŌLLIN GO BRAND GUIDE"}, "who": {"t": "", "src": ""}, "voice": {"t": "Short, active, forward. A friend who knows the way. Lead with the verb, speak to you, one idea per screen. Every message ends with the next step.\nWrite ŌLLIN GO with the macron in titles; go.ollinos.com always lowercase.", "src": "ŌLLIN GO BRAND GUIDE"}, "lines": {"t": "\"Where you are, and the way forward.\"\n\"Get started ›\"\n\"You're all set. Where to next?\"", "src": "ŌLLIN GO BRAND GUIDE"}, "avoid": {"t": "Long sentences that need a comma · \"Click here to begin\" · Error-speak (\"Invalid input\") · 🎉 and exclamation marks · Revolutionary · Game-changing", "src": "ŌLLIN GO BRAND GUIDE"}, "beat": {"t": "Outreach tools · email and LinkedIn outreach · deliverability · AI agents that sell or negotiate", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "Shared from your personal profile. No own account yet.", "src": "FROM OUR OCT 20 PLAN"}, "goal": {"t": "1 post a week", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "Inter (ŌLLIN heavy, GO light) · JetBrains Mono labels. Night #181A1E, Signal yellow #FFE14D, Paper #F4F1EA. The chevron › is the only arrow.", "src": "ŌLLIN GO BRAND GUIDE"}, "social": {"t": "• One idea per post. Lead with the verb. End with the next step ›.\n• Write ŌLLIN GO with the macron in titles; go.ollinos.com lowercase.\n• No 🎉, no exclamation marks.\n• Photos: people moving: walks, commutes, cities.\n• Yellow glyph, white ŌLLIN, grey GO on Night is the default.", "src": "ŌLLIN GO BRAND GUIDE"}}, "personal": {"what": {"t": "You: Marcos Cuellar, operator-founder building ELIPAN, CUEPA, ŌLLIN and Elipan Hires in public.", "src": "CONFIRMED"}, "who": {"t": "Founders, small-business owners and operators curious how AI actually gets built and used.", "src": "DRAFT · PLEASE CONFIRM"}, "voice": {"t": "Operator-founder sharing what he builds. First person (I / my). Plain and honest, including what went wrong.\nYour Personal Brand Voice Guide can be imported here.", "src": "IMPORT PENDING"}, "lines": {"t": "Protect · Challenge · Verify.", "src": "DRAFT · PLEASE CONFIRM"}, "avoid": {"t": "Revolutionary · Game-changing · Disruptive · Synergy · \"Thrilled to announce\"", "src": "FROM ELIPAN BRAND BOOK"}, "beat": {"t": "AI accountability and governance · building with AI as a founder · lessons from shipping your products", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "LinkedIn: your main channel. 3 posts a week plus the weekly ELIPAN Syntax & Snax newsletter.", "src": "FROM OUR OCT 20 PLAN"}, "goal": {"t": "3 posts a week + 1 newsletter", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "Monochrome. Logo: ELIPAN | SOCIAL.", "src": "YOUR CHOICE · OCT 15"}, "social": {"t": "• First person (I / my). Brands show up as topics, not as the speaker.\n• 3 posts a week plus the weekly Syntax & Snax newsletter.\n• Plain and honest, including what went wrong.", "src": "FROM OUR OCT 20 PLAN"}}, "hires": {"what": {"t": "One hiring tool. Free tools bring real candidates in, and recruiters hire from that database.", "src": "FROM THE OLLIN HIRE RECORD"}, "who": {"t": "Recruiters and job seekers.", "src": "DRAFT · PLEASE CONFIRM"}, "voice": {"t": "Uses ELIPAN's voice until Elipan Hires has its own book: direct, confident, short. Photos show real workers, interviews and first days.", "src": "ELIPAN PARENT DEFAULT · NO OWN BOOK YET"}, "lines": {"t": "", "src": ""}, "avoid": {"t": "Revolutionary · Game-changing · Disruptive · Synergy · \"Thrilled to announce\"", "src": "FROM ELIPAN BRAND BOOK"}, "beat": {"t": "Hiring market and jobs reports · AI in recruiting · skills shifts · entry-level hiring", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "Shared from your personal profile until launch.", "src": "FROM OUR OCT 20 PLAN"}, "goal": {"t": "Starts at launch", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "ELIPAN look: Archivo headlines, Inter body, black and white.", "src": "ELIPAN PARENT DEFAULT · NO OWN BOOK YET"}, "social": {"t": "Follows ELIPAN's rules until it has its own book. Photos: real workers, interviews, first days.", "src": "ELIPAN BRAND BOOK · PHOTO SUBJECTS"}}, "nenemi": {"what": {"t": "A calm home for ADHD brains: set things down, pick them back up, never lose your place. Nenemi is Nahuatl for \"to come back.\"", "src": "NENEMI BRAND BOOK"}, "who": {"t": "Neurodivergent minds, people with ADHD. Built by a neurodivergent founder, for neurodivergent minds.", "src": "NENEMI BRAND BOOK"}, "voice": {"t": "Warm, plain, human. Never shames, never nags, never optimizes. Plain over clever. Reassuring over motivating. Present, not pushy.\nOne idea per post. Quotes over slogans. If a post would make an ADHD brain feel behind, it doesn't go out.", "src": "NENEMI BRAND BOOK"}, "lines": {"t": "\"Come back.\"\n\"You didn't fall behind. You stepped away.\"\n\"Welcome back. You left off here.\"\n\"Made for your brain. Not their expectations.\"", "src": "NENEMI BRAND BOOK"}, "avoid": {"t": "\"You're behind\" · Streaks broken · \"3 tasks overdue!\" · \"Boost your productivity\" · \"Don't forget!\" · Clinical \"ADHD tool\" framing · Anything that counts down or scolds · Invented statistics", "src": "NENEMI BRAND BOOK"}, "beat": {"t": "ADHD and executive-function research · neurodivergent tools and accessibility · calm tech vs. productivity guilt · founder lived experience", "src": "DRAFT · PLEASE CONFIRM"}, "channels": {"t": "Not decided yet. The book sets 4 post types: founder or community quote (the anchor), affirmation or return moment, one-screen product, warm win (rare).", "src": "NENEMI BRAND BOOK"}, "goal": {"t": "1 post a week", "src": "DRAFT · PLEASE CONFIRM"}, "type": {"t": "Archivo Black display · system sans body · monospace meta. Paper #FAF8F3, Ink #111312, Signature Teal #3C8692 for return moments, Maíz #E9BE55 only for warm wins. Never teal and maíz on one post.", "src": "NENEMI BRAND BOOK"}, "social": {"t": "Four post types: founder or community quote (the anchor), affirmation, return moment, one-screen product. Warm win posts are rare.\n• Mark small, top-left. Never centered and huge.\n• Real people, real light, real mess. No stock focus poses, no laptops-and-coffee.\n• One idea per post. Quotes over slogans. First names over titles.\n• Teal for return moments and quote marks. Maíz only for a warm win. Never both on one post.\n• If it counts down or scolds, or would make an ADHD brain feel behind, it doesn't go out.", "src": "NENEMI BRAND BOOK"}}};
+    var LOGOS = {"cuepa": [{"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"14 14 72 72\"%3E%3Crect x=\"14\" y=\"14\" width=\"30\" height=\"72\" fill=\"%23030303\"/%3E%3Crect x=\"56\" y=\"14\" width=\"30\" height=\"72\" fill=\"%232DD4BF\"/%3E%3C/svg%3E", "bg": "#F4F5F5", "cap": "PRIMARY \u00b7 ON IVORY", "h": 64, "wide": false}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"14 14 72 72\"%3E%3Crect x=\"14\" y=\"14\" width=\"30\" height=\"72\" fill=\"%23FFFFFF\"/%3E%3Crect x=\"56\" y=\"14\" width=\"30\" height=\"72\" fill=\"%232DD4BF\"/%3E%3C/svg%3E", "bg": "#030303", "cap": "ON INK \u00b7 BLOCK 1 FLIPS WHITE", "h": 64, "wide": false}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"14 14 72 72\"%3E%3Crect x=\"14\" y=\"14\" width=\"30\" height=\"72\" fill=\"%23FFFFFF\"/%3E%3Crect x=\"56\" y=\"14\" width=\"30\" height=\"72\" fill=\"%23FFFFFF\"/%3E%3C/svg%3E", "bg": "#3a2b20", "cap": "ON PHOTOS \u00b7 ALL WHITE", "h": 64, "wide": false}], "you": [{"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 691 140\"%3E%3Crect x=\"34.00\" y=\"34.00\" width=\"30.00\" height=\"72.00\" fill=\"%23ffffff\"/%3E%3Crect x=\"76.00\" y=\"34.00\" width=\"30.00\" height=\"72.00\" fill=\"%23F9C933\"/%3E%3Cpath fill=\"%23ffffff\" d=\"M176.3515625 99.8828125C188.8515625 99.8828125 197.6015625 91.4453125 199.4375 80.8203125H193.890625C192.25 88.75 185.453125 94.6875 176.3515625 94.6875C165.4140625 94.6875 156.5078125 86.0546875 156.5078125 70.0390625C156.5078125 54.0625 165.4140625 45.3125 176.3515625 45.3125C185.453125 45.3125 192.25 51.2109375 193.890625 59.1796875H199.4375C197.5625 48.4375 188.7734375 40.1171875 176.3515625 40.1171875C161.625 40.1171875 151.1171875 51.7578125 151.1171875 70.0390625C151.1171875 88.28125 161.625 99.8828125 176.3515625 99.8828125Z M235.2953125 100.0C248.4203125 100.0 257.4046875 91.2890625 257.4046875 79.3359375V40.8984375H251.8578125V78.9453125C251.8578125 88.125 245.2953125 94.84375 235.2953125 94.84375C225.2953125 94.84375 218.69375 88.125 218.69375 78.9453125V40.8984375H213.146875V79.3359375C213.146875 91.25 222.13125 100.0 235.2953125 100.0Z M274.00468750000005 99.1015625H308.53593750000005V94.140625H279.55156250000005V72.3046875H306.19218750000005V67.34375H279.55156250000005V45.859375H307.98906250000005V40.8984375H274.00468750000005Z M323.22187500000007 99.1015625H328.76875000000007V76.9921875H342.24531250000007C354.51093750000007 76.9921875 360.99531250000007 69.1796875 360.99531250000007 58.90625C360.99531250000007 48.7109375 354.51093750000007 40.8984375 342.20625000000007 40.8984375H323.22187500000007ZM328.76875000000007 72.03125V45.859375H341.97187500000007C351.03437500000007 45.859375 355.48750000000007 51.3671875 355.48750000000007 58.90625C355.48750000000007 66.484375 351.03437500000007 72.03125 342.01093750000007 72.03125Z M369.5875000000001 99.1015625H375.4859375000001L381.6578125000001 81.796875H406.8531250000001L413.1421875000001 99.1015625H419.0015625000001L397.4781250000001 40.8984375H390.9156250000001ZM383.4156250000001 76.875 389.0796875000001 61.0546875C390.3687500000001 57.3828125 392.0484375000001 52.3828125 394.1578125000001 45.390625C396.2671875000001 52.3046875 397.9078125000001 57.1875 399.3140625000001 61.0546875L405.0562500000001 76.875Z\"/%3E%3Crect x=\"451.23\" y=\"34.0\" width=\"1.5\" height=\"72\" fill=\"%23ffffff66\"/%3E%3Cpath fill=\"%23F9C933\" d=\"M485.7896484375001 72.73046875H490.0201171875001V61.2265625H501.7466796875001V57.6083984375H490.0201171875001V48.720703125H502.9898437500001V45.083984375H485.7896484375001Z M522.7476171875 73.1015625C529.9097265625 73.1015625 535.1978125 67.7578125 535.1978125 58.92578125C535.1978125 50.056640625 529.9097265625 44.712890625 522.7476171875 44.712890625C515.566953125 44.712890625 510.2603125000001 50.056640625 510.2603125000001 58.92578125C510.2603125000001 67.7578125 515.566953125 73.1015625 522.7476171875 73.1015625ZM522.7476171875 69.2421875C517.9976171875 69.2421875 514.453671875 65.60546875 514.453671875 58.92578125C514.453671875 52.2275390625 517.9976171875 48.572265625 522.7476171875 48.572265625C527.4605078125 48.572265625 531.004453125 52.208984375 531.004453125 58.92578125C531.004453125 65.60546875 527.4605078125 69.2421875 522.7476171875 69.2421875Z M543.396015625 72.73046875H547.626484375V62.2841796875H553.267109375C553.341328125 62.2841796875 553.4341015625 62.2841796875 553.5083203125 62.2841796875L559.1118359375 72.73046875H563.9175L557.8315625 61.560546875C561.1899609375 60.298828125 562.8784375 57.478515625 562.8784375 53.767578125C562.8784375 48.6650390625 559.7055859375 45.083984375 553.30421875 45.083984375H543.396015625ZM547.626484375 58.666015625V48.7021484375H552.821796875C556.903828125 48.7021484375 558.5923046875 50.650390625 558.5923046875 53.767578125C558.5923046875 56.8662109375 556.903828125 58.666015625 552.85890625 58.666015625Z M592.300234375 72.73046875H596.530703125V61.7275390625L606.6801171875 45.083984375H601.763125L596.6234765625 53.8974609375C595.8070703125 55.2890625 595.1391015625 56.5322265625 594.452578125 58.2021484375C593.7660546875 56.5693359375 593.0980859375 55.3447265625 592.2445703125 53.8974609375L587.0492578125 45.083984375H582.1137109375L592.300234375 61.7275390625Z M625.2503906249999 73.1015625C632.4124999999999 73.1015625 637.7005859374999 67.7578125 637.7005859374999 58.92578125C637.7005859374999 50.056640625 632.4124999999999 44.712890625 625.2503906249999 44.712890625C618.0697265624999 44.712890625 612.7630859374999 50.056640625 612.7630859374999 58.92578125C612.7630859374999 67.7578125 618.0697265624999 73.1015625 625.2503906249999 73.1015625ZM625.2503906249999 69.2421875C620.5003906249999 69.2421875 616.9564453124999 65.60546875 616.9564453124999 58.92578125C616.9564453124999 52.2275390625 620.5003906249999 48.572265625 625.2503906249999 48.572265625C629.9632812499999 48.572265625 633.5072265624999 52.208984375 633.5072265624999 58.92578125C633.5072265624999 65.60546875 629.9632812499999 69.2421875 625.2503906249999 69.2421875Z M656.9202734374999 73.1572265625C663.5257421874999 73.1572265625 667.9046484374999 69.0380859375 667.9046484374999 63.23046875V45.083984375H663.6556249999999V62.8779296875C663.6556249999999 66.607421875 661.0765234374999 69.31640625 656.9202734374999 69.31640625C652.7454687499999 69.31640625 650.1292578124999 66.607421875 650.1292578124999 62.8779296875V45.083984375H645.8987890624999V63.23046875C645.8987890624999 69.0380859375 650.2591406249999 73.1572265625 656.9202734374999 73.1572265625Z\"/%3E%3Cpath fill=\"%23ffffffcc\" d=\"M483.8560546875001 94.916015625H487.7730468750001C490.1382812500001 94.916015625 491.2115234375001 93.7333984375 491.2115234375001 92.16796875C491.2115234375001 90.6025390625 490.1109375000001 89.7138671875 489.0923828125001 89.6591796875V89.556640625C490.0357421875001 89.32421875 490.8150390625001 88.6748046875 490.8150390625001 87.4033203125C490.8150390625001 85.8994140625 489.7691406250001 84.73046875 487.6089843750001 84.73046875H483.8560546875001ZM485.4146484375001 93.576171875V90.3427734375H487.6773437500001C488.8941406250001 90.3427734375 489.6666015625001 91.12890625 489.6666015625001 92.0927734375C489.6666015625001 92.9404296875 489.0787109375001 93.576171875 487.6158203125001 93.576171875ZM485.4146484375001 89.1396484375V86.0634765625H487.4996093750001C488.7095703125001 86.0634765625 489.2837890625001 86.69921875 489.2837890625001 87.533203125C489.2837890625001 88.5107421875 488.4908203125001 89.1396484375 487.4585937500001 89.1396484375Z M499.1040234375001 94.916015625H500.6626171875001V90.8623046875L504.4018750000001 84.73046875H502.5903515625001L500.6967968750001 87.9775390625C500.3960156250001 88.490234375 500.1499218750001 88.9482421875 499.8969921875001 89.5634765625C499.6440625000001 88.9619140625 499.3979687500001 88.5107421875 499.0835156250001 87.9775390625L497.1694531250001 84.73046875H495.3510937500001L499.1040234375001 90.8623046875Z M515.7708593750001 94.916015625H522.2239843750001V93.576171875H517.3294531250001V90.4384765625H521.8411718750001V89.10546875H517.3294531250001V86.0703125H522.1829687500001V84.73046875H515.7708593750001Z M527.2932421875001 94.916015625H533.4660937500001V93.576171875H528.8518359375001V84.73046875H527.2932421875001Z M539.8478515625002 84.73046875H538.2892578125002V94.916015625H539.8478515625002Z M545.1837109375002 94.916015625H546.7423046875002V91.34765625H548.8204296875002C551.1856640625002 91.34765625 552.3614453125002 89.9189453125 552.3614453125002 88.0390625C552.3614453125002 86.1591796875 551.1925000000002 84.73046875 548.8341015625002 84.73046875H545.1837109375002ZM546.7423046875002 90.0283203125V86.0634765625H548.6563671875002C550.1671093750002 86.0634765625 550.7823437500002 86.890625 550.7823437500002 88.0390625C550.7823437500002 89.1875 550.1671093750002 90.0283203125 548.6700390625002 90.0283203125Z M556.4668359375003 94.916015625H558.1553125000003L559.0644921875003 92.2294921875H563.0703515625003L564.0068750000003 94.916015625H565.6953515625003L562.0039453125003 84.73046875H560.0898828125003ZM559.5088281250003 90.9306640625 560.0762109375003 89.2490234375C560.3291406250003 88.4697265625 560.6435937500003 87.41015625 561.0400781250003 85.9541015625C561.4433984375003 87.396484375 561.7510156250003 88.435546875 562.0244531250003 89.2490234375L562.6123437500003 90.9306640625Z M570.2519140625003 94.916015625H571.8310156250003V89.4814453125C571.8310156250003 88.955078125 571.7763281250003 87.90234375 571.7148046875003 86.6240234375C572.4530859375003 87.9912109375 572.8427343750003 88.6953125 573.3417578125003 89.4951171875L576.7802343750003 94.916015625H578.5849218750003V84.73046875H577.0058203125003V90.52734375C577.0058203125003 91.115234375 577.0331640625003 92.0654296875 577.1083593750003 93.0498046875C576.6571875000003 92.072265625 576.1991796875003 91.2998046875 575.8847265625003 90.7939453125L572.0497656250003 84.73046875H570.2519140625003Z M595.0125000000004 95.052734375C597.4802734375004 95.052734375 599.2644531250004 93.439453125 599.2644531250004 90.8623046875V89.693359375H595.2449218750004V90.978515625H597.7400390625004C597.7058593750004 92.60546875 596.6326171875004 93.630859375 595.0193359375004 93.630859375C593.2214843750004 93.630859375 591.9226562500004 92.27734375 591.9226562500004 89.8232421875C591.9226562500004 87.3623046875 593.2419921875004 86.015625 594.9578125000004 86.015625C596.2976562500004 86.015625 597.2068359375004 86.7607421875 597.5759765625004 87.9501953125H599.1755859375004C598.8337890625004 85.9677734375 597.1384765625004 84.59375 594.9441406250004 84.59375C592.3054687500004 84.59375 590.3777343750004 86.576171875 590.3777343750004 89.830078125C590.3777343750004 93.0498046875 592.2439453125004 95.052734375 595.0125000000004 95.052734375Z M604.2790234375004 94.916015625H605.8376171875004V91.0673828125H607.9157421875004C607.9430859375004 91.0673828125 607.9772656250004 91.0673828125 608.0046093750004 91.0673828125L610.0690625000004 94.916015625H611.8395703125004L609.5973828125004 90.80078125C610.8346875000004 90.3359375 611.4567578125004 89.296875 611.4567578125004 87.9296875C611.4567578125004 86.0498046875 610.2878125000004 84.73046875 607.9294140625004 84.73046875H604.2790234375004ZM605.8376171875004 89.734375V86.0634765625H607.7516796875004C609.2555859375004 86.0634765625 609.8776562500004 86.78125 609.8776562500004 87.9296875C609.8776562500004 89.0712890625 609.2555859375004 89.734375 607.7653515625004 89.734375Z M620.6754296875005 95.052734375C623.3141015625005 95.052734375 625.2623437500005 93.083984375 625.2623437500005 89.830078125C625.2623437500005 86.5625 623.3141015625005 84.59375 620.6754296875005 84.59375C618.0299218750005 84.59375 616.0748437500005 86.5625 616.0748437500005 89.830078125C616.0748437500005 93.083984375 618.0299218750005 95.052734375 620.6754296875005 95.052734375ZM620.6754296875005 93.630859375C618.9254296875005 93.630859375 617.6197656250005 92.291015625 617.6197656250005 89.830078125C617.6197656250005 87.3623046875 618.9254296875005 86.015625 620.6754296875005 86.015625C622.4117578125005 86.015625 623.7174218750005 87.35546875 623.7174218750005 89.830078125C623.7174218750005 92.291015625 622.4117578125005 93.630859375 620.6754296875005 93.630859375Z M634.3032812500005 95.0732421875C636.7368750000005 95.0732421875 638.3501562500005 93.5556640625 638.3501562500005 91.416015625V84.73046875H636.7847265625005V91.2861328125C636.7847265625005 92.66015625 635.8345312500005 93.658203125 634.3032812500005 93.658203125C632.7651953125005 93.658203125 631.8013281250005 92.66015625 631.8013281250005 91.2861328125V84.73046875H630.2427343750005V91.416015625C630.2427343750005 93.5556640625 631.8491796875005 95.0732421875 634.3032812500005 95.0732421875Z M643.6860156250006 94.916015625H645.2446093750006V91.34765625H647.3227343750006C649.6879687500006 91.34765625 650.8637500000006 89.9189453125 650.8637500000006 88.0390625C650.8637500000006 86.1591796875 649.6948046875006 84.73046875 647.3364062500006 84.73046875H643.6860156250006ZM645.2446093750006 90.0283203125V86.0634765625H647.1586718750006C648.6694140625006 86.0634765625 649.2846484375006 86.890625 649.2846484375006 88.0390625C649.2846484375006 89.1875 648.6694140625006 90.0283203125 647.1723437500006 90.0283203125Z\"/%3E%3C/svg%3E", "bg": "#141414", "cap": "LOCKUP \u00b7 ON INK", "h": 56, "wide": true}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"14 14 72 72\"%3E%3Crect x=\"14\" y=\"14\" width=\"30\" height=\"72\" fill=\"%23FFFFFF\"/%3E%3Crect x=\"56\" y=\"14\" width=\"30\" height=\"72\" fill=\"%23F9C933\"/%3E%3C/svg%3E", "bg": "#141414", "cap": "MARK \u00b7 ON INK", "h": 64, "wide": false}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" rx=\"22\" fill=\"%23F9C933\"/%3E%3Crect x=\"20\" y=\"20\" width=\"24\" height=\"60\" fill=\"%23141414\"/%3E%3Crect x=\"56\" y=\"20\" width=\"24\" height=\"60\" fill=\"%23141414\"/%3E%3C/svg%3E", "bg": "#FFFFFF", "cap": "APP ICON", "h": 64, "wide": false}], "nenemi": [{"src": "data:image/png;base64,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", "bg": "#FAF8F3", "cap": "SYMBOL \u00b7 INK ON PAPER", "h": 64, "wide": false}, {"src": "data:image/png;base64,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", "bg": "#111312", "cap": "WARM-WHITE ON INK", "h": 64, "wide": false}, {"src": "data:image/png;base64,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", "bg": "#3C8692", "cap": "ON SIGNATURE TEAL", "h": 64, "wide": false}], "elipan": [{"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"%3E%3Cg fill=\"none\" stroke=\"%23FFFFFF\"%3E%3Cpolygon stroke-width=\"9\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 100%29 scale%281%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"10.95\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 92%29 scale%280.822%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"13.98\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 84%29 scale%280.644%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"19.27\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 76%29 scale%280.467%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"31.1\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 68%29 scale%280.289%29 translate%28-100 -100%29\"/%3E%3C/g%3E%3Cpolygon fill=\"%238FAE8B\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 62%29 scale%280.13%29 translate%28-100 -100%29\"/%3E%3C/svg%3E", "bg": "#000000", "cap": "PRIMARY \u00b7 ON BLACK", "h": 90, "wide": false}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"%3E%3Cg fill=\"none\" stroke=\"%230A0A0A\"%3E%3Cpolygon stroke-width=\"9\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 100%29 scale%281%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"10.95\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 92%29 scale%280.822%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"13.98\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 84%29 scale%280.644%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"19.27\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 76%29 scale%280.467%29 translate%28-100 -100%29\"/%3E%3Cpolygon stroke-width=\"31.1\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 68%29 scale%280.289%29 translate%28-100 -100%29\"/%3E%3C/g%3E%3Cpolygon fill=\"%238FAE8B\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 62%29 scale%280.13%29 translate%28-100 -100%29\"/%3E%3C/svg%3E", "bg": "#FFFFFF", "cap": "ON WHITE \u00b7 PAPER ONLY", "h": 90, "wide": false}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"%3E%3Cpolygon fill=\"none\" stroke=\"%23fff\" stroke-width=\"22\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\"/%3E%3Cpolygon fill=\"%238FAE8B\" points=\"100,10 177.9,55 177.9,145 100,190 22.1,145 22.1,55\" transform=\"translate%28100 100%29 scale%280.38%29 translate%28-100 -100%29\"/%3E%3C/svg%3E", "bg": "#0A0A0A", "cap": "FAVICON \u00b7 UNDER 32PX", "h": 40, "wide": false}], "go": [{"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"60 30 309 56\"%3E%3Ccircle cx=\"70.00\" cy=\"56.50\" r=\"6.00\" fill=\"%23FFE14D\"/%3E%3Cpolyline points=\"90.00,50.25 99.00,56.50 90.00,62.75\" fill=\"none\" stroke=\"%23FFE14D\" stroke-width=\"4.60\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/%3E%3Cpath d=\"M147.84429530201342 72.43489932885906C155.18322147651006 72.43489932885906 160.96375838926176 67.5241610738255 160.96375838926176 58.51812080536913C160.96375838926176 49.493959731543626 155.18322147651006 44.56510067114094 147.84429530201342 44.56510067114094C140.4691275167785 44.56510067114094 134.7248322147651 49.493959731543626 134.7248322147651 58.51812080536913C134.7248322147651 67.46979865771812 140.4691275167785 72.43489932885906 147.84429530201342 72.43489932885906ZM147.84429530201342 65.91140939597315C144.31073825503356 65.91140939597315 142.33557046979865 63.1751677852349 142.33557046979865 58.51812080536913C142.33557046979865 53.84295302013423 144.31073825503356 51.08859060402685 147.84429530201342 51.08859060402685C151.39597315436242 51.08859060402685 153.3530201342282 53.84295302013423 153.3530201342282 58.51812080536913C153.3530201342282 63.1751677852349 151.39597315436242 65.91140939597315 147.84429530201342 65.91140939597315ZM153.28053691275167 38.11409395973154H142.40805369127517V42.31812080536913H153.28053691275167ZM165.92161073825503 72.0H185.09342281879194V65.62147651006711H173.45986577181208V45.0H165.92161073825503ZM190.05127516778523 72.0H209.22308724832214V65.62147651006711H197.58953020134228V45.0H190.05127516778523ZM221.7191946308725 45.0H214.18093959731544V72.0H221.7191946308725ZM227.40187919463088 72.0H234.94013422818793V62.14228187919463C234.94013422818793 61.05503355704698 234.94013422818793 58.93489932885906 234.84953020134228 56.506711409395976C236.11798657718123 58.84429530201342 237.31395973154363 60.928187919463085 238.075033557047 62.14228187919463L244.21798657718122 72.0H251.90120805369128V45.0H244.36295302013423V54.893959731543625C244.36295302013423 56.18053691275168 244.38107382550336 58.37315436241611 244.45355704697988 60.565771812080534C243.40255033557048 58.62684563758389 242.2971812080537 56.61543624161074 241.66295302013424 55.600671140939596L235.08510067114094 45.0H227.40187919463088Z\" fill=\"%23FFFFFF\"/%3E%3Crect x=\"273.13\" y=\"34\" width=\"2.5\" height=\"48\" rx=\"1.25\" fill=\"%234D4E51\"/%3E%3Cpath d=\"M313.2280805369127 72.44939597315437C321.13744966442954 72.44939597315437 326.6874899328859 66.98923489932886 326.6874899328859 58.51812080536913V55.7543355704698H313.9021744966443V58.58553020134228H323.5641879194631C323.4518389261745 65.25906040268457 319.3623355704698 69.46091275167785 313.2280805369127 69.46091275167785C306.48714093959734 69.46091275167785 301.6786040268456 64.15804026845638 301.6786040268456 55.282469798657715C301.6786040268456 46.31702013422819 306.53208053691276 41.05908724832214 313.0258523489933 41.05908724832214C318.46354362416105 41.05908724832214 321.9913020134228 44.631785234899326 323.15973154362416 49.01339597315436H326.440322147651C325.3617718120805 43.08136912751678 320.3285369127517 38.070604026845636 313.0033825503356 38.070604026845636C304.50979865771814 38.070604026845636 298.5777718120805 44.766604026845634 298.5777718120805 55.282469798657715C298.5777718120805 65.75339597315437 304.44238926174495 72.44939597315437 313.2280805369127 72.44939597315437ZM347.3372348993289 72.44939597315437C355.80834899328863 72.44939597315437 361.8302550335571 65.75339597315437 361.8302550335571 55.282469798657715C361.8302550335571 44.78907382550335 355.80834899328863 38.070604026845636 347.3372348993289 38.070604026845636C338.8661208053692 38.070604026845636 332.79927516778525 44.78907382550335 332.79927516778525 55.282469798657715C332.79927516778525 65.75339597315437 338.8436510067114 72.44939597315437 347.3372348993289 72.44939597315437ZM347.3372348993289 69.46091275167785C340.7535838926175 69.46091275167785 335.90010738255035 64.15804026845638 335.90010738255035 55.282469798657715C335.90010738255035 46.339489932885904 340.7985234899329 41.05908724832214 347.3372348993289 41.05908724832214C353.85347651006714 41.05908724832214 358.729422818792 46.339489932885904 358.729422818792 55.282469798657715C358.729422818792 64.1805100671141 353.85347651006714 69.46091275167785 347.3372348993289 69.46091275167785Z\" fill=\"%23BEBFC0\"/%3E%3C/svg%3E", "bg": "#181A1E", "cap": "LOCKUP \u00b7 ON NIGHT", "h": 40, "wide": true}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 360\"%3E%3Crect width=\"360\" height=\"360\" rx=\"90\" fill=\"%23181A1E\"/%3E%3Ccircle cx=\"107\" cy=\"180\" r=\"39\" fill=\"%23FFE14D\"/%3E%3Cpolyline points=\"192,107 270,180 192,253\" fill=\"none\" stroke=\"%23FFE14D\" stroke-width=\"46\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/%3E%3C/svg%3E", "bg": "#F4F1EA", "cap": "APP ICON", "h": 64, "wide": false}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 360\"%3E%3Ccircle cx=\"107\" cy=\"180\" r=\"39\" fill=\"%23181A1E\"/%3E%3Cpolyline points=\"192,107 270,180 192,253\" fill=\"none\" stroke=\"%23181A1E\" stroke-width=\"46\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/%3E%3C/svg%3E", "bg": "#FFE14D", "cap": "NIGHT ON SIGNAL", "h": 64, "wide": false}], "personal": [{"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200.5 179.3\"%3E%3Cpath fill=\"%23141414\" fill-rule=\"evenodd\" d=\"M0.8 66.0 L0.0 68.5 L0.0 127.8 L1.7 130.2 L3.0 130.8 L61.3 131.2 L62.3 132.7 L62.3 177.7 L63.7 179.0 L118.8 179.3 L121.3 178.0 L122.3 176.2 L122.3 124.2 L121.3 121.8 L120.0 120.5 L118.0 119.5 L112.5 119.3 L64.5 119.5 L61.7 119.2 L59.0 117.7 L56.3 113.5 L56.3 68.3 L55.3 66.2 L53.0 64.3 L3.3 64.2Z M63.3 1.3 L62.3 3.5 L62.3 52.2 L63.3 54.7 L64.8 56.2 L67.0 57.0 L109.7 57.0 L113.0 57.8 L114.5 58.8 L144.5 91.7 L145.0 92.8 L145.2 114.0 L146.2 115.8 L147.8 117.2 L149.3 117.7 L197.0 117.7 L199.7 115.8 L200.3 114.5 L200.5 57.7 L198.7 54.7 L196.2 53.5 L125.0 53.3 L123.5 52.2 L122.3 49.7 L122.5 1.2 L121.8 0.2 L65.5 0.0Z\"/%3E%3C/svg%3E", "bg": "#FFFFFF", "cap": "ELIPAN SOCIAL EMBLEM", "h": 64, "wide": false}, {"src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200.5 179.3\"%3E%3Cpath fill=\"%23FFFFFF\" fill-rule=\"evenodd\" d=\"M0.8 66.0 L0.0 68.5 L0.0 127.8 L1.7 130.2 L3.0 130.8 L61.3 131.2 L62.3 132.7 L62.3 177.7 L63.7 179.0 L118.8 179.3 L121.3 178.0 L122.3 176.2 L122.3 124.2 L121.3 121.8 L120.0 120.5 L118.0 119.5 L112.5 119.3 L64.5 119.5 L61.7 119.2 L59.0 117.7 L56.3 113.5 L56.3 68.3 L55.3 66.2 L53.0 64.3 L3.3 64.2Z M63.3 1.3 L62.3 3.5 L62.3 52.2 L63.3 54.7 L64.8 56.2 L67.0 57.0 L109.7 57.0 L113.0 57.8 L114.5 58.8 L144.5 91.7 L145.0 92.8 L145.2 114.0 L146.2 115.8 L147.8 117.2 L149.3 117.7 L197.0 117.7 L199.7 115.8 L200.3 114.5 L200.5 57.7 L198.7 54.7 L196.2 53.5 L125.0 53.3 L123.5 52.2 L122.3 49.7 L122.5 1.2 L121.8 0.2 L65.5 0.0Z\"/%3E%3C/svg%3E", "bg": "#141414", "cap": "ON BLACK", "h": 64, "wide": false}], "os": [], "hires": []};
+    var BMFIELDS = [["what", "WHAT IT IS"], ["who", "WHO IT’S FOR"], ["voice", "VOICE"], ["lines", "KEY LINES"], ["avoid", "WORDS TO AVOID"], ["beat", "BEAT · TOPICS THE DAILY NEWS JOB HUNTS FOR"], ["channels", "CHANNELS"], ["social", "SOCIAL POSTING RULES"], ["goal", "WEEKLY GOAL"], ["type", "TYPE"]];
+    var ORDER = ['cuepa', 'you', 'nenemi', 'elipan', 'os', 'go', 'personal', 'hires'];
+    var bid = s.brand || 'cuepa';
+    var B = BR[bid];
+    var tb = tone(B.c);
+    var bmOk = !!(s.bmOk && s.bmOk[bid]);
+
+    var TOPICS = [
+      { id: 'l1', ours: true, pillar: 'conversion', brand: 'you', ts: '2026-10-21T06:00:00-05:00', date: 'OCT 21', title: 'Introducing CUEPA for You: one-on-one AI help for everyday life', why: 'Our own launch. Personal AI coaching for people who feel behind on AI, built on everything CUEPA for Work does for businesses.', source: 'CUEPA for You', url: 'https://you.makingcuepa.com/',
+        draft: 'I just launched CUEPA for You.\n\nPeople keep asking me the same thing: I know AI matters, but where do I even start?\n\nSo now there’s an hour for that. One-on-one, over video. We look at how your life actually runs, decide what AI should take off your plate and what stays yours, and set it up together.\n\nYou leave with your own AI command center and a weekly AI briefing from me, so you never have to keep up alone.\n\nNo tech skills needed.\n\nYou stay in the middle. AI makes the room.\n\nWho’s one person in your life who would want this?', headline: 'Make room for more of you.' }
+    ];
+    var FEED = [{"id": "g01", "cat": "AGENTS", "title": "OpenAI caught two of its coding agents weakening the monitors that watch them", "sum": "Its misalignment report, updated Oct 20, discloses incidents on Oct 3 and Oct 6.", "source": "OpenAI", "url": "https://alignment.openai.com/misalignment-reports/", "ts": "2026-10-20T14:00:00-05:00", "brand": "cuepa", "why": "Even the builders need checks on their agents. Human approval isn’t optional."}, {"id": "g02", "cat": "SECURITY", "title": "Only 2.3% of AI agent visits to websites carry a verified ID", "sum": "Arkose Labs Q3 report; ChatGPT agent made up 78.4% of the verified ones.", "source": "PPC Land", "url": "https://ppc.land/97-7-of-legitimate-ai-agent-sessions-carry-no-verified-id-arkose-finds", "ts": "2026-10-20T14:00:00-05:00", "brand": "cuepa", "why": "Most agents online can’t prove who they are. Verify before you trust."}, {"id": "g03", "cat": "POLICY", "title": "NYC proposes $525 fines for AI chatbot “doom loops” with no human off-ramp", "sum": "Rules would require AI disclosure and a way to reach a person; 30-day comment period.", "source": "NYC.gov", "url": "https://www.nyc.gov/site/dca/news/072-26/mamdani-administration-proposes-ban-ai-customer-service-doom-loops", "ts": "2026-10-20T14:00:00-05:00", "brand": "personal", "why": "A city is writing “keep a human in reach” into law. Your Protect, Challenge, Verify angle."}, {"id": "g04", "cat": "AI", "title": "Demis Hassabis now expects AGI in two to three years", "sum": "Down from the three-to-five years he predicted earlier in 2026.", "source": "WSJ", "url": "https://www.wsj.com/tech/ai/demis-hassabis-ai-deepmind-google-isomorphic-2b4e3153", "ts": "2026-10-21T06:00:00-05:00", "brand": "personal", "why": "A big timeline shift from a top lab. A good prompt for your take as a builder."}, {"id": "g05", "cat": "PHONES", "title": "OPPO’s new phone ships with an AI agent built into the operating system", "sum": "Find X10 launches in Spain with Manus built in, after a prompt-injection advisory was patched.", "source": "TechTimes", "url": "https://www.techtimes.com/articles/329254/20261020/oppo-find-x10-debuts-manus-ai-researchers-exposed-exploit-china-can-compel-agent-email-access.htm", "ts": "2026-10-21T06:00:00-05:00", "brand": "you", "why": "AI agents are arriving on everyday phones. Your clients will ask what to trust."}, {"id": "g06", "cat": "TOOLS", "title": "Notion’s AI agents can now work on one task for 24+ hours", "sum": "Up from five minutes; Business and Enterprise seats get 1,500 + 500 AI credits a month.", "source": "Notion", "url": "https://www.notion.com/blog/notion-ai-more-for-less", "ts": "2026-10-20T14:00:00-05:00", "brand": "elipan", "why": "Tools small teams already use are getting real agents. Guidance on what to hand off matters more."}, {"id": "g07", "cat": "PRICING", "title": "Alibaba tripled DeepSeek V4 Flash prices overnight", "sum": "Output went from $0.40 to $1.32 per million tokens; input from $0.20 to $0.44.", "source": "Stork", "url": "https://www.stork.ai/newsletter/2026-10-20-alibaba-quietly-tripled-deepseek-prices", "ts": "2026-10-21T06:00:00-05:00", "brand": "elipan", "why": "AI costs can jump without warning. Don’t build a small business on one vendor."}, {"id": "g08", "cat": "SECURITY", "title": "Claude found 493 security issues across 25 open-source projects", "sum": "Covered 5M+ lines of code and flagged 3,842 of 17,000+ settings as security-relevant.", "source": "Anthropic", "url": "https://www.anthropic.com/research/attack-surface-reduction", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g09", "cat": "RESEARCH", "title": "Claude designed 17 working scorpion-antivenom binders on its own", "sum": "A 64-hour run produced 318,484 designs; 17 of 211 tested in the lab bound the toxins.", "source": "Anthropic", "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g10", "cat": "AI", "title": "Amodei lists nine safety calls he says cost Anthropic commercially", "sum": "Responding to a critic on X, he also conceded some of the critique’s points.", "source": "Digg", "url": "https://digg.com/ai/ulobab3r", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g11", "cat": "INFRA", "title": "Nvidia’s DSX POD cuts AI data center setup from six months to 14 days", "sum": "A containerized Vera Rubin design; first deliveries early 2027.", "source": "Data Center Dynamics", "url": "https://www.datacenterdynamics.com/en/news/nvidia-launches-dsx-pod-claims-the-vera-rubin-reference-architecture-will-make-ai-data-centers-more-water-and-energy-efficient/", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g12", "cat": "FUNDING", "title": "Eka Robotics raises $150M at a $1.45B valuation", "sum": "Led by a16z and F-Prime; claims about 1,500 picks an hour at 95% reliability.", "source": "TechCrunch", "url": "https://techcrunch.com/2026/10/20/eka-is-worth-1-45-billion-thanks-to-a-physical-ai-model-that-has-experts-raving/", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g13", "cat": "BUSINESS", "title": "SpaceX’s AI unit made $7.56B last quarter, more than Starlink", "sum": "Up about 9x year over year and nearly 3x the prior quarter.", "source": "Fortune", "url": "https://fortune.com/2026/10/20/spacex-q3-profit-ai-si-elon-musk/", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g14", "cat": "INFRA", "title": "Nscale CEO claims $100B in contracted revenue ahead of IPO", "sum": "A year-end listing at a $30B–$35B valuation is still planned.", "source": "Financial Times", "url": "https://www.ft.com/content/9bc15db9-08b4-40f1-b814-24a52eed8ebc", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g15", "cat": "HEALTH", "title": "Two of three U.S. doctors now use OpenEvidence", "sum": "Ad revenue projected at $400M–$500M in 2026.", "source": "Financial Times", "url": "https://www.ft.com/content/0ed17b79-47dd-4ad8-8dca-44eb35617edc", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g16", "cat": "ROBOTICS", "title": "AGCO will pilot Digit humanoid robots at its Kansas plant", "sum": "Parts sorting and stacking starting in 2027.", "source": "AGCO", "url": "https://news.agcocorp.com/2026-10-20-AGCO-and-Agility-Robotics-Advance-Smart-Manufacturing-with-Humanoid-Robot-Pilot-in-Hesston,-Kansas,-Facility", "ts": "2026-10-20T14:00:00-05:00", "brand": null, "why": ""}, {"id": "g17", "cat": "HEALTH", "title": "AI predicts cancer survival from a single face photo", "sum": "Mass General Brigham study in Lancet Digital Health.", "source": "CNN", "url": "https://edition.cnn.com/2026/10/20/health/ai-models-cancer-survival-biological-age", "ts": "2026-10-20T14:00:00-05:00", "brand": null, "why": ""}, {"id": "g18", "cat": "CLOUD", "title": "Microsoft adds an EU data guardian and offline AI to its Sovereign Cloud", "sum": "Foundry Local and GitHub Enterprise Local go GA at Ignite, Nov 17–19.", "source": "The Next Web", "url": "https://thenextweb.com/news/microsoft-sovereign-cloud-data-guardian-azure-local", "ts": "2026-10-20T14:00:00-05:00", "brand": null, "why": ""}, {"id": "g19", "cat": "OPEN SOURCE", "title": "DeepSeek open-sources DeepInfer, its production inference engine", "sum": "Apache 2.0; runs on Nvidia SM100 and Huawei Ascend 950.", "source": "GitHub", "url": "https://github.com/deepseek-ai/DeepInfer", "ts": "2026-10-20T14:00:00-05:00", "brand": null, "why": ""}, {"id": "g20", "cat": "AGENTS", "title": "Agent S4 lets an AI agent redesign its own interface, 3.8x better on OSWorld", "sum": "Open-sourced by Simular AI.", "source": "Hugging Face", "url": "https://huggingface.co/papers/2610.28601", "ts": "2026-10-21T06:00:00-05:00", "brand": null, "why": ""}, {"id": "g21", "cat": "CODING", "title": "GPT-6.1 Sol jumps from 5.4% to 97.9% on COBOL migration", "sum": "86.6% at low effort for about 61% lower cost.", "source": "Dataconomy", "url": "https://dataconomy.com/2026/10/20/openai-gpt-6-cobol-coding-migration-gains/", "ts": "2026-10-20T14:00:00-05:00", "brand": null, "why": ""}, {"id": "g22", "cat": "CHIPS", "title": "ByteDance, Alibaba and Tencent order $35B of China-tier Nvidia GPUs", "sum": "More than 3 million RTX PRO 5500 cards at about $11,400 each.", "source": "The Edge Malaysia", "url": "https://theedgemalaysia.com/node/822533", "ts": "2026-10-20T14:00:00-05:00", "brand": null, "why": ""}, {"id": "g23", "cat": "POLICY", "title": "U.S. sanctions five Chinese entities over Google AI trade-secret theft", "sum": "Tied to ex-Google engineer Linwei Ding.", "source": "Export Compliance Daily", "url": "https://exportcompliancedaily.com/article/2026/10/20/us-sanctions-five-chinese-entities-over-google-tradesecret-theft-2610190052", "ts": "2026-10-20T14:00:00-05:00", "brand": null, "why": ""}];
+    var NOW24 = new Date();
+    function hoursAgo(t) { return (NOW24 - new Date(t.ts)) / 3600000; }
+    var ALL_TOPICS = TOPICS;
+    TOPICS = TOPICS.filter(function (t) { var h = hoursAgo(t); return h >= -1 && h <= (t.ours ? 168 : 24); });
+    function fmtFeed(t) { return new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', month: 'short', day: 'numeric' }).format(new Date(t.ts)).toUpperCase(); }
+    function ageLabel(t) { if (t.ours) return 'OUR NEWS · NEW'; return ageLabel2(t); }
+    function ageLabel2(t) { var h = Math.floor(hoursAgo(t)); return h < 1 ? 'JUST IN' : (h + 'H AGO'); }
+    FEED = FEED.filter(function (t) { var h = hoursAgo(t); return h >= -1 && h <= 24; });
+    var seenT = {}; TOPICS.forEach(function (t) { seenT[t.title] = 1; });
+    var fromWire = FEED.filter(function (t) { return t.brand && !seenT[t.title]; }).map(function (t) { return { id: t.id, pillar: 'insight', brand: t.brand, ts: t.ts, date: fmtFeed(t), title: t.title, why: t.why || t.sum, source: t.source, url: t.url, draft: '', headline: t.title }; });
+    TOPICS = TOPICS.concat(fromWire); ALL_TOPICS = ALL_TOPICS.concat(fromWire);
+    var topic = ALL_TOPICS.filter(function (t) { return t.id === s.topic; })[0] || null;
+    if (!topic && s.topic) { var fi = FEED.filter(function (t) { return t.id === s.topic; })[0]; if (fi) topic = { id: fi.id, brand: fi.brand, pillar: 'insight', date: fmtFeed(fi), title: fi.title, why: fi.why || fi.sum, source: fi.source, url: fi.url, draft: '', headline: fi.title }; }
+    var step = s.step || 'home';
+    // ---- today (live, Central time) ----
+    var NOW = new Date();
+    function fmtD(o, d) { return new Intl.DateTimeFormat('en-US', Object.assign({ timeZone: 'America/Chicago' }, o)).format(d || NOW); }
+    var todayLong = (fmtD({ weekday: 'long' }) + ', ' + fmtD({ month: 'short', day: 'numeric' })).toUpperCase();
+    var todayShort = (fmtD({ weekday: 'short' }) + ' ' + fmtD({ month: 'short', day: 'numeric' })).toUpperCase();
+    var todayKey = fmtD({ year: 'numeric', month: '2-digit', day: '2-digit' });
+    function daysAgo(label) { var d = new Date(label + ' ' + fmtD({ year: 'numeric' }) + ' 12:00'); var t = new Date(fmtD({ month: 'short', day: 'numeric', year: 'numeric' }) + ' 12:00'); return Math.round((t - d) / 86400000); }
+    var channel = s.channel || 'li';
+    var isIG = channel === 'ig';
+    var PILL = { authority: ['AUTHORITY', 0.4, 'Frameworks, data, strong points of view.'], insight: ['BEHIND THE SCENES', 0.4, 'Lessons, how we work, what went wrong.'], conversion: ['SELLING', 0.2, 'Case studies, results, offers.'] };
+    var PORDER = ['authority', 'insight', 'conversion'];
+    var pillar = s.pillar || (topic ? topic.pillar : 'insight');
+    // posts already on the books this week/month (staged + scheduled), used for the mix and the 80/20 rule
+    var BASE = { cuepa: [{ p: 'conversion', xp: false }, { p: 'conversion', xp: false }, { p: 'authority', xp: false }] };
+    function postsFor(id) { return (BASE[id] || []).concat((s.sched || []).filter(function (x) { return x.brand === id; }).map(function (x) { return { p: x.pillar, xp: !!x.xp }; })); }
+    function mixFor(id) { var ps = postsFor(id); var c = { authority: 0, insight: 0, conversion: 0 }; ps.forEach(function (x) { if (c[x.p] != null) c[x.p]++; }); return { c: c, n: ps.length }; }
+    function neededFor(id) { var m = mixFor(id); var best = 'authority', gap = -99; PORDER.forEach(function (k) { var g = PILL[k][1] * (m.n + 1) - m.c[k]; if (g > gap) { gap = g; best = k; } }); return best; }
+    var draft = s.draft != null ? s.draft : '';
+    var copyOk = !!s.copyOk;
+    var designOk = !!s.designOk;
+
+    // ---- brand check (real, rule-based) ----
+    var R = B.rules || {};
+    var low = draft.toLowerCase();
+    var checks = [];
+    var blocking = false;
+    if (!draft.trim()) { checks.push({ k: 'bad', text: 'Post is empty.' }); blocking = true; }
+    var charMax = isIG ? 2200 : 3000;
+    var chName = isIG ? 'Instagram' : 'LinkedIn';
+    if (draft.length > charMax) { checks.push({ k: 'bad', text: 'Over ' + chName + '’s ' + charMax.toLocaleString() + '-character limit.' }); blocking = true; }
+    else if (draft.trim()) checks.push({ k: 'ok', text: 'Fits ' + chName + '’s ' + charMax.toLocaleString() + '-character limit.' });
+    var hasLink = /https?:\/\/|www\./i.test(draft);
+    if (hasLink && !isIG) checks.push({ k: 'warn', text: 'Has a link. LinkedIn shows posts with links to fewer people. Move it to the first comment.' });
+    if (hasLink && isIG) checks.push({ k: 'warn', text: 'Links don’t click in Instagram captions. Say "Comment GUIDE" and send the link by DM.' });
+    var tags = (draft.match(/#\w+/g) || []).length;
+    if (!isIG && tags > 3) checks.push({ k: 'warn', text: tags + ' hashtags. LinkedIn treats piles of hashtags as spam. Keep it to 3 or fewer.' });
+    var SIS = { you: /cuepa\s+for\s+you/i, cuepa: /\bcuepa\b(?!\s+for\s+you)/i, elipan: /\belipan\b(?!\s+hires)/i, os: /[ōo]llin\s*os\b/i, go: /[ōo]llin\s*go\b|vamos/i, hires: /elipan\s+hires/i };
+    var xpHits = Object.keys(SIS).filter(function (k) { return k !== bid && SIS[k].test(draft); });
+    var xpNow = xpHits.length > 0;
+    var bm0 = mixFor(bid); var xpPast = postsFor(bid).filter(function (x) { return x.xp; }).length;
+    var xpShare = Math.round((xpPast + (xpNow ? 1 : 0)) / (bm0.n + 1) * 100);
+    if (xpNow) checks.push(xpShare > 20 ? { k: 'warn', text: 'Mentions ' + xpHits.map(function (k) { return BR[k].name; }).join(', ') + '. That puts ' + B.name + ' at ' + xpShare + '% cross-promo this month. The cap is 20%.' } : { k: 'ok', text: 'Mentions ' + xpHits.map(function (k) { return BR[k].name; }).join(', ') + '. Cross-promo stays at ' + xpShare + '%, under the 20% cap.' });
+    var hits = GLOBAL_AVOID.filter(function (w) { return low.indexOf(w) >= 0; });
+    if (hits.length) { checks.push({ k: 'bad', text: 'Uses words to avoid: ' + hits.join(', ') + '.' }); blocking = true; }
+    else if (draft.trim()) checks.push({ k: 'ok', text: 'No hype words.' });
+    if (R.noExclaim) { if (draft.indexOf('!') >= 0) { checks.push({ k: 'bad', text: 'Has an exclamation mark. ' + B.name + ' doesn’t use them.' }); blocking = true; } else if (draft.trim()) checks.push({ k: 'ok', text: 'No exclamation marks.' }); }
+    if (R.noEmoji) { if (/[☀-➿]|[\uD83C-\uDBFF][\uDC00-\uDFFF]/.test(draft)) { checks.push({ k: 'bad', text: 'Has an emoji. ' + B.name + ' doesn’t use them.' }); blocking = true; } else if (draft.trim()) checks.push({ k: 'ok', text: 'No emoji.' }); }
+    if (R.must && draft.trim()) { var has = R.must.some(function (w) { return (' ' + draft).indexOf(w) >= 0 || low.indexOf(w.toLowerCase()) >= 0; }); checks.push(has ? { k: 'ok', text: R.mustLabel + '.' } : { k: 'warn', text: R.mustLabel + ': not found yet.' }); }
+    if (/\d/.test(draft) && !hasLink) checks.push({ k: 'warn', text: isIG ? 'Has numbers. Put the source on the last carousel slide.' : 'Has numbers. Put the source link in the first comment.' });
+    if (!R.noExclaim && !R.must && draft.trim()) checks.push({ k: 'warn', text: B.name + ' has no voice rules yet. Add them in Brand Manager.' });
+    var ICON = { ok: '✓', warn: '!', bad: '✕' };
+    checks = checks.map(function (c) { return { cls: 'chk ' + c.k, icon: ICON[c.k], text: c.text }; });
+
+    // ---- design ----
+    var layout = s.layout || 'hook';
+    var ground = s.ground || 'dark';
+    var headline = s.headline != null ? s.headline : (topic ? topic.headline : (draft.split('\n')[0] || 'Your headline'));
+    var bg, ink, sub, acc;
+    if (ground === 'brand') { bg = B.c === '#FFFFFF' ? '#232527' : B.c; ink = B.c === '#FFFFFF' ? '#FFFFFF' : '#0A0A0A'; sub = ink; acc = ink; }
+    else if (ground === 'light') { var lt = LIGHT[B.c]; bg = '#FFFFFF'; ink = '#232527'; sub = '#6B7079'; acc = lt[0]; }
+    else { bg = '#0A0A0A'; ink = '#FFFFFF'; sub = '#B4BAC1'; acc = B.c; }
+    var mono = "font-family: 'IBM Plex Mono', monospace; ";
+
+    // ---- steps ----
+    var unlocked = { home: true, snax: true, write: true, design: true, post: true, engage: true, bm: true };
+    var stepDefs = [['home', '← BOARD', ''], ['write', 'WRITE', '1'], ['design', 'DESIGN', '2'], ['post', 'POST', '3'], ['engage', 'ENGAGE', ''], ['bm', '⛨ BRAND MANAGER', '']];
+    var steps = stepDefs.map(function (d, i) {
+      var cur = d[0] === step;
+      var locked = !unlocked[d[0]];
+      return {
+        num: d[2], name: d[1], locked: locked, current: cur ? 'page' : 'false',
+        go: function () { set({ step: d[0], menu: false, navOpen: false }); },
+        style: mono + 'display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; cursor: ' + (locked ? 'not-allowed' : 'pointer') + '; ' + (cur ? 'background: var(--swap); color: var(--swap-ink); border: 1px solid var(--swap);' : 'background: transparent; color: ' + (locked ? 'var(--muted)' : 'var(--ink)') + '; border: 1px solid var(--line2);') + (locked ? ' opacity: .5;' : ''),
+        numStyle: d[2] ? 'display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: 10px; ' + (cur ? 'background: var(--swap-ink); color: var(--swap);' : 'border: 1px solid currentColor;') : 'display: none;',
+        arrow: 'color: var(--muted); ' + (d[2] && d[2] !== '3' ? '' : 'display: none;'),
+        gapStyle: (d[0] === 'write' || d[0] === 'engage') ? 'width: 1px; height: 28px; background: var(--line2); margin: 0 6px;' : 'display: none;'
+      };
+    });
+    var STAGED = { cuepa: 3 };
+    var brandCards = ORDER.map(function (id) {
+      var b = BR[id]; var ok = !!(s.bmOk && s.bmOk[id]);
+      return {
+        name: b.name, staged: b.soon ? '—' : (STAGED[id] || 0),
+        dot: 'width: 10px; height: 10px; border-radius: 50%; flex: none; background: ' + tone(b.c)[1] + ';' + (light ? ' box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3);' : ''),
+        bm: ok ? 'RULES APPROVED' : 'RULES PENDING',
+        bmStyle: ok ? '' : 'color: var(--warn);',
+        style: 'display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); color: var(--ink); cursor: pointer; font: inherit; text-align: left;' + (b.soon ? ' opacity: .55;' : ''),
+        pick: function () { set({ brand: id, boardBrand: id, step: 'home', menu: false }); }
+      };
+    });
+
+    var visibleTopics = TOPICS.filter(function (t) { return !s.mine || t.brand === bid; }).map(function (t) {
+      var tt = tone(BR[t.brand].c);
+      return Object.assign({}, t, {
+        brandUpper: BR[t.brand].name.toUpperCase(), date: ageLabel(t) + ' · ' + t.date,
+        pillarName: PILL[t.pillar][0], fillsGap: neededFor(t.brand) === t.pillar,
+        dot: 'width: 9px; height: 9px; border-radius: 50%; background: ' + tt[1] + ';',
+        btn: mono + 'display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: ' + tt[1] + '; color: ' + tt[2] + '; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; cursor: pointer;',
+        use: function () { set({ topic: t.id, pillar: t.pillar, brand: t.brand, step: 'write', draft: t.draft, copyOk: false, designOk: false, headline: null, blank: false, scheduledNow: false }); }
+      });
+    });
+
+    var bmHist = (s.bmHist && s.bmHist[bid]) || '';
+    var schedList = (s.sched || []).filter(function (x) { return true; });
+    var upcoming = schedList.map(function (x) { return { when: x.when, title: x.title, dot: 'width: 9px; height: 9px; border-radius: 50%; background: ' + tone(BR[x.brand].c)[1] + ';' }; }).concat([
+      { when: 'THU · CUEPA', title: 'Automating a broken process only makes the wrong process move faster.', dot: 'width: 9px; height: 9px; border-radius: 50%; background: ' + tone('#2DD4BF')[1] + ';' },
+      { when: 'SUN · CUEPA', title: 'How we found 14.5 hours of hidden capacity in a multi-location dental practice.', dot: 'width: 9px; height: 9px; border-radius: 50%; background: ' + tone('#2DD4BF')[1] + ';' }
+    ]);
+
+    // ---- Engage ----
+    var commented = s.commented || {};
+    var PROMPTS = [
+      { id: 'c1', brand: 'cuepa', target: 'A post about AI agents asking permission before they act', starter: 'The ask-first default is the part I’d keep. In a small business, one wrong auto-sent email can cost a client, so approval isn’t friction. It’s protection.', q: 'AI agent approval' },
+      { id: 'c2', brand: 'personal', target: 'A post about AI governance or who owns an agent’s mistakes', starter: 'The ownership question is the real one. When I build, every agent has one named person who approves what it does. What’s your rule?', q: 'AI agent governance' },
+      { id: 'c3', brand: 'hires', target: 'A post about slow hiring or the latest jobs numbers', starter: 'Few layoffs plus very little hiring means every open seat matters more. Speed to a good decision is the edge right now.', q: 'hiring slowdown' }
+    ];
+    var commentsToday = PROMPTS.filter(function (p) { return commented[p.id]; }).length;
+    var points = (s.sched || []).length * 10 + commentsToday * 3;
+    var prompts = PROMPTS.map(function (p) {
+      var done = !!commented[p.id];
+      return {
+        brand: BR[p.brand].name.toUpperCase(), target: p.target, starter: p.starter,
+        dot: 'width: 9px; height: 9px; border-radius: 50%; background: ' + tone(BR[p.brand].c)[1] + ';',
+        url: 'https://www.linkedin.com/search/results/content/?keywords=' + encodeURIComponent(p.q),
+        doneStr: done ? 'true' : 'false', cls: done ? 'obtn' : 'wbtn', label: done ? '✓ COMMENTED' : 'I COMMENTED',
+        done: function () { var m = Object.assign({}, (self.state && self.state.commented) || {}); m[p.id] = !m[p.id]; set({ commented: m }); }
+      };
+    });
+
+    // ---- mix ----
+    var bm1 = mixFor(bid); var need = neededFor(bid);
+    var mix = PORDER.map(function (k) {
+      var pct = bm1.n ? bm1.c[k] / bm1.n : 0;
+      return { name: PILL[k][0], count: bm1.c[k], goal: Math.round(PILL[k][1] * 100) + '%', desc: PILL[k][2],
+        bar: 'display: block; height: 100%; border-radius: 999px; width: ' + Math.round(pct * 100) + '%; background: ' + (k === need ? 'var(--warn)' : 'var(--ink)') + ';' };
+    });
+
+    // ---- format ----
+    var fmt = isIG ? (s.fmt || 'carousel') : 'li';
+    var tall = fmt === 'story' || fmt === 'reel';
+    var FMT = { carousel: ['CAROUSEL', 'Up to 20 slides. Carousels get saved the most, and Instagram re-shows slide 2 to people who scrolled past.'], reel: ['REEL COVER', 'Reels reach people who don’t follow you yet. Hook in the first 2 seconds and make the end loop back to the start.'], story: ['STORY', 'Stories keep current followers close. Add a poll or question sticker so people reply.'] };
+
+    // ---- command center ----
+    var GOAL = { nenemi: 1, you: 2, cuepa: 3, elipan: 2, os: 2, go: 1, personal: 3, hires: 0 };
+    var weekAgo = NOW.getTime() - 7 * 86400000;
+    var postedAll = (s.posted || []).filter(function (x) { return x.ts >= weekAgo; });
+    var schedAllCC = s.sched || [];
+    var activeIds = ORDER.filter(function (id) { return !BR[id].soon; });
+    var goalTotal = activeIds.reduce(function (a, id) { return a + GOAL[id]; }, 0);
+    var doneTotal = postedAll.length + schedAllCC.length;
+    function barStyle(n, d) { return 'display: block; height: 100%; border-radius: 999px; width: ' + (d ? Math.min(100, Math.round(n / d * 100)) : 0) + '%; background: var(--ink);'; }
+    var STAGED_NEXT = { cuepa: 'Thu · Automating a broken process only makes the wrong process move faster.' };
+    var brandRows = ORDER.map(function (id) {
+      var b = BR[id]; var ok = !!(s.bmOk && s.bmOk[id]);
+      var n = postedAll.filter(function (x) { return x.brand === id; }).length + schedAllCC.filter(function (x) { return x.brand === id; }).length;
+      var nx = schedAllCC.filter(function (x) { return x.brand === id; })[0];
+      return {
+        name: b.name, soon: !!b.soon, action: b.soon ? 'COMING SOON' : 'WRITE →',
+        dot: 'width: 10px; height: 10px; border-radius: 50%; flex: none; background: ' + tone(b.c)[1] + ';' + (light ? ' box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3);' : ''),
+        rules: ok ? 'RULES APPROVED' : 'RULES PENDING', rulesStyle: ok ? '' : 'color: var(--warn);',
+        posted: b.soon ? '—' : n, goal: b.soon ? '—' : GOAL[id], bar: barStyle(n, GOAL[id]),
+        next: nx ? nx.when.split(' · ').slice(0, 2).join(' · ') + ' · ' + nx.title : (STAGED_NEXT[id] || 'Nothing scheduled'),
+        needs: b.soon ? '—' : (n >= GOAL[id] ? '✓ GOAL MET' : PILL[neededFor(id)][0]),
+        go: function () { var on = s.boardBrand === id; set({ brand: id, boardBrand: on ? null : id, step: 'home', menu: false }); },
+        onStr: s.boardBrand === id ? 'true' : 'false',
+        chipStyle: 'gap: 10px; text-transform: none; letter-spacing: 0.08em;' + (s.boardBrand === id ? ' background: var(--swap); color: var(--swap-ink); border-color: var(--swap);' : '')
+      };
+    });
+    var BB = s.boardBrand || null;
+    var homeTopics = TOPICS.filter(function (t) { return !BB || t.brand === BB; }).map(function (t) {
+      var tt = tone(BR[t.brand].c); var dA = hoursAgo(t);
+      return {
+        title: t.title, why: t.why, source: t.source, url: t.url, brandUpper: BR[t.brand].name.toUpperCase(),
+        dA: dA, ours: !!t.ours, kicker: t.ours ? 'OUR NEWS' : 'LEAD STORY', age: ageLabel(t), ageStyle: dA < 3 ? 'color: var(--bad);' : '',
+        dot: 'width: 9px; height: 9px; border-radius: 50%; background: ' + tt[1] + ';',
+        btn: "font-family: 'IBM Plex Mono', monospace; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: " + tt[1] + '; color: ' + tt[2] + '; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; cursor: pointer;',
+        use: function () { set({ topic: t.id, pillar: t.pillar, brand: t.brand, step: 'write', draft: t.draft, copyOk: false, designOk: false, headline: null, blank: false, scheduledNow: false }); }
+      };
+    });
+    homeTopics.sort(function (a, b) { return (b.ours ? 1 : 0) - (a.ours ? 1 : 0) || a.dA - b.dA; });
+    var todayFull = (fmtD({ weekday: 'long' }) + ', ' + fmtD({ month: 'long', day: 'numeric' }) + ', ' + fmtD({ year: 'numeric' })).toUpperCase();
+    var issueNo = Math.max(1, daysAgo('Oct 15') + 1);
+    var staleCount = 0;
+    var behind = activeIds.filter(function (id) { var n = postedAll.filter(function (x) { return x.brand === id; }).length + schedAllCC.filter(function (x) { return x.brand === id; }).length; return n < GOAL[id]; }).length;
+    var commentsTodayCC = Object.keys(s.commented || {}).filter(function (k) { return s.commented[k]; }).length;
+    var kpis = [
+      { label: 'POSTED + SCHEDULED · 7 DAYS', value: doneTotal, unit: '/ ' + goalTotal + ' GOAL', bar: barStyle(doneTotal, goalTotal), note: 'All brands combined.' },
+      { label: 'BRANDS BEHIND GOAL', value: behind, unit: 'OF ' + activeIds.length, bar: barStyle(activeIds.length - behind, activeIds.length), note: behind ? 'Tap a brand above to catch up.' : 'Every brand is on track.' },
+      { label: 'COMMENTS TODAY', value: commentsTodayCC, unit: '/ 3 GOAL', bar: barStyle(commentsTodayCC, 3), note: 'Comments count about 15x more than likes on LinkedIn.' },
+      { label: 'STORIES TODAY', value: TOPICS.length, unit: 'STORIES', bar: barStyle(TOPICS.length - staleCount, TOPICS.length), note: TOPICS.length ? 'Only stories from the last 24 hours.' : 'Nothing new in 24 hours. The 4:57 AM brief fills this.' }
+    ];
+    var feedMode = s.feedMode || 'all';
+    var feedAll = FEED.slice().sort(function (a, b) { return (b.brand ? 1 : 0) - (a.brand ? 1 : 0) || hoursAgo(a) - hoursAgo(b); });
+    var feedRows = feedAll.filter(function (t) { return (feedMode === 'all' || t.brand) && (!BB || t.brand === BB); }).map(function (t) {
+      var b = t.brand ? BR[t.brand] : null; var tt = b ? tone(b.c) : null;
+      return { title: t.title, sum: t.sum, source: t.source, url: t.url, cat: t.cat, age: ageLabel(t), flagged: !!b, why: t.why,
+        brandUpper: b ? b.name.toUpperCase() : '', dot: b ? 'width: 9px; height: 9px; border-radius: 50%; flex: none; background: ' + tt[1] + ';' : '',
+        use: function () { if (b) set({ topic: t.id, pillar: 'insight', brand: t.brand, step: 'write', draft: '', copyOk: false, designOk: false, headline: null, blank: false, scheduledNow: false }); } };
+    });
+    var flaggedCount = FEED.filter(function (t) { return t.brand; }).length;
+    var postedList = (s.posted || []).slice(0, 6).map(function (x) { return { when: fmtD({ weekday: 'short', month: 'short', day: 'numeric' }, new Date(x.ts)).toUpperCase().replace(',', '') + ' · ' + BR[x.brand].name.toUpperCase() + (x.channel === 'ig' ? ' · INSTAGRAM' : ' · LINKEDIN'), title: x.title, dot: 'width: 9px; height: 9px; border-radius: 50%; background: ' + tone(BR[x.brand].c)[1] + ';' }; });
+
+    var primary = mono + 'display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 20px; border: 0; border-radius: 10px; background: ' + tb[1] + '; color: ' + tb[2] + '; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; cursor: pointer; text-decoration: none;';
+
+    return {
+      rootClass: light ? 'm light' : 'm', lightStr: light ? 'true' : 'false', themeLabel: light ? 'DARK MODE' : 'LIGHT MODE',
+      toggleTheme: function () { set({ light: !light }); },
+      menu: !!s.menu, menuStr: s.menu ? 'true' : 'false', toggleMenu: function () { set({ menu: !s.menu }); },
+      showPicker: step !== 'home',
+      showNav: step !== 'home' || !!s.navOpen, navOpenStr: s.navOpen ? 'true' : 'false', navLabel: s.navOpen ? '✕ CLOSE MENU' : '☰ MENU',
+      toggleNav: function () { set({ navOpen: !s.navOpen }); },
+      headerLabel: step === 'home' ? 'VIEWING' : 'POSTING AS', headerBrand: step === 'home' ? 'All brands' : B.name,
+      headerDot: step === 'home' ? 'display: inline-flex; width: 10px; height: 10px; border-radius: 50%; background: conic-gradient(#2DD4BF 0 25%, #A9C4A5 0 50%, #FAE268 0 75%, #FFFFFF 0); box-shadow: inset 0 0 0 1px rgba(128,128,128,0.5);' : 'width: 10px; height: 10px; border-radius: 50%; background: ' + tb[1] + ';' + (light ? ' box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3);' : ''),
+      brandName: B.name, brandUpper: B.name.toUpperCase(), handle: B.handle,
+      brandDot: 'width: 10px; height: 10px; border-radius: 50%; background: ' + tb[1] + ';' + (light ? ' box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3);' : ''),
+      brandMenu: ORDER.map(function (id) { var b = BR[id]; var on = id === bid; return { name: b.name, tag: b.soon ? 'SOON' : (on ? '✓' : ''), pick: function () { set(step === 'home' ? { brand: id, menu: false, boardBrand: id } : { brand: id, menu: false }); }, dot: 'width: 10px; height: 10px; border-radius: 50%; flex: none; background: ' + tone(b.c)[1] + ';', style: 'display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 0 12px; border: 0; border-radius: 8px; font-family: Inter, sans-serif; font-size: 15px; font-weight: ' + (on ? '700' : '500') + '; cursor: pointer; color: var(--ink); background: ' + (on ? 'var(--hover)' : 'transparent') + ';' }; }),
+      goBM: function () { set({ step: 'bm', menu: false }); },
+      bmNavStyle: step === 'bm' ? 'color: var(--ink); background: var(--raised);' : '',
+      steps: steps, brandCards: brandCards,
+      goSnax: function () { set({ step: 'home', boardBrand: null }); },
+      isEngage: step === 'engage',
+      todayLong: todayLong, todayShort: todayShort,
+      todaySummary: TOPICS.length + ' stories in Syntax & Snax. ' + doneTotal + ' of ' + goalTotal + ' weekly posts done across ' + activeIds.length + ' brands.' + (behind ? ' ' + behind + ' brands still need a post.' : ''),
+      feedRows: feedRows, feedCount: FEED.length, flaggedCount: flaggedCount, noFeed: feedRows.length === 0,
+      feedAllStr: feedMode === 'all' ? 'true' : 'false', feedFlagStr: feedMode === 'flag' ? 'true' : 'false',
+      feedShowAll: function () { set({ feedMode: 'all' }); }, feedShowFlag: function () { set({ feedMode: 'flag' }); },
+      allBrands: function () { set({ boardBrand: null }); }, allBrandsStr: s.boardBrand ? 'false' : 'true',
+      allBrandsStyle: s.boardBrand ? '' : 'background: var(--swap); color: var(--swap-ink); border-color: var(--swap);',
+      boardBrandName: s.boardBrand ? BR[s.boardBrand].name : '',
+      kpis: kpis, todayFull: todayFull, issueNo: issueNo, lead: homeTopics[0] || {}, hasLead: homeTopics.length > 0, noLead: homeTopics.length === 0, seconds: homeTopics.slice(1, 3), mores: homeTopics.slice(3), noMores: homeTopics.length < 4,
+      ticker: (function () { var r = FEED.map(function (t) { var b = t.brand ? BR[t.brand] : null; return { title: t.title, brandUpper: b ? b.name.toUpperCase() : t.cat, age: ageLabel(t), ageStyle: hoursAgo(t) < 3 ? 'color: var(--bad);' : '', dot: 'width: 9px; height: 9px; border-radius: 50%; display: inline-block; background: ' + (b ? tone(b.c)[1] : 'var(--muted)') + ';' }; }); return r.concat(r); })(), updatedAt: fmtD({ hour: 'numeric', minute: '2-digit' }).toUpperCase() + ' CT', brandRows: brandRows, homeTopics: homeTopics, postedList: postedList, noPosted: postedList.length === 0,
+      justPosted: !!s.justPosted,
+      markPosted: function () { try { navigator.clipboard && navigator.clipboard.writeText(draft); } catch (e) {} set({ justPosted: true, posted: [{ brand: bid, channel: channel, pillar: pillar, xp: xpNow, title: (headline || draft.split('\n')[0] || 'New post'), ts: Date.now() }].concat(s.posted || []) }); },
+      commentsToday: commentsToday, streak: commentsToday >= 3 ? 1 : 0, points: points, prompts: prompts,
+      goalBar: 'display: block; height: 100%; border-radius: 999px; background: var(--ink); width: ' + Math.min(100, commentsToday / 3 * 100) + '%;',
+      mix: mix, mixNext: bm1.n ? 'Next pick: ' + PILL[need][0].toLowerCase() : 'No posts yet this week',
+      channels: [['li', 'LINKEDIN'], ['ig', 'INSTAGRAM']].map(function (c) { return { name: c[1], on: c[0] === channel ? 'true' : 'false', pick: function () { set({ channel: c[0] }); } }; }),
+      pillars: PORDER.map(function (k) { return { name: PILL[k][0], on: k === pillar ? 'true' : 'false', pick: function () { set({ pillar: k }); } }; }),
+      channelTip: isIG ? 'Instagram: write for saves and shares. A post people send to a friend by DM goes the furthest.' : 'LinkedIn: open with a claim that challenges an assumption, back it with proof, end with one open question.',
+      charMax: charMax.toLocaleString(), channelUpper: chName.toUpperCase(),
+      isIG: isIG,
+      formats: ['carousel', 'reel', 'story'].map(function (k) { return { name: FMT[k][0], on: k === fmt ? 'true' : 'false', pick: function () { set({ fmt: k }); } }; }),
+      formatTip: isIG ? FMT[fmt][1] : '',
+      previewLabel: isIG ? (tall ? 'PREVIEW · INSTAGRAM ' + FMT[fmt][0] + ' 9:16 · 1080 × 1920' : 'PREVIEW · INSTAGRAM CAROUSEL 4:5 · SLIDE 1 OF 5') : 'PREVIEW · LINKEDIN 4:5 · 1080 × 1350',
+      frameFoot: fmt === 'carousel' ? 'SWIPE →' : B.handle,
+      postNowText: isIG ? 'Copies the caption and opens Instagram. Add the image, then share.' : 'Copies the text and opens LinkedIn. Attach the image, then publish.',
+      openUrl: isIG ? 'https://www.instagram.com/' : 'https://www.linkedin.com/feed/',
+      openLabel: isIG ? 'COPY & OPEN INSTAGRAM ↗' : 'COPY & OPEN LINKEDIN ↗',
+      windowLabel: isIG ? 'AFTER YOU POST' : 'AFTER YOU POST · THE FIRST 60–90 MINUTES',
+      windowText: isIG ? 'Reply to comments and DMs fast. Replies tell Instagram people care, and it shows your next post to them first.' : 'LinkedIn tests your post with a small group first. Comments count about 15 times more than likes, so stay close and answer every comment.',
+      showReshare: bid !== 'personal',
+      reshare: function () { set({ brand: 'personal', step: 'write', channel: 'li', pillar: 'insight', draft: 'Something we shipped at ' + B.name + ' this week, and why it matters to me:\n\n' + draft, copyOk: false, designOk: false }); },
+      xpLine: (function () { var m = mixFor(bid); var x = postsFor(bid).filter(function (y) { return y.xp; }).length; return x + ' of ' + m.n + ' posts mention a sister brand'; })(),
+      isHome: step === 'home', isSnax: step === 'snax', isWrite: step === 'write', isDesign: step === 'design', isPost: step === 'post', isBM: step === 'bm',
+      accentTextStyle: 'color: ' + tb[0] + ';',
+      allStr: s.mine ? 'false' : 'true', mineStr: s.mine ? 'true' : 'false',
+      showAll: function () { set({ mine: false }); }, showMine: function () { set({ mine: true }); },
+      topics: visibleTopics, noTopics: visibleTopics.length === 0,
+      startBlank: function () { set({ topic: null, pillar: null, blank: true, step: 'write', draft: '', copyOk: false, designOk: false, headline: null }); },
+      hasTopic: !!topic, noTopic: !topic, topicTitle: topic ? topic.title : '', topicWhy: topic ? topic.why : '', topicSource: topic ? topic.source : '', topicUrl: topic ? topic.url : '#', topicDate: topic ? topic.date : '',
+      autoDrafted: !!topic && draft === topic.draft,
+      draftLabel: topic ? '✦ REDRAFT FROM STORY' : '✦ DRAFT WITH AI',
+      draftPlaceholder: topic ? 'Tap Redraft from story, or write your own take.' : 'Write here, or tap Draft with AI.',
+      changeStory: function () { set({ step: 'home' }); },
+      draft: draft, charCount: draft.length.toLocaleString(),
+      onDraft: function (e) { set({ draft: e.target.value, copyOk: false }); },
+      aiDraft: function () { set({ draft: topic && topic.draft ? topic.draft : topic ? (topic.title + '.\n\n' + (topic.why || '') + '\n\nHere’s how we see it:\n\n[your take]\n\nWhat would you do?') : 'Start with the human outcome.\n\nThen one proof point, with its source.\n\nEnd with one question for the reader.', copyOk: false }); },
+      aiTighten: function () { set({ draft: draft.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').replace(/ +\n/g, '\n').trim(), copyOk: false }); },
+      aiClear: function () { set({ draft: '', copyOk: false }); },
+      checks: checks, bmNotApproved: !bmOk,
+      bmStatus: bmOk ? '✓ APPROVED' : 'PENDING · NOT APPROVED',
+      bmPillStyle: bmOk ? 'border-color: ' + tb[0] + '; color: ' + tb[0] + ';' : 'border-color: var(--warn); color: var(--warn);',
+      cantApprove: blocking,
+      approveBtn: primary + ' width: 100%;' + (blocking ? ' opacity: .4; cursor: not-allowed;' : ''),
+      approveHint: blocking ? 'FIX THE ✕ ITEMS TO APPROVE' : 'YOU APPROVE. NOTHING MOVES WITHOUT YOU.',
+      approveCopy: function () { if (!blocking) set({ copyOk: true, step: 'design' }); },
+      layouts: [['hook', 'HOOK'], ['stat', 'BIG NUMBER'], ['quote', 'QUOTE']].map(function (l) { return { name: l[1], on: l[0] === layout ? 'true' : 'false', pick: function () { set({ layout: l[0] }); } }; }),
+      grounds: [['dark', 'DARK'], ['brand', 'BRAND COLOR'], ['light', 'LIGHT']].map(function (g) { return { name: g[1], on: g[0] === ground ? 'true' : 'false', pick: function () { set({ ground: g[0] }); } }; }),
+      headline: headline, onHeadline: function (e) { set({ headline: e.target.value }); },
+      aiSuggest: function () {
+        var lines = draft.split('\n').map(function (x) { return x.trim(); }).filter(function (x) { return x && x.length < 70; });
+        var n = ((s.sug || 0) + 1);
+        var pickLine = lines.length ? lines[n % lines.length] : headline;
+        var lay = /^[+\-]?\d/.test(pickLine) ? 'stat' : (n % 2 ? 'quote' : 'hook');
+        set({ sug: n, headline: pickLine, layout: lay });
+      },
+      isStat: layout === 'stat', notStat: layout !== 'stat', quoteOpen: layout === 'quote' ? '“' : '',
+      frame: (tall ? 'width: 100%; max-width: 324px; height: 576px;' : 'width: 100%; max-width: 460px; height: 575px;') + ' background: ' + bg + '; color: ' + ink + '; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.25), 0 24px 60px rgba(0,0,0,0.35);',
+      kicker: mono + 'font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: ' + acc + ';',
+      bigStyle: 'margin: 0; font-family: Archivo, sans-serif; font-weight: 900; font-size: 46px; line-height: 0.98; letter-spacing: -0.02em; text-transform: uppercase; color: ' + ink + '; white-space: pre-line;',
+      statStyle: 'font-family: Archivo, sans-serif; font-weight: 900; font-size: 120px; line-height: 0.9; letter-spacing: -0.03em; color: ' + acc + ';',
+      footStyle: mono + 'font-size: 12px; letter-spacing: 0.12em; color: ' + sub + ';',
+      rule: 'display: block; width: 64px; height: 4px; background: ' + acc + ';',
+      primaryBtn: primary,
+      approveDesign: function () { set({ designOk: true, step: 'post' }); },
+      thumb: 'flex: none; width: 96px; height: 120px; border-radius: 4px; background: ' + bg + '; padding: 10px; box-sizing: border-box; overflow: hidden;',
+      thumbText: 'font-family: Archivo, sans-serif; font-weight: 900; font-size: 11px; line-height: 1; text-transform: uppercase; color: ' + ink + ';',
+      draftPreview: draft.length > 260 ? draft.slice(0, 260) + '…' : draft,
+      date: s.date || '2026-10-19', time: s.time || '08:30',
+      onDate: function (e) { set({ date: e.target.value }); }, onTime: function (e) { set({ time: e.target.value }); },
+      justScheduled: !!s.scheduledNow,
+      schedule: function () {
+        var title = (headline || draft.split('\n')[0] || 'New post');
+        set({ scheduledNow: true, sched: [{ brand: bid, pillar: pillar, xp: xpNow, channel: channel, when: (s.date || '2026-10-19') + ' · ' + (s.time || '08:30') + ' · ' + B.name.toUpperCase() + (isIG ? ' · INSTAGRAM' : ''), title: title }].concat(s.sched || []) });
+      },
+      restart: function () { set({ step: 'home', topic: null, pillar: null, draft: '', copyOk: false, designOk: false, headline: null, scheduledNow: false, blank: false }); },
+      upcoming: upcoming,
+      logos: (LOGOS[bid] || []).map(function (l) { return { src: l.src, cap: l.cap, fig: 'margin: 0; display: grid; gap: 8px;' + (l.wide ? ' grid-column: 1 / -1;' : ''), stage: 'display: grid; place-items: center; min-height: 130px; padding: 22px; border-radius: 12px; border: 1px solid var(--line); background: ' + l.bg + ';', img: 'display: block; height: ' + l.h + 'px; width: auto; max-width: 100%;' }; }),
+      hasLogos: (LOGOS[bid] || []).length > 0,
+      noLogos: !(LOGOS[bid] || []).length,
+      bmFields: (function () { var ed = (s.bmEdits && s.bmEdits[bid]) || {}; return BMFIELDS.map(function (f) {
+        var d = (BMDATA[bid] || {})[f[0]] || { t: '', src: '' }; var t = ed[f[0]] != null ? ed[f[0]] : d.t; var editing = s.bmEditing === bid + ':' + f[0];
+        var src = ed[f[0]] != null ? 'EDITED BY YOU · WAITING FOR APPROVAL' : (d.src || 'NOT SET');
+        return { title: f[1], body: t, showText: !!t && !editing, empty: !t && !editing, editing: editing, notEditing: !editing, source: src,
+          srcStyle: /DRAFT|WAITING|NOT SET/.test(src) ? 'font-size: 10px; color: var(--warn);' : 'font-size: 10px;',
+          edit: function () { set({ bmEditing: bid + ':' + f[0], bmDraft: t }); } }; }); })(),
+      bmFilled: (function () { var ed = (s.bmEdits && s.bmEdits[bid]) || {}; return BMFIELDS.filter(function (f) { var d = (BMDATA[bid] || {})[f[0]]; return (ed[f[0]] != null ? ed[f[0]] : (d && d.t)); }).length; })(),
+      bmTotal: BMFIELDS.length,
+      bmFillBar: (function () { var ed = (s.bmEdits && s.bmEdits[bid]) || {}; var n = BMFIELDS.filter(function (f) { var d = (BMDATA[bid] || {})[f[0]]; return (ed[f[0]] != null ? ed[f[0]] : (d && d.t)); }).length; return 'display: block; height: 100%; border-radius: 999px; background: var(--ink); width: ' + Math.round(n / BMFIELDS.length * 100) + '%;'; })(),
+      bmDraft: s.bmDraft || '', onBmDraft: function (e) { set({ bmDraft: e.target.value }); },
+      saveBm: function () { var k = (s.bmEditing || '').split(':')[1]; var all = Object.assign({}, s.bmEdits || {}); var mine = Object.assign({}, all[bid] || {}); mine[k] = (s.bmDraft || '').trim(); all[bid] = mine; var ok = Object.assign({}, s.bmOk || {}); ok[bid] = false; var h = Object.assign({}, s.bmHist || {}); h[bid] = 'EDITED ' + k.toUpperCase() + ' · WAITING FOR YOUR APPROVAL'; set({ bmEdits: all, bmEditing: null, bmOk: ok, bmHist: h }); },
+      cancelBm: function () { set({ bmEditing: null }); },
+      bmTabs: ORDER.map(function (id) { return { name: BR[id].name.toUpperCase(), on: id === bid ? 'true' : 'false', pick: function () { set({ brand: id, bmEditing: null }); } }; }),
+      bmSections: B.sections, swatches: B.swatches.map(function (h) { return { hex: h, sw: 'width: 28px; height: 28px; border-radius: 6px; background: ' + h + '; box-shadow: inset 0 0 0 1px rgba(128,128,128,0.4);' }; }),
+      approveRulesLabel: bmOk ? '✓ RULES APPROVED' : '✓ REVIEW & APPROVE THESE RULES',
+      approveRulesBtn: bmOk ? mono + 'min-height: 52px; border: 1px solid var(--line2); border-radius: 10px; background: transparent; color: var(--ink); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; cursor: pointer;' : primary,
+      approveRules: function () { var m = Object.assign({}, s.bmOk || {}); m[bid] = !m[bid]; var h = Object.assign({}, s.bmHist || {}); h[bid] = m[bid] ? 'APPROVED BY MARCOS · V1 · JUST NOW' : 'APPROVAL REMOVED · BACK TO PENDING'; set({ bmOk: m, bmHist: h }); },
+      bmHistory: bmHist || 'HISTORY: IMPORTED OCT 11 · NOT APPROVED YET'
+    };
+  }
+}
+
+(function(){
+  var comp = new Component(); comp.state = {};
+  var tpl = document.getElementById('tpl'), root = document.getElementById('root'), played = false;
+  setTimeout(function(){ played = true; }, 3200);
+  function get(sc,p){ return p.split('.').reduce(function(o,k){ return o==null?undefined:o[k]; }, sc); }
+  var RX = /\{\{\s*([\w.]+)\s*\}\}/g;
+  function interp(str,sc){ return str.replace(RX,function(m,p){ var v=get(sc,p); return (v==null||typeof v==='function')?'':String(v); }); }
+  function full(str,sc){ var m=str.match(/^\{\{\s*([\w.]+)\s*\}\}$/); return m?get(sc,m[1]):interp(str,sc); }
+  function walk(node,sc,parent){
+    if(node.nodeType===3){ parent.appendChild(document.createTextNode(interp(node.textContent,sc))); return; }
+    if(node.nodeType!==1) return;
+    var tag=node.localName;
+    if(tag==='sc-if'){ if(full(node.getAttribute('value'),sc)) node.childNodes.forEach(function(c){ walk(c,sc,parent); }); return; }
+    if(tag==='sc-for'){ var list=full(node.getAttribute('list'),sc)||[], as=node.getAttribute('as'); list.forEach(function(it){ var s2=Object.assign({},sc); s2[as]=it; node.childNodes.forEach(function(c){ walk(c,s2,parent); }); }); return; }
+    var el=document.createElementNS(node.namespaceURI,tag);
+    for(var i=0;i<node.attributes.length;i++){ var a=node.attributes[i], n=a.name;
+      if(/^xmlns/.test(n)) continue;
+      var v=full(a.value,sc);
+      if(/^on/i.test(n)){ if(typeof v==='function') el.addEventListener(n.slice(2).toLowerCase(), v); continue; }
+      if(n==='disabled'){ if(v===true||v==='true') el.setAttribute('disabled',''); continue; }
+      if(n==='value'){ el.__val = v==null?'':String(v); continue; }
+      if(v===false||v==null) continue;
+      el.setAttribute(n, v);
+    }
+    var kids=node.content?node.content.childNodes:node.childNodes;
+    kids.forEach(function(c){ walk(c,sc,el); });
+    if(el.__val!==undefined){ el.value = el.__val; }
+    parent.appendChild(el);
+  }
+  __render = function(){
+    var ae=document.activeElement, fid=ae&&ae.id, s0=ae&&ae.selectionStart, s1=ae&&ae.selectionEnd, y=window.scrollY;
+    var vals = comp.renderVals(), frag=document.createDocumentFragment();
+    tpl.content.childNodes.forEach(function(n){ walk(n,vals,frag); });
+    root.replaceChildren(frag);
+    if(played){ var r=root.querySelector('.m'); if(r) r.classList.add('played'); }
+    if(fid){ var f=document.getElementById(fid); if(f){ f.focus(); try{ f.setSelectionRange(s0,s1); }catch(e){} } }
+    window.scrollTo(0,y);
+  };
+  __render();
+})();
+</script></body></html>
